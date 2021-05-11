@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 高谦
  * 学期表服务层
  * <p>
  * 下面的接口请改为从数据库中获取。
- * @implement 孟庆强
  */
 
 @Service
@@ -46,7 +44,6 @@ public class SemesterService {
     }
 
     /**
-     * @author 高谦
      * 用于根据条件查询学期，不要删！
      * @param start  学年起始年
      * @param semester  学期 【1,2,3】
@@ -61,7 +58,6 @@ public class SemesterService {
     }
 
     /**
-     * @author 王艺琳
      * @param semesterId  学期id
      * @return
      */

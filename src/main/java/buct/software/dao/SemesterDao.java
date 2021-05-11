@@ -12,9 +12,7 @@ import java.util.List;
 
 
 /**
- * @author 高谦
  * 学期表 semester 数据库操作类
- * @implements 孟庆强
  */
 
 @Repository
@@ -28,7 +26,6 @@ public interface SemesterDao {
     public List<Semester> getSemesterMostId();
 
     /**
-     * @author 高谦
      * 查询特定的学期
      * @param parm  查询条件数据集合
      * @return
@@ -36,7 +33,6 @@ public interface SemesterDao {
     Semester getSemesterByStartAndSemester(Semester parm);
 
     /**
-     * @author 王艺琳
      * @param semesterId  学期的id
      * @return
      */

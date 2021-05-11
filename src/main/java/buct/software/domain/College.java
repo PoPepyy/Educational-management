@@ -4,7 +4,6 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 /**
- * @author 高谦
  *  数据库学院表 domain 类
  */
 @Data

@@ -4,7 +4,6 @@ import buct.software.domain.Student;
 import buct.software.domain.Teacher;
 import buct.software.domain.User;
 import buct.software.service.*;
-import buct.software.utils.UserAgentParser;
 import buct.software.views.SelectCourseView;
 import buct.software.views.StudentGradeIndexView;
 
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 高谦
  * 登录功能实现
  * 特别注意，这里不可以配置拦截。
  * 网站如果登录页面都需要已登录的用户才可以看到的话，那就很荒谬了。
@@ -57,19 +55,8 @@ public class LoginController {
         Object userInfo = session.getAttribute("user");
         Integer semesterId = semesterService.getCurrentSemesterId();
 
-        /**
-         * 获取当前的用户使用的是什么设备。
-         */
-        String useragent = request.getHeader("User-Agent");
-        UserAgentParser userAgentParser = new UserAgentParser(useragent);
-        String platform = userAgentParser.getPlatform();
-
         if (userInfo == null) {
-            if (platform.equals("mobile"))
-                return "MobileLogin";
-            else
-                return "login";
-
+            return "login";
         } else {
             User user = (User) userInfo;
             Integer type = user.getType();
@@ -79,10 +66,6 @@ public class LoginController {
                 List<StudentGradeIndexView> gradeList = selectCourseService.getGrade(semesterId, user.getAccount());
                 parmMap.put("courseTable", courseTable);
                 parmMap.put("gradeList", gradeList);
-
-                if (platform.equals("mobile"))
-                    return "msh";
-
                 return "student";
             }
             if (type == 1) {
@@ -96,16 +79,10 @@ public class LoginController {
                 int cid = teacher.getCollegeId();
                 String colname = collegeService.getColnameById(cid);
                 parmMap.put("colname", colname);
-                if (platform.equals("mobile"))
-                    return "MobileTeacherHome";
                 return "teacher";
             }
             if(type==2){
-                if (platform.equals("mobile")) {
-                    return "redirect:/GoMobileHomePage";
-                } else {
                     return "redirect:/GoHomePage";
-                }
             }
             return "login";
         }
@@ -124,23 +101,10 @@ public class LoginController {
                         @RequestParam("password") String password) {
 
 
-        /**
-         * 获取当前的用户使用的是什么设备。
-         */
-        String useragent = request.getHeader("User-Agent");
-        UserAgentParser userAgentParser = new UserAgentParser(useragent);
-        String platform = userAgentParser.getPlatform();
-
-
-
         HttpSession session=request.getSession();
         User user=userService.LoginFun(account,password);
         if(user==null){
             paraMap.put("error_msg","用户名或者密码错误，请重新输入");
-
-
-            if (platform.equals("mobile"))
-                return "MobileLogin";
 
             return "login";
         } else {
@@ -177,9 +141,6 @@ public class LoginController {
             }
             if (error) {
                 paraMap.put("error_msg", "数据库中找不到您的详细信息，请联系管理员");
-
-                if (platform.equals("mobile"))
-                    return "MobileLogin";
 
                 return "login";
             } else {

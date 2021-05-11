@@ -11,6 +11,7 @@
         <result column="phone" javaType="String" jdbcType="VARCHAR" property="phone"></result>
         <result column="description" javaType="String" jdbcType="VARCHAR" property="description"></result>
     </resultMap>
+
     <select id="getColleges" resultMap="getCollegesResultMap">select * from college</select>
 
     <select id="getCollegeById" parameterType="String" resultType="College">

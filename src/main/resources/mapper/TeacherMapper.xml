@@ -2,8 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--author 高谦-->
-<!-- implements 孟庆强 -->
+
 <mapper namespace="buct.software.dao.TeacherDao">
     <select id="getByTno" parameterType="Integer" resultType="buct.software.domain.Teacher">
         select * from teacher where teacher.tno=#{tno}

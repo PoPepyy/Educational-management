@@ -59,13 +59,11 @@
                 <if test="capacity==2">
                     and scheduling.capacity =0
                 </if>
-
             </if>
             <if test="cno != null">
                 and  scheduling.cno= #{cno}
             </if>
             and scheduling.semesterid=#{semesterId} and schedule_major.majorid=#{majorId}
-
         </where>
     </select>
 

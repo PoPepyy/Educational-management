@@ -3,7 +3,6 @@ package buct.software.domain;
 import lombok.Data;
 
 /**
- * @author 高谦
  * 学期实体类
  */
 @Data
