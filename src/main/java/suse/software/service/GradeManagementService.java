@@ -1,12 +1,12 @@
-package buct.software.service;
+package suse.software.service;
 
-import buct.software.dao.GradeManagementDao;
-import buct.software.dao.SchedulingDao;
-import buct.software.domain.Course;
-import buct.software.domain.Scheduling;
-import buct.software.views.GradeManagementView;
-import buct.software.domain.SelectCourse;
-import buct.software.utils.ExcelUtil;
+import suse.software.dao.GradeManagementDao;
+import suse.software.dao.SchedulingDao;
+import suse.software.domain.Course;
+import suse.software.domain.Scheduling;
+import suse.software.views.GradeManagementView;
+import suse.software.domain.SelectCourse;
+import suse.software.utils.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -18,7 +18,6 @@ import java.io.File;
 import java.util.List;
 
 /**
- * @author  王艺琳
  * 成绩管理子系统服务层
  */
 @Service

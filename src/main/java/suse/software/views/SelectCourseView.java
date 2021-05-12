@@ -1,9 +1,8 @@
-package buct.software.views;
+package suse.software.views;
 
 import lombok.Data;
 
 /**
- * @author  高谦
  * 这里不是一个数据库的实体
  * 这是在具体的应用接口 api 中，由于多表连接查询所生成的 view
  * 这个包里面的所有类都是这个作用。

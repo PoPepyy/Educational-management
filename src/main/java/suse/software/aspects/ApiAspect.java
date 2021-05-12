@@ -1,6 +1,6 @@
 package suse.software.aspects;
 
-import buct.software.utils.ResponseMessage;
+import suse.software.utils.ResponseMessage;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

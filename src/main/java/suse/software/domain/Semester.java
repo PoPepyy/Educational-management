@@ -1,4 +1,4 @@
-package buct.software.domain;
+package suse.software.domain;
 
 import lombok.Data;
 

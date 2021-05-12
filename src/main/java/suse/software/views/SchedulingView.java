@@ -1,4 +1,4 @@
-package buct.software.views;
+package suse.software.views;
 
 import lombok.Data;
 
