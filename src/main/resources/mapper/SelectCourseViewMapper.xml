@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="buct.software.dao.SelectCourseDao">
+<mapper namespace="suse.software.dao.SelectCourseDao">
 
-    <resultMap id="getAllAvaiableCourseWithConditionMap" type="buct.software.views.SelectCourseView">
+    <resultMap id="getAllAvaiableCourseWithConditionMap" type="suse.software.views.SelectCourseView">
         <!--排课表信息-->
         <id column="semesterid" javaType="Integer" jdbcType="INTEGER" property="semesterId"></id>
         <result column="cno" javaType="Integer" jdbcType="INTEGER" property="cno"></result>
@@ -32,7 +32,7 @@
     </resultMap>
 
     <select id="getAllAvaiableCourseWithCondition"
-            parameterType="buct.software.views.SelectCourseView"
+            parameterType="suse.software.views.SelectCourseView"
             resultMap="getAllAvaiableCourseWithConditionMap">
         select
         teacher.tno, teacher.tname,course.cname,course.college,course.description,course.status as courseStatus,
@@ -69,7 +69,7 @@
 
 
 
-    <resultMap id="getAllAvaiableCourseMap" type="buct.software.views.SelectCourseView">
+    <resultMap id="getAllAvaiableCourseMap" type="suse.software.views.SelectCourseView">
         <!--排课表信息-->
         <id column="semesterid" javaType="Integer" jdbcType="INTEGER" property="semesterId"></id>
         <result column="cno" javaType="Integer" jdbcType="INTEGER" property="cno"></result>
@@ -93,7 +93,7 @@
         <result column="type" javaType="Integer" jdbcType="INTEGER" property="courseType"></result>
     </resultMap>
     <select id="getAllAvaiableCourse"
-            parameterType="buct.software.domain.ScheduleMajor"
+            parameterType="suse.software.domain.ScheduleMajor"
             resultMap="getAllAvaiableCourseMap">
         select
         teacher.tno, teacher.tname,course.cname,course.college,course.description,course.status as courseStatus,
@@ -108,7 +108,7 @@
     </select>
 
 
-    <resultMap id="getAllCourseHaveBeenSelectedMap" type="buct.software.domain.SelectCourse">
+    <resultMap id="getAllCourseHaveBeenSelectedMap" type="suse.software.domain.SelectCourse">
         <!--选课表信息-->
         <id column="semesterid" javaType="Integer" jdbcType="INTEGER" property="semesterId"></id>
         <result column="cno" javaType="Integer" jdbcType="INTEGER" property="cno"></result>
@@ -118,14 +118,14 @@
         <result column="totalscore" javaType="Integer" jdbcType="INTEGER" property="totalScore"></result>
     </resultMap>
     <select id="getAllCourseHaveBeenSelected"
-            parameterType="buct.software.domain.SelectCourse"
+            parameterType="suse.software.domain.SelectCourse"
             resultMap="getAllCourseHaveBeenSelectedMap">
         select * from select_course where semesterid=#{semesterId} and select_course.sno=#{sno}
     </select>
 
 
 
-    <insert id="addNewCourseToTable" parameterType="buct.software.domain.SelectCourse">
+    <insert id="addNewCourseToTable" parameterType="suse.software.domain.SelectCourse">
         insert into select_course
         <set>
             <if test="semesterId != null">semesterid=#{semesterId},</if>
@@ -138,13 +138,13 @@
     </insert>
 
 
-    <delete id="deleteCourseFromTable" parameterType="buct.software.domain.SelectCourse">
+    <delete id="deleteCourseFromTable" parameterType="suse.software.domain.SelectCourse">
         delete from select_course where semesterid=#{semesterId} and sno=#{sno} and cno=#{cno}
     </delete>
 
 
 
-    <resultMap id="getCourseTableMap" type="buct.software.views.SelectCourseView">
+    <resultMap id="getCourseTableMap" type="suse.software.views.SelectCourseView">
         <!--排课表信息-->
         <id column="semesterid" javaType="Integer" jdbcType="INTEGER" property="semesterId"></id>
         <result column="address" javaType="String" jdbcType="VARCHAR" property="address"></result>
@@ -163,7 +163,7 @@
         <result column="type" javaType="Integer" jdbcType="INTEGER" property="courseType"></result>
     </resultMap>
     <select id="getCourseTable"
-            parameterType="buct.software.domain.SelectCourse" resultMap="getCourseTableMap">
+            parameterType="suse.software.domain.SelectCourse" resultMap="getCourseTableMap">
         select course.cname,course.cno,teacher.tname,scheduling.address,scheduling.course_time,scheduling.semesterid,planning.type from scheduling
         left join select_course on scheduling.semesterid=select_course.semesterid and scheduling.cno=select_course.cno
         left join course on scheduling.cno=course.cno left join teacher on scheduling.tno=teacher.tno left join planning
@@ -173,7 +173,7 @@
         </where>
     </select>
 
-    <resultMap id="getGradMap" type="buct.software.views.StudentGradeIndexView">
+    <resultMap id="getGradMap" type="suse.software.views.StudentGradeIndexView">
         <id column="cno" javaType="Integer" jdbcType="INTEGER" property="cno"></id>
         <result column="semester" javaType="Integer" jdbcType="INTEGER" property="semester"></result>
         <result column="start" javaType="Integer" jdbcType="INTEGER" property="start"></result>
@@ -182,7 +182,7 @@
 
         <result column="cname" javaType="String" jdbcType="VARCHAR" property="cname"></result>
     </resultMap>
-    <select id="getGrade" resultMap="getGradMap" parameterType="buct.software.domain.SelectCourse">
+    <select id="getGrade" resultMap="getGradMap" parameterType="suse.software.domain.SelectCourse">
         select semester.start,semester.end,semester.semester,course.cname,select_course.totalscore,select_course.cno from select_course left join course on select_course.cno=course.cno
         left join semester on select_course.semesterid=semester.semesterid
         where select_course.totalscore is not null and select_course.semesterid=#{semesterId} and select_course.sno=#{sno};
@@ -193,7 +193,7 @@
         and scheduling.cno=#{cno}
     </update>
 
-    <select id="getSchedulingBySemesterIdAndCno" resultType="buct.software.domain.Scheduling">
+    <select id="getSchedulingBySemesterIdAndCno" resultType="suse.software.domain.Scheduling">
         select * from scheduling where scheduling.semesterid=#{semesterId} and scheduling.cno=#{cno}
     </select>
 

@@ -3,14 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="buct.software.dao.TeacherDao">
-    <select id="getByTno" parameterType="Integer" resultType="buct.software.domain.Teacher">
+<mapper namespace="suse.software.dao.TeacherDao">
+    <select id="getByTno" parameterType="Integer" resultType="suse.software.domain.Teacher">
         select * from teacher where teacher.tno=#{tno}
     </select>
-    <insert id="insertTeacher" parameterType="buct.software.domain.Teacher">
+    <insert id="insertTeacher" parameterType="suse.software.domain.Teacher">
         insert into teacher values (#{tno},#{tname},#{sex},#{phone},#{email},#{collegeId},#{office},#{rank})
     </insert>
-    <select id="queryByExample" parameterType="buct.software.domain.Teacher" resultType="buct.software.domain.Teacher">
+    <select id="queryByExample" parameterType="suse.software.domain.Teacher" resultType="suse.software.domain.Teacher">
         select * from teacher
         <where>
             <if test="tno != null">
@@ -39,7 +39,7 @@
             </if>
         </where>
     </select>
-    <update id="updateTeacher" parameterType="buct.software.domain.Teacher">
+    <update id="updateTeacher" parameterType="suse.software.domain.Teacher">
         update teacher
         <set>
 
@@ -68,7 +68,7 @@
         where tno = #{tno}
     </update>
 
-    <select id="getTeacherByTnoAndTname" resultType="buct.software.domain.Teacher">
+    <select id="getTeacherByTnoAndTname" resultType="suse.software.domain.Teacher">
       <bind name="_tno" value="'%' + tno + '%'"></bind>
       <bind name="_tname" value="'%' + tname + '%'"></bind>
         select * from teacher

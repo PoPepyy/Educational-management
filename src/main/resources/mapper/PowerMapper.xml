@@ -3,14 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 孟庆强 -->
-<mapper namespace="buct.software.dao.PowerDao">
-    <select id="getPower" resultType="buct.software.domain.Power">
+<mapper namespace="suse.software.dao.PowerDao">
+    <select id="getPower" resultType="suse.software.domain.Power">
         select * from power
     </select>
     <delete id="deletePower">
         delete  from power
     </delete>
-    <update id="updatePower" parameterType="buct.software.domain.Power">
+    <update id="updatePower" parameterType="suse.software.domain.Power">
         update power
         <set>
             power.selectCourse = #{ selectCourse },
@@ -18,7 +18,7 @@
             power.abnormal = #{abnormal}
         </set>
     </update>
-    <insert id="insertPower" parameterType="buct.software.domain.Power">
+    <insert id="insertPower" parameterType="suse.software.domain.Power">
         insert into power values (#{selectCourse},#{score},#{abnormal})
     </insert>
 </mapper>

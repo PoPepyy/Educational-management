@@ -3,18 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="buct.software.dao.StudentDao">
-    <select id="getBySno" parameterType="Integer" resultType="buct.software.domain.Student">
+<mapper namespace="suse.software.dao.StudentDao">
+    <select id="getBySno" parameterType="Integer" resultType="suse.software.domain.Student">
         select * from student where student.sno= #{sno}
     </select>
-    <select id="getAll" resultType="buct.software.domain.Student">
+    <select id="getAll" resultType="suse.software.domain.Student">
         select * from student
     </select>
-    <insert id="insertStudnet" parameterType="buct.software.domain.Student">
+    <insert id="insertStudnet" parameterType="suse.software.domain.Student">
         insert into student values (#{sno},#{sname},#{sex},#{major},#{klass},#{comeYear},#{phone},#{grade},#{majorId},#{college},#{collegeId})
     </insert>
-    <select id="getStudentsByExample" parameterType="buct.software.domain.Student"
-            resultType="buct.software.domain.Student">
+    <select id="getStudentsByExample" parameterType="suse.software.domain.Student"
+            resultType="suse.software.domain.Student">
         select * from student
         <where>
             <if test="sno!=null">
@@ -31,7 +31,7 @@
             </if>
         </where>
     </select>
-    <update id="updateStudent" parameterType="buct.software.domain.Student">
+    <update id="updateStudent" parameterType="suse.software.domain.Student">
         update student
         <set>
             <if test="sname!=null">

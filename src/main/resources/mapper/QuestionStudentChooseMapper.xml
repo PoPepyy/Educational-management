@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="buct.software.dao.QuestionStudentDao">
+<mapper namespace="suse.software.dao.QuestionStudentDao">
     <!--id对应的是dao中方法-->
     <insert id="chooseQuestion" parameterType="Map">
         insert into question_student(
