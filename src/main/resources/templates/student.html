@@ -4,7 +4,6 @@
 <header th:replace="app/header::static"></header>
 <body class="body-container">
 <div th:replace="app/header::header"></div>
-<div th:replace="app/header::menu"></div>
 
 <!-- 主体 -->
 <div class="container padding-150" style="padding-bottom: 100px;">
@@ -17,18 +16,6 @@
 						<a href="/stupersonalinfo" target="_blank">
 							<img src="images/ico_but19.png"/>
 							<h5>个人信息</h5>
-						</a>
-					</li>
-					<li class="col-md-6 col-sm-6 col-xs-6">
-						<a href="/selectcourse" target="_blank">
-							<img src="images/ico_but30.png"/>
-							<h5>自主选课</h5>
-						</a>
-					</li>
-					<li class="col-md-6 col-sm-6 col-xs-6">
-						<a href="/coursetable" target="_blank">
-							<img src="images/ico_but28.png"/>
-							<h5>课表查询</h5>
 						</a>
 					</li>
 					<li class="col-md-6 col-sm-6 col-xs-6">
@@ -57,15 +44,6 @@
 				<div class="col-md-12">
 					<div class="index_grxx">
 						<div class="row">
-<!--							<div class="col-md-5" id="yhxxIndex">-->
-<!--								<div class="media">-->
-<!--									<div class="media-body">-->
-<!--										<h4 class="media-heading">[[${userinfo.sname}]]</h4>-->
-<!--										<p>[[${userinfo.college}]] [[${userinfo.major}]] [[${userinfo.klass}]]</p>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-
 							<div class="col-md-12 column">
 								<div class="carousel slide" id="carousel-942744" style="height: 250px;">
 									<div class="carousel-inner">
@@ -84,11 +62,6 @@
 											<div class="carousel-caption"></div>
 											<p class="text-center" style="font-size: 20px">营盘校区</p>
 										</div>
-										<div class="item posdiv">
-											<img alt="" class="img-responsive" style="width: 100%;" src="images/lunbo_lbh.jpg" />
-											<div class="carousel-caption"></div>
-											<p class="text-center" style="font-size: 20px">李白河校区</p>
-										</div>
 									</div>
 									<a class="left carousel-control" href="#carousel-942744" data-slide="prev">
 									</a>
@@ -96,33 +69,6 @@
 									</a>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="index_rctx" style="height: 418px;">
-						<h5 class="index_title"><span class="title">课表</span></h5>
-						<p th:if="${#lists.isEmpty(courseTable)}" style="margin-left: 20px;">当前没有选课信息</p>
-						<a class="list-group-item" th:each="course : ${courseTable}">
-							<span class="title">
-								[[ ${course.startWeek} ]]-[[${course.endWeek}]]周
-								([[ ${course.startStep} ]]-[[${course.endStep}]]节)
-								-星期[[${course.week}]]-[[${course.cname}]]-
-								[[${course.address}]]-
-								[[${course.tname}]]
-							</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="index_rctx" style="height: 418px;">
-						<h5 class="index_title"><span class="title">成绩</span></h5>
-						<p th:if="${#lists.isEmpty(gradeList)}" style="margin-left: 20px;">当前学期没有成绩信息</p>
-						<div class="list-group">
-							<a class="list-group-item" th:each="grade : ${gradeList}">
-								<span class="title"> [[${grade.start}]]-[[${grade.end}]]-[[${grade.semester}]]-[[${grade.cname}]] </span>
-								<span class="fraction float_r">[[${grade.totalScore}]]</span>
-							</a>
 						</div>
 					</div>
 				</div>
