@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * course表 数据库操作类。
+ * course表
  */
 
 @Repository

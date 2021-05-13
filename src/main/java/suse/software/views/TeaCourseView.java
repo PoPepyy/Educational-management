@@ -13,8 +13,6 @@ public class TeaCourseView{
     private String address;
     private String courseTime;
 
-    //public TeaCourseView(){}
-
     public TeaCourseView(int semesterid,int cno,int capacity,String address,String courseTime,String courseName){
         this.semesterid = semesterid;
         this.cno = cno;
@@ -22,11 +20,5 @@ public class TeaCourseView{
         this.capacity = capacity;
         this.address = address;
         this.courseTime = courseTime;
-//        System.out.println(semesterid);
-//        System.out.println(cno);
-//        System.out.println(courseName);
-//        System.out.println(capacity);
-//        System.out.println(address);
-//        System.out.println(courseTime);
     }
 }

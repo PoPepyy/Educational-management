@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * 数据表 college 服务层。
- * 以下代码还可以继续优化。
  */
 @Service
 public class CollegeService {

@@ -3,7 +3,7 @@ package suse.software.domain;
 import lombok.Data;
 
 /**
- * 数据库专业实体
+ * 专业
  */
 @Data
 public class Major {

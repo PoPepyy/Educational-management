@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 学生 student 表 数据库操作类
+ * 学生 student 表
  */
 
 @Repository

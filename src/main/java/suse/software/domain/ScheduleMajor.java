@@ -3,7 +3,7 @@ package suse.software.domain;
 import lombok.Data;
 
 /**
- * 数据库 schedule_major 数据表 domain 类
+ * schedule_major
  */
 
 @Data

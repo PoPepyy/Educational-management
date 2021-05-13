@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 学院 college 表 数据库操作类。
+ * 学院 college
  */
 
 

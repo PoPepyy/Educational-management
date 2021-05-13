@@ -40,33 +40,33 @@ public class SchedulingControllerPage {
     }
 
 
-    @GetMapping("/schedulingmobile")
-    public String schedulingmobile(@RequestParam("tno") Integer tno,
-                                   @RequestParam("tname") String tname,
-                                   @RequestParam("address") String address,
-                                   Map<String,Object> parmMap, HttpServletRequest request){
-        HttpSession session =request.getSession();
-        User user=(User) session.getAttribute("user");
-        System.out.println(tno);
-        System.out.println(tname);
-        System.out.println(address);
-        List<MobileSchedulingView> data =
-                schedulingDao.getCoursesByTnoAndTnameAndAddress(
-                        tno,tname,address);
-        parmMap.put("data",data);
-        System.out.println("success");
-        /**
-         * 这里需要判断哪些老师有权限排课，属于后期功能
-         * 暂且不表
-         */
-        return "schedulingmobile";
-    }
+//    @GetMapping("/schedulingmobile")
+//    public String schedulingmobile(@RequestParam("tno") Integer tno,
+//                                   @RequestParam("tname") String tname,
+//                                   @RequestParam("address") String address,
+//                                   Map<String,Object> parmMap, HttpServletRequest request){
+//        HttpSession session =request.getSession();
+//        User user=(User) session.getAttribute("user");
+//        System.out.println(tno);
+//        System.out.println(tname);
+//        System.out.println(address);
+//        List<MobileSchedulingView> data =
+//                schedulingDao.getCoursesByTnoAndTnameAndAddress(
+//                        tno,tname,address);
+//        parmMap.put("data",data);
+//        System.out.println("success");
+//        /**
+//         * 这里需要判断哪些老师有权限排课，属于后期功能
+//         * 暂且不表
+//         */
+//        return "schedulingmobile";
+//    }
 
-    @GetMapping("/schedulingsearchmobile")
-    public String schedulingsearchmobile(Map<String,Object> parmMap, HttpServletRequest request){
-        HttpSession session =request.getSession();
-        User user=(User) session.getAttribute("user");
-
-        return "schedulingsearchmobile";
-    }
+//    @GetMapping("/schedulingsearchmobile")
+//    public String schedulingsearchmobile(Map<String,Object> parmMap, HttpServletRequest request){
+//        HttpSession session =request.getSession();
+//        User user=(User) session.getAttribute("user");
+//
+//        return "schedulingsearchmobile";
+//    }
 }

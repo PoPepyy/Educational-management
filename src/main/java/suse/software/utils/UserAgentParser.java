@@ -10,13 +10,9 @@ import lombok.Data;
 public class UserAgentParser {
     private String url;
     private String platform;
+
     public UserAgentParser(String url){
         this.url=url;
-        if(this.url.indexOf("Android")!=-1 || this.url.indexOf("iPhone")!=-1){
-            this.setPlatform("mobile");
-        }
-        else{
-            this.setPlatform("pc");
-        }
+        this.setPlatform("pc");
     }
 }

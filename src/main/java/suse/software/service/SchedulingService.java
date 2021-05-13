@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 数据表 scheduling 服务层
+ * scheduling
  */
 @Service
 public class SchedulingService {
@@ -115,7 +115,6 @@ public class SchedulingService {
     }
 
     /**
-     * @author: yuzhongrui
      * @func: 拿到老师正在开的课程的数据
      * @param tno
      * @return

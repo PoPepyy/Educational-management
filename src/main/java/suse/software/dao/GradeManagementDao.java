@@ -39,14 +39,12 @@ public interface GradeManagementDao {
 
 
     /**
-     * wyl
      * 获取某个课程的成绩百分比
      * @return  返回成绩百分比
      */
    String getCoursePercent(GradeManagementView percent);
 
     /**
-     * wyl
      * 获取某个老师该学期所有课的cno和cname
      * @return
      */

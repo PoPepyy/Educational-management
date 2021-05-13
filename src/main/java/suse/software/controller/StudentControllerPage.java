@@ -119,4 +119,8 @@ public class StudentControllerPage {
         return "StudentsAlter";
     }
 
+    @RequestMapping("/stupersonalinfo")
+    public String stuPersonalInfo(HttpServletRequest httpServletRequest) {
+        return "/stupersonalinfo";
+    }
 }

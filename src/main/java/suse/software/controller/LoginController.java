@@ -22,8 +22,7 @@ import java.util.Map;
 
 /**
  * 登录功能实现
- * 特别注意，这里不可以配置拦截。
- * 网站如果登录页面都需要已登录的用户才可以看到的话，那就很荒谬了。
+ * 特别注意，不配置拦截。
  */
 @Controller
 public class LoginController {
@@ -44,7 +43,7 @@ public class LoginController {
 
     /**
      * 登录页面网址，请求这个地址用于展现登录页面
-     * 当然，如果已经有登陆信息的话，会直接跳转到登录成功的界面。
+     * 如已有登陆信息，直接跳转到登录成功的界面。
      *
      * @param request 这里是 一个HttpServletRequest 用于获取 session 相关信息。
      * @return

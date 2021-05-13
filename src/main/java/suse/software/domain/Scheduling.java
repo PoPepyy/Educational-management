@@ -5,8 +5,7 @@ import org.apache.ibatis.type.Alias;
 
 
 /**
- * 排课表实体类
- * 修改了这里的 cno 和 tno 的类型。
+ * 排课表
  */
 @Data
 @Alias("Scheduling")

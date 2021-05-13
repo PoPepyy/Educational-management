@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 
 /**
  * 排课表 scheduling 数据库操作类
- * @implement 实现者名字
  */
 @Repository
 public interface SchedulingDao {
@@ -47,10 +46,6 @@ public interface SchedulingDao {
 
     public List<String> getRoomTaskTime(Scheduling scheduling);
 
-    /**
-     * @author: yuzhongrui
-     *
-     */
     public List<TeaCourseView> getCourseInfoByTno(int tno);
 
 }

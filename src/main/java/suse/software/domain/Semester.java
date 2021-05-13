@@ -3,7 +3,7 @@ package suse.software.domain;
 import lombok.Data;
 
 /**
- * 学期实体类
+ * 学期
  */
 @Data
 public class Semester {

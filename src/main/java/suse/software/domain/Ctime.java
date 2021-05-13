@@ -3,7 +3,7 @@ package suse.software.domain;
 import lombok.Data;
 
 /**
- * 数据库 上课时间实体
+ * 上课时间
  */
 @Data
 public class Ctime {

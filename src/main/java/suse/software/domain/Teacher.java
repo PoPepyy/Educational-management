@@ -3,7 +3,7 @@ package suse.software.domain;
 import lombok.Data;
 
 /**
- * 教师实体类
+ * 教师
  */
 @Data
 public class Teacher {

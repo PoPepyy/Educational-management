@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 学生表相应的服务。
+ * 学生表
  */
 @Service
 public class StudentService {

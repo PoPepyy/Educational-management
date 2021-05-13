@@ -18,22 +18,13 @@ public class CourseDataUtil{
     private Integer endStep;
 
     /**
-     * 构造函数，不过貌似这个构造函数没有什么卵用。
+     * 构造函数
      * @param startweek  教学开始周
      * @param endweek  教学结束周
      * @param week  在星期几上课
      * @param startStep  从第几节课开始上
      * @param endStep  上到第几节课
      */
-    public CourseDataUtil(Integer startweek,
-                          Integer endweek, Integer week,
-                          Integer startStep, Integer endStep) {
-        this.startweek = startweek;
-        this.endweek = endweek;
-        this.week = week;
-        this.startStep = startStep;
-        this.endStep = endStep;
-    }
 
     /**
      * 根据数据库中的字符串表达式来构造，这个函数就很方便了
@@ -63,13 +54,13 @@ public class CourseDataUtil{
      */
     public Boolean checkConflict(CourseDataUtil other){
         if(this.startweek> other.endweek || this.endweek<other.startweek){
-            // 课程的起始周和结束周都没有重叠，那还冲突个毛
+            // 课程的起始周和结束周都没有重叠
             return false;
         }
         if(this.week!=other.week)
             return false;
         if(this.startStep>other.endStep || this.endStep<other.startStep){
-            // 上课时间没有重叠，冲突个毛啊
+            // 上课时间没有重叠
             return false;
         }
         return true;
@@ -85,18 +76,18 @@ public class CourseDataUtil{
     public static Boolean isConflict(String courseTime, List<String> courseDataStrList){
 
         // 将数据库中读到的数据 解析成为多个 courseDataUtil 对象，生成一个列表。
-        List<CourseDataUtil> dataBaseTiems=new ArrayList<>();
+        List<CourseDataUtil> dataBaseTimes=new ArrayList<>();
         for(String coursetime:courseDataStrList){
             String[] times=coursetime.split(";");
             for(String time:times){
-                dataBaseTiems.add(new CourseDataUtil(time));
+                dataBaseTimes.add(new CourseDataUtil(time));
             }
         }
 
         String[] times=courseTime.split(";");
         for(String time:times){
             CourseDataUtil other=new CourseDataUtil(time);
-            for(CourseDataUtil data: dataBaseTiems){
+            for(CourseDataUtil data: dataBaseTimes){
                 if(data.checkConflict(other)){
                     return true;
                 }

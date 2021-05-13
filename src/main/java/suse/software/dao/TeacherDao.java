@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 教师表 teacher 数据库擦作类。
+ * 教师表 teacher
  */
 
 @Repository

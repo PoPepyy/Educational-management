@@ -1,7 +1,7 @@
 package suse.software.domain;
 import lombok.Data;
 /**
- * 课程实体类
+ * 课程
  */
 @Data
 public class Course {

@@ -28,7 +28,7 @@ public class GradeManagementControllerPage {
     @Autowired
     PowerService powerService;
 
-//    学生端PC
+//    学生端
     @RequestMapping ("/gradeinfo")
     public String gradeManagement(Map<String,Object> parMap,HttpServletRequest request){
         HttpSession session =request.getSession();
@@ -44,24 +44,9 @@ public class GradeManagementControllerPage {
         return "GradeManagementStudent";
     }
 
-    //    学生端移动
-    @RequestMapping ("/gradeinfomobile")
-    public String gradeManagementm(Map<String,Object> parMap,HttpServletRequest request){
-        HttpSession session =request.getSession();
-        User user=(User) session.getAttribute("user");
-        Integer sno=user.getAccount();
-        Semester semester=semesterService.getCurrentSemesterInfo();
-        List<GradeManagementView> studentGradeList= gradeManagementService.getCourseGrade(semester.getStart(),semester.getSemester(),sno);
-        parMap.put("gradetable",studentGradeList);
-        parMap.put("currentSemester",semester);
-        for(GradeManagementView temp:studentGradeList){
-            temp.getCname();
-        }
-        return "GradeStudentM";
-    }
 
 
-    //    教师端PC
+    //    教师端
     @RequestMapping ("/gradeinfoteacher")
     public String gradeManagementTeacher(Map<String,Object> parMap,HttpServletRequest request){
         HttpSession session =request.getSession();
@@ -77,21 +62,7 @@ public class GradeManagementControllerPage {
         return "GradeManagementTeacher";
     }
 
-    //    教师端移动
-    @RequestMapping ("/gradeteachermobile")
-    public String gradeManagementTeacherm(Map<String,Object> parMap,HttpServletRequest request){
-        HttpSession session =request.getSession();
-        User user=(User) session.getAttribute("user");
-        Integer tno=user.getAccount();
 
-        boolean permission = powerService.getScore();//获取选课权限
-        Semester semester=semesterService.getCurrentSemesterInfo();
-
-        parMap.put("currentSemester",semester);
-        parMap.put("permission",permission);
-
-        return "GradeTeacherM";
-    }
 
 }
 

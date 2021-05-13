@@ -83,7 +83,7 @@
           grade=#{grade}
     </select>
 
-    <!--下面的三条用于老师时间，学生时间，教室使用时间的冲突检测。  高谦编写-->
+    <!--下面的三条用于老师时间，学生时间，教室使用时间的冲突检测。  -->
     <select id="getTeacherTaskTime" resultType="String">
         select scheduling.course_time from scheduling where scheduling.semesterid=#{semesterId}
         and scheduling.tno=#{tno}

@@ -3,7 +3,7 @@ package suse.software.domain;
 import lombok.Data;
 
 /**
- * 数据库选课对应domain 类
+ * 数据库选课
  */
 @Data
 public class SelectCourse {
@@ -12,7 +12,6 @@ public class SelectCourse {
     private Integer sno;
     private Integer totalScore;
     private String detail;
-    // 这个参数别管他，没用！但是也别删！
     private Integer addition;
 
 

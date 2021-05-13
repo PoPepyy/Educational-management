@@ -168,7 +168,6 @@ public class GradeManagementControllerApi {
      * 方法名：importExcel
      * 功能：上传临时文件并导入，导入完毕后删除临时文件
      * 描述：文件格式为xls或xlsx
-     * 创建人：wyl
      */
 
     @RequestMapping("/import")

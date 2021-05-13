@@ -10,7 +10,7 @@
         <version>2.1.3.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>buct</groupId>
+    <groupId>suse</groupId>
     <artifactId>software</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>software</name>

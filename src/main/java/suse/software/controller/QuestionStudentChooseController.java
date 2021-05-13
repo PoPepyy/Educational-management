@@ -34,11 +34,6 @@ public class QuestionStudentChooseController {
         boolean isChosen = questionStudentChooseService.chooseQuestion(questionid,sno);
         session.setAttribute("hasChanged",true);
         session.setAttribute("isChosen",isChosen);
-//        if(isChosen) //没用
-//            map.put("isChosen",1);
-//        else
-//            map.put("isChosen",0);
-
         return "forward:/StuQuesDetails";
     }
 

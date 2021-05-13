@@ -59,8 +59,10 @@ public class SelectCourseControllerPage {
         Integer sno=user.getAccount();
         Integer majorId=user.getMajorid();
         List<Semester> semesters=semesterService.getSemesterDomain();
+        /**  已选  */
         ArrayList<SelectCourse> selectedList=
                 (ArrayList<SelectCourse>) selectCourseService.getSelectedCourseList(sno,semesterId);
+        /**  可选  */
         ArrayList<SelectCourseView> courseViews=
                 (ArrayList<SelectCourseView>)
                         selectCourseService.getAllCourseList(semesterId,majorId);
@@ -94,38 +96,7 @@ public class SelectCourseControllerPage {
         return "coursetable";
     }
 
-    /**
-     * 学生手机端选课界面的接口controller
-     * @param parmMap  传递到前端的参数集合
-     * @return
-     */
 
 
-    @GetMapping("/selectcoursemobile")
-    public String selectcoursemobile(Map<String, Object> parmMap){
-        Boolean canSelect=powerService.getSelectCourse();
-        if(!canSelect){
-            parmMap.put("reason","当前不是选课时间，如有需要请联系管理员！");
-            parmMap.put("url","/index");
-            return "toindex";
-        }
-        ResponseMessage res=collegeService.getAllCollege();
-        List<College> collegeList=(List<College>) res.getData();
-        parmMap.put("collegelist",collegeList);
-        return "selectcoursemobile";
-    }
 
-    /**
-     * 学生手机端课程表的展示界面。
-     * @param parmMap  传递到前端的参数。
-     * @return
-     */
-    @GetMapping("/coursetablemobile")
-    public String coursetablemobile(Map<String, Object> parmMap){
-        List<Semester> semesters=semesterService.getSemesterDomain();
-        Semester semester=semesterService.getCurrentSemesterInfo();
-        parmMap.put("semesterlist",semesters);
-        parmMap.put("currentSemester",semester);
-        return "coursetablemobile";
-    }
 }

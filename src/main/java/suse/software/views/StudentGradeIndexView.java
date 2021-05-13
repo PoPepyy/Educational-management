@@ -3,7 +3,6 @@ package suse.software.views;
 import lombok.Data;
 
 /**
- * @author 高谦
  * 首页显示的成绩栏目的 view
  */
 @Data

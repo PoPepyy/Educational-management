@@ -32,7 +32,6 @@ public class ExcelUtil {
      * 方法名：setBrowser
      * 功能：使用浏览器下载
      * 描述：
-     * 创建人：wyl
      */
 //    private static void setBrowser(HttpServletResponse response, HSSFWorkbook workbook, String fileName) {
 //        try {
@@ -58,7 +57,6 @@ public class ExcelUtil {
     /**
      * 方法名：importExcel
      * 功能：导入某学期某课程所有学生的成绩到数据库
-     * 创建人：wyl
      */
     public static List<Object[]> importExcel(File file) {
         log.info("导入解析开始");

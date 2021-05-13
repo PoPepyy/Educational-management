@@ -4,7 +4,7 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 /**
- *  数据库学院表 domain 类
+ *  学院表
  */
 @Data
 @Alias(value = "college")
@@ -32,9 +32,4 @@ public class College {
         this.description = description;
     }
     public College(){}
-
-    /**
-     * 下面的方法都是用于设置和获取类中的变量。
-     * @return
-     */
 }

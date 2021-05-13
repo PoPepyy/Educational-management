@@ -5,7 +5,7 @@ import suse.software.views.UserAddView;
 import org.springframework.stereotype.Repository;
 
 /**
- * 用户 User 表 数据库操作类。
+ * 用户 User 表
  * UserDao
  */
 

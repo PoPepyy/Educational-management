@@ -1,15 +1,9 @@
 package suse.software.dao;
 
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
 import suse.software.domain.Semester;
-
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
-
 
 /**
  * 学期表 semester 数据库操作类

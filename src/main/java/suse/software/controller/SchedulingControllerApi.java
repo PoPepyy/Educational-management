@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @author  刘权达大佬无敌宇宙第一帅
  * 排课子系统api
  */
 
@@ -68,7 +67,7 @@ public class SchedulingControllerApi {
 
     /**
      *
-     * @param cno  这里改动了一下
+     * @param cno
      * @param year
      * @param semester
      * @param majorName
@@ -86,7 +85,7 @@ public class SchedulingControllerApi {
     }
 
     /**
-     * @param cno 这里改动了一下
+     * @param cno
      * @param year
      * @param semester
      * @param majorName
@@ -106,8 +105,8 @@ public class SchedulingControllerApi {
 
     /**
      *
-     * @param cno  这里改变了一下
-     * @param tno  这里改变了一下
+     * @param cno
+     * @param tno
      * @param year
      * @param semester
      * @param majorName
@@ -134,7 +133,7 @@ public class SchedulingControllerApi {
     }
 
     /**
-     * @param cno 这里改变了一下
+     * @param cno
      * @param year
      * @param semester
      * @param majorName
