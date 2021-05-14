@@ -28,7 +28,7 @@
 
 <!--首页顶部-->
 <div th:fragment="banner">
-        <nav class="navbar navbar-dark navbar-fixed-top bg-primary  p-0" style="z-index: 1000;">
+        <nav class="navbar navbar-dark bg-primary  p-0" style="z-index: 1000; position: fixed; width:100%;" role="navigation">
             <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">后台管理系统</a>
             <!--input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"-->
             <ul class="navbar-nav px-3">
@@ -45,7 +45,7 @@
         <div class="sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/GoHomePage">
+                    <a th:class="${active=='HomePage.html'?'nav-link active':'nav-link'}" href="/GoHomePage">
                         <span data-feather="home"></span>
                         首页
                         <span class="sr-only">(current)</span>
@@ -58,31 +58,31 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/GoSemesterManage">
+                    <a th:class="${active=='SemesterManage.html'?'nav-link active':'nav-link'}" href="/GoSemesterManage">
                         <span data-feather="calendar"></span>
                         学期管理
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/PowerManage">
+                    <a th:class="${active=='PowerManage.html'?'nav-link active':'nav-link'}" href="/PowerManage">
                         <span data-feather="check-square"></span>
                         权限管理
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/StudentsInfo">
+                    <a th:class="${active=='StudentsInfo.html'?'nav-link active':'nav-link'}" href="/StudentsInfo">
                         <span data-feather="users"></span>
                         学生管理
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/TeachersInfo">
+                    <a th:class="${active=='TeachersInfo.html'?'nav-link active':'nav-link'}" href="/TeachersInfo">
                         <span data-feather="users"></span>
                         教师管理
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/ExcelInsert">
+                    <a th:class="${active=='StudentsFileAdd.html'?'nav-link active':'nav-link'}" href="/ExcelInsert">
                         <span data-feather="users"></span>
                         批量导入
                     </a>
@@ -96,7 +96,7 @@
 <!--                </li>-->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/GoChangePassword">
+                    <a th:class="${active=='changePassword.html'?'nav-link active':'nav-link'}" href="/GoChangePassword">
                         <span data-feather="help-circle"></span>
                         修改密码
                     </a>
@@ -106,6 +106,36 @@
     </nav>
 </div>
 
+<!--论文浏览导航栏-->
+<div th:fragment="managenavi">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/GoHomePage">
+                        <span data-feather="home"></span>
+                        首页
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:class="${active=='ManageQues.html'?'nav-link active':'nav-link'}" href="/ManageQues">
+                        <span data-feather="activity"></span>
+                        论题浏览
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:class="${active=='ManageLookThroughGrade.html'?'nav-link active':'nav-link'}" href="/ManageLookThroughGrade">
+                        <span data-feather="airplay"></span>
+                        成绩浏览
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
 
 </body>
 </html>
+
+
+

@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="common/backstageNavigator.html :: head"></div>
+    <div th:replace="common/backstageNavigator :: head"></div>
 </head>
 
 <body>
-<div th:replace="common/backstageNavigator.html :: banner"></div>
+<div th:replace="common/backstageNavigator :: banner"></div>
+<div th:replace="common/backstageNavigator :: navi(active='TeachersInfo.html')"></div>
 <div class="container-fluid" id="TI">
     <div class="row">
-        <div th:replace="common/backstageNavigator.html :: navi"></div>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" method="post" th:action="@{/SeacherTeachers}">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" method="post" th:action="@{/SeacherTeachers}" style="margin-top:48px;">
 
             <form class="form-inline mt-2 mt-md-0" method="post" th:action="@{/SearchTeachers}">
                 <div class="input-group">
@@ -18,7 +18,6 @@
                         <span class="input-group-text">工号</span>
                     </div>
                     <input class="form-control mr-sm-2" type="text" th:name="tno" v-model="searchTeacher.tno"
-                           placeholder="工号"
                            aria-label="Search">
                 </div>
                 <div class="input-group">
@@ -26,7 +25,6 @@
                         <span class="input-group-text">姓名</span>
                     </div>
                     <input class="form-control mr-sm-2" type="text" th:name="tname" v-model="searchTeacher.tname"
-                           placeholder="姓名"
                            aria-label="Search">
                 </div>
                 <div class="input-group">
@@ -34,15 +32,13 @@
                         <span class="input-group-text">性别</span>
                     </div>
                     <input class="form-control mr-sm-2" type="text" th:name="sex" v-model="searchTeacher.sex"
-                           placeholder="性别"
                            aria-label="Search">
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">学院号</span>
                     </div>
-                    <input class="form-control mr-sm-2" type="text" th:name="collegeid"
-                           v-model="searchTeacher.collegeId" placeholder="学院号"
+                    <input class="form-control mr-sm-2" type="text" th:name="collegeid" v-model="searchTeacher.collegeId"
                            aria-label="Search">
                 </div>
                 <button class="btn btn-outline-primary mr-sm-2" type="submit">
@@ -101,6 +97,19 @@
         </main>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript" th:inline="javascript">
     var ti = new Vue({

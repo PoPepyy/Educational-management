@@ -2,16 +2,17 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="common/backstageNavigator.html :: head"></div>
+    <div th:replace="common/backstageNavigator :: head"></div>
 
 </head>
 
 <body>
-<div th:replace="common/backstageNavigator.html :: banner"></div>
+<div th:replace="common/backstageNavigator :: banner"></div>
+<div th:replace="common/backstageNavigator :: navi(active='SemesterManage.html')"></div>
+
 <div class="container-fluid" id="SM">
     <div class="row">
-        <div th:replace="common/backstageNavigator.html :: navi"></div>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" style="margin-top:48px;">
 
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h1 class="h2">当前学期</h1>

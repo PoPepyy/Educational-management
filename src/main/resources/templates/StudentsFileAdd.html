@@ -2,13 +2,13 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="common/backstageNavigator.html :: head"></div>
+    <div th:replace="common/backstageNavigator :: head"></div>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>教务后台管理系统</title>
+    <title>后台管理系统</title>
 
     <script src="./js/vue.js"></script>
 
@@ -28,11 +28,12 @@
 <body>
 
 <div th:replace="common/backstageNavigator.html :: banner"></div>
+<div th:replace="common/backstageNavigator.html :: navi(active='StudentsFileAdd.html')"></div>
+
 
 <div class="container-fluid" id="app">
     <div class="row">
-        <div th:replace="common/backstageNavigator.html :: navi"></div>
-        <div role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" style="margin-top:48px;">
             <h2>学生导入</h2>
             <div id="app1">
                 <input type="file" @change="getFile($event)"/>
@@ -54,7 +55,6 @@
         <!--<button @click="upload" class="btn btn-xs btn-primary">Upload</button>-->
 
     </div>
-</div>
 </div>
 </body>
 <script>

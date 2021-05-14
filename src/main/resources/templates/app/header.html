@@ -29,7 +29,7 @@
                    style="color: white;font-weight: bolder;font-size: 20px;">
                     欢迎您
                     <span th:if="${userinfo.type}==0">[[${userinfo.sname}]] 同学</span>
-                    <span th:if="${userinfo.type}==1">老师</span>
+                    <span th:if="${userinfo.type}==1">[[${userinfo.tname}]] 老师</span>
                     <span th:if="${userinfo.type}==2">管理员</span>
                 </a>
                 <ul class="dropdown-menu">
