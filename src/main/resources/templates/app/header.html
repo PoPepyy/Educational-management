@@ -1,22 +1,21 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
-<!--用于引入css js 等静态资源的模板块-->
+<!--引入css js 等静态资源的模板块-->
 <head th:fragment="static">
     <!--    fragment布局标签，定义一个代码片段，方便其他地方引用-->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>毕业设计管理系统</title>
     <script type="text/javascript" src="js/selectcourse/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/selectcourse/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/selectcourse/zftal-ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/selectcourse/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/selectcourse/zftal-ui.css"/>
     <script type="text/javascript" src="js/selectcourse/bootstrap.min.js" charset="utf-8"></script>
 </head>
-
-<!--用于首页的 标题，登出按钮，和用户登录信息的展示。-->
-<div class="navbar navbar-default navbar-static-top top1" th:fragment="header" >
+                                <!--首页顶部-->
+<div class="navbar navbar-default navbar-static-top top1" th:fragment="header">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand logo_2" href="">
-                <img src="images/logo_jw_w.png" style="margin-top:-3px" />
+                <img src="images/logo_jw_w.png" style="margin-top:-3px"/>
                 <span id="xtmc">毕业设计管理系统&nbsp;&nbsp;
                     <span th:if="${userinfo.type}==0"> 学生端</span>
                     <span th:if="${userinfo.type}==1"> 教师端</span>
@@ -26,7 +25,8 @@
         </div>
         <ul class="nav navbar-nav navbar-right  hidden-xs">
             <li>
-                <a href="" class="dropdown-toggle grxx" data-toggle="dropdown" style="color: white;font-weight: bolder;font-size: 20px;">
+                <a href="" class="dropdown-toggle grxx" data-toggle="dropdown"
+                   style="color: white;font-weight: bolder;font-size: 20px;">
                     欢迎您
                     <span th:if="${userinfo.type}==0">[[${userinfo.sname}]] 同学</span>
                     <span th:if="${userinfo.type}==1">老师</span>
@@ -40,39 +40,40 @@
         </ul>
     </div>
 </div>
-<div class="col-md-12 col-sm-12" style="padding: 0px;" th:fragment="carousel">
+
+<div class=" p-0 col-md-12 col-sm-12" th:fragment="carousel">
     <div class="row">
-        <div class="col-md-12">
-            <div class="index_grxx">
-                <div class="row">
-                    <div class="col-md-12 column">
-                        <div class="carousel slide" id="carousel-942744" style="height: 250px;">
-                            <div class="carousel-inner">
-                                <div class="item active  posdiv">
-                                    <img alt="" class="img-responsive" style="width: 100%; height: 235px ;" src="images/lunbo_hn.jpg" />
-                                    <div class="carousel-caption"></div>
-                                    <p class="text-center" style="font-size: 1px">汇东校区</p>
-                                </div>
-                                <div class="item posdiv">
-                                    <img alt="" class="img-responsive" style="width: 100%; height: 235px ;" src="images/lunbo_yb.jpg" />
-                                    <div class="carousel-caption"></div>
-                                    <p class="text-center" style="font-size: 1px">宜宾校区</p>
-                                </div>
-                                <div class="item posdiv">
-                                    <img alt="" class="img-responsive" style="width: 100%; height: 235px ;" src="images/lunbo_yp.jpg" />
-                                    <div class="carousel-caption"></div>
-                                    <p class="text-center" style="font-size: 1px">营盘校区</p>
-                                </div>
-                            </div>
-                            <a class="left carousel-control" href="#carousel-942744" data-slide="prev">
-                            </a>
-                            <a class="right carousel-control" href="#carousel-942744" data-slide="next">
-                            </a>
+        <div class="index_grxx">
+            <div class="col-md-12 column">
+                <div class="carousel slide" id="carousel-942744" style="height: 250px;">
+                    <div class="carousel-inner">
+                        <div class="item active  posdiv">
+                            <img alt="" class="img-responsive" style="width: 100%; height: 235px ;"
+                                 src="images/lunbo_hn.jpg"/>
+                            <div class="carousel-caption"></div>
+                            <p class="text-center" style="font-size: 1px">汇东校区</p>
+                        </div>
+                        <div class="item posdiv">
+                            <img alt="" class="img-responsive" style="width: 100%; height: 235px ;"
+                                 src="images/lunbo_yb.jpg"/>
+                            <div class="carousel-caption"></div>
+                            <p class="text-center" style="font-size: 1px">宜宾校区</p>
+                        </div>
+                        <div class="item posdiv">
+                            <img alt="" class="img-responsive" style="width: 100%; height: 235px ;"
+                                 src="images/lunbo_yp.jpg"/>
+                            <div class="carousel-caption"></div>
+                            <p class="text-center" style="font-size: 1px">营盘校区</p>
                         </div>
                     </div>
+                    <a class="left carousel-control" href="#carousel-942744" data-slide="prev">
+                    </a>
+                    <a class="right carousel-control" href="#carousel-942744" data-slide="next">
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 </html>
