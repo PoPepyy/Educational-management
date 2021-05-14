@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 /**
  * 用户 User 表
- * UserDao
  */
 
 @Repository

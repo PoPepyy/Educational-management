@@ -15,11 +15,6 @@
     <div class="row">
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" method="post" th:action="@{/ManageQues}" style="margin-top:48px;">
             <h1></h1>
-            <!--<a href="/TeachersAddAction" class="btn btn-outline-primary mr-sm-2" role="button">
-                <span data-feather="user-plus"></span>
-                添加教师
-            </a>-->
-
             <h1></h1>
             <table class="table">
                 <thead class="thead-light">
@@ -55,6 +50,7 @@
                 </tr>
                 </tbody>
             </table>
+
             <!--分页-->
             <div>
                 <button @click="prePage()" id="btnprepage">上一页</button>

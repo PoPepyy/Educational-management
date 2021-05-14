@@ -1,5 +1,6 @@
 package suse.software.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import suse.software.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,13 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class UserControllerPage {
-
     /**
-     * 返回一个学生修改密码的界面
+     * 跳转到修改密码的界面
      * @return
      */
-    @GetMapping("/fixpasswordstudent")
+    @GetMapping("/fixpassword")
     public String fixPassword(){
-        return "fixpasswordstudent";
+        return "fixpassword";
     }
 }

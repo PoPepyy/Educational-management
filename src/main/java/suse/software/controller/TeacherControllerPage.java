@@ -93,8 +93,6 @@ public class TeacherControllerPage {
         teacher.setSex(sex);
         teacher.setTname(tname);
         List<Teacher> teacherByExample = teacherService.getTeacherByExample(teacher);
-//        List<Student> studentsByExample = studentService.getStudentsByExample(student);
-//        System.out.println(studentsByExample);
         httpServletRequest.getSession().setAttribute("allTeacher", teacherByExample);
         return "forward:/TeacherPage";
     }

@@ -1,4 +1,5 @@
 package suse.software.controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import suse.software.domain.User;
 import suse.software.service.UserService;
 import suse.software.utils.ResponseMessage;
@@ -20,6 +21,13 @@ import javax.servlet.http.HttpSession;
 public class UserControllerApi {
     @Autowired
     UserService userService;
+
+    /**
+     * 老师、学生密码修改
+     * @param password
+     * @param request
+     * @return
+     */
     @PostMapping("/changepassword")
     public ResponseMessage changePassword(@RequestParam("newpass") String password,
                                           HttpServletRequest request){
@@ -37,6 +45,12 @@ public class UserControllerApi {
             return new ResponseMessage(500,"修改失败",null);
     }
 
+    /**
+     * 后台密码修改
+     * @param account
+     * @param newpass
+     * @return
+     */
     @PostMapping("/fixpasswordBack")
     public ResponseMessage fixpasswordBack(@RequestParam("account") Integer account,
                                            @RequestParam("newpass") String newpass){
@@ -52,4 +66,7 @@ public class UserControllerApi {
         else
             return new ResponseMessage(500,"失败",null);
     }
+
+
+
 }

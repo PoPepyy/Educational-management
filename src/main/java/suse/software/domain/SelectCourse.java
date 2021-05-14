@@ -19,10 +19,7 @@ public class SelectCourse {
         this.semesterId = semesterId;
         this.cno = cno;
         this.sno = sno;
-
         this.totalScore = grade;
-
-
         this.detail = detail;
     }
     public SelectCourse(){}

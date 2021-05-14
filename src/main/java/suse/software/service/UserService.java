@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 数据表 user 服务层。
- * 以下代码还可以继续优化。
  */
 @Service
 public class UserService {
@@ -36,6 +35,13 @@ public class UserService {
             return null;
         }
     }
+    /**
+     * 修改密码
+     * @param userAddView
+     * @param newPassword
+     * @return
+     */
+
     public Boolean upDateUserPassword(UserAddView userAddView,String newPassword){
         User user = new User();
         user.setAccount(userAddView.getUserAccount());

@@ -11,12 +11,21 @@ public class Student {
     private String sname;
     private String sex;
     private String major;
-    // 班级：
+    /**
+     *班级
+    */
     private String klass;
     private String comeYear;
     private String phone;
     private String college;
     private Integer collegeId;
+    /**
+     * 年级
+     */
+    private String grade;
+    private Integer majorId;
+
+
 
     public Student(Integer sno, String sname, String sex,
                    String major, String klass, String comeYear,
@@ -34,10 +43,6 @@ public class Student {
         this.grade = grade;
         this.majorId = majorId;
     }
-
-    // 年级年级年级，不是分数，不是分数，不是分数！
-    private String grade;
-    private Integer majorId;
 
     public Student() {
     }
