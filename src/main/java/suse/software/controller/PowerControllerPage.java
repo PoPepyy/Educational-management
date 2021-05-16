@@ -89,7 +89,7 @@ public class PowerControllerPage {
                 try {
                     ok = studentService.excel(file);
                 } catch (Exception e) {
-                    return "导入失败";
+                    return "导入失败"+e;
                 }
                 //导入结束时，删除临时文件
                 deleteFile(file);
@@ -141,7 +141,7 @@ public class PowerControllerPage {
                 try {
                     ok = teacherService.excel(file);
                 } catch (Exception e) {
-                    return "导入失败";
+                    return "导入失败"+e;
                 }
                 //导入结束时，删除临时文件
                 deleteFile(file);

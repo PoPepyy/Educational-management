@@ -99,8 +99,6 @@ public class TeacherService {
             System.out.println(teacher);
             teachers.add(teacher);
         }
-//        teacherDao.insertTeacher();
-//        s(students);
         addTeachers(teachers);
         return true;
     }

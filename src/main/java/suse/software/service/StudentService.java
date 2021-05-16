@@ -61,7 +61,6 @@ public class StudentService {
         HSSFWorkbook hssfWorkbook = null;
         Student student = null;
         List<Student> students = new LinkedList<>();
-//        students.g
         try {
             hssfWorkbook = new HSSFWorkbook(new FileInputStream(file));
         } catch (IOException e) {
@@ -82,7 +81,7 @@ public class StudentService {
                     row.getCell(5).toString(),
                     row.getCell(6).toString(),
                     row.getCell(9).toString(),
-                    Integer.parseInt(row.getCell(10).toString()),
+                    (int)Double.parseDouble(row.getCell(10).toString()),
                     row.getCell(7).toString(),
                     Integer.parseInt(row.getCell(8).toString())
             );

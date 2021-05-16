@@ -49,27 +49,7 @@ public class QuesitonScoreController {
         return "StuScore";
     }
 
-    @RequestMapping(value = "/StuScoreMobile")
-    public String StuScoreMobile(HttpServletRequest request,
-                           Map<String,Object> map){
-        HttpSession session = request.getSession();
-        Object user = session.getAttribute("user");
-        int sno = ((User)user).getAccount();
-        QuestionScore questionScore = questionScoreService.getQuestionScoreBySno(sno);
 
-        double total = 0;
-
-        if(questionScore==null)
-            total = -1;
-        else{
-            total =  questionScore.getEarlyperformance()*0.1+questionScore.getMidexam()*0.2+questionScore.getThesisanswer()*0.3+questionScore.getPaper()*0.3+questionScore.getExtracredit()*0.1;
-        }
-
-        map.put("total",total);
-        map.put("quesScore",questionScore);
-
-        return "StuScoreMobile";
-    }
 
     @RequestMapping(value =  "/TeaAddScore")
     public String TeaAddScore(HttpServletRequest request,Map<String,Object>map){
@@ -105,21 +85,7 @@ public class QuesitonScoreController {
         return "TeaAddScore";
     }
 
-    @RequestMapping(value =  "/TeaAddScoreMobile")
-    public String TeaAddScoreMobile(HttpServletRequest request,Map<String,Object>map){
-        HttpSession session = request.getSession();
-        Object user = session.getAttribute("user");
-        int tno = ((User)user).getAccount();
-        List<Question> questions = questionService.getQuestionByTno(tno);
-        List<QuestionStudentChoose> questionStudentChooses = new ArrayList<>();
-        for(int i=0;i<questions.size();i++){
-            if (questions.get(i).getSno()!=-1){
-                questionStudentChooses.add(new QuestionStudentChoose(questions.get(i).getQuestionid(),questions.get(i).getSno() ) );
-            }
-        }
-        map.put("choices",questionStudentChooses);
-        return "TeaAddScoreMobile";
-    }
+
 
     @RequestMapping(value = "/TeaAddScore",method = RequestMethod.POST)
     public String TeaAddScore(HttpServletRequest request,
@@ -153,32 +119,6 @@ public class QuesitonScoreController {
        return "redirect:/TeaAddScore";
     }
 
-    @RequestMapping(value = "/TeaAddScoreMobile",method = RequestMethod.POST)
-    public String TeaAddScoreMobile(HttpServletRequest request,
-                              @RequestParam("sno")int sno,
-                              @RequestParam("questionid")int questionid,
-                              @RequestParam("earlyperformance")int earlyperformance,
-                              @RequestParam("midexam")int midexam,
-                              @RequestParam("thesisanswer")int thesisanswer,
-                              @RequestParam("paper")int paper,
-                              @RequestParam("extracredit")int extracredit){
-        //判断有无打过分
-        QuestionScore questionScoreCheck = questionScoreService.getQuestionScoreBySno(sno);
-        if(questionScoreCheck!=null){
-            return "redirect:/TeaAddScoreMobile";
-        }
-
-        QuestionScore questionScore = new QuestionScore();
-        questionScore.setSno(sno);
-        questionScore.setQuestionid(questionid);
-        questionScore.setEarlyperformance(earlyperformance);
-        questionScore.setMidexam(midexam);
-        questionScore.setThesisanswer(thesisanswer);
-        questionScore.setPaper(paper);
-        questionScore.setExtracredit(extracredit);
-        questionScoreService.addQuestionScore(questionScore);
-        return "redirect:/TeaAddScoreMobile";
-    }
 
 
 
