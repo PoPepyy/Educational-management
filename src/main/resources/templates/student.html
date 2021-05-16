@@ -20,14 +20,22 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <h4>[[${userinfo.sname}]]</h4>
+                    <div class="row inline">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
+                            <p style="font-size: 30px;">[[${userinfo.sname}]]</p>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary" @click="changePass()">信息修改</button>
+                        </div>
+                    </div>
                     <p> 学院：[[${userinfo.college}]] </p>
                     <p> 专业：[[${userinfo.major}]] </p>
                     <p> 班级：[[${userinfo.klass}]] </p>
                 </div>
             </div>
-        </div>
 
+        </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -59,24 +67,11 @@
                                     <h5>关于成绩</h5>
                                 </a>
                             </li>
-<!--                            <li class="col-md-4 col-sm-4">
-                                <a href="/coursetable" target="_blank">
-                                    <img src="images/ico_but28.png"/>
-                                    <h5>课表查询</h5>
-                                </a>
-                            </li>
-                            <li class="col-md-4 col-sm-4">
-                                <a href="/gradeinfo" target="_blank">
-                                    <img src="images/ico_but46.png"/>
-                                    <h5>成绩查询</h5>
-                                </a>
-                            </li>-->
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">

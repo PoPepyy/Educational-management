@@ -1,8 +1,5 @@
 package suse.software.utils;
 
-import suse.software.dao.CourseDao;
-import suse.software.domain.Course;
-
 import java.util.ArrayList;
 import java.util.List;
 

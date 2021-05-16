@@ -9,15 +9,6 @@ public class GradeManagementView {
     private Integer sno;
     private Integer tno;
 
-    //课程表特有字段
-    private String cname;
-    private String college;
-    private String percent;
-
-    //选课表
-    private String totalscore;
-    private String detail;
-
     //planning表
     private Integer credit;
 

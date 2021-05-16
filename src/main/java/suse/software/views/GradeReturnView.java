@@ -6,13 +6,6 @@ public class GradeReturnView {
     //公共字段
     private Integer cno;
 
-    //课程表特有字段
-    private String cname;
-    private String college;
-
-    //选课表
-    private String totalscore;
-
     //planning表
     private Integer credit;
 

@@ -76,49 +76,9 @@ public class Scheduling {
         return status;
     }
 
-    public Integer getCapacity() {
-        return capacity;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getCourseTime() {
-        return courseTime;
-    }
-
     public String getPercent() {
         return percent;
     }
 
-    public String getMajorGrade() {
-        return majorGrade;
-    }
 
-
-    public Scheduling(Integer semesterId, Integer cno,
-                      Integer tno, String status,
-
-                      Integer capacity, String address,
-                      String courseTime, String percent,
-                      String majorGrade) {
-        if(semesterId !=-1)
-            this.semesterId = semesterId;
-        else
-            this.semesterId = null;
-        this.cno = cno;
-        this.tno = tno;
-        this.status = status;
-        if(capacity!=-1)
-            this.capacity = capacity;
-        else
-            this.capacity = null;
-        this.address = address;
-        this.courseTime = courseTime;
-        this.percent = percent;
-        this.majorGrade = majorGrade;
-    }
-
-    public Scheduling(){}
 }

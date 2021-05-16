@@ -4,10 +4,7 @@ import suse.software.domain.Student;
 import suse.software.domain.Teacher;
 import suse.software.domain.User;
 import suse.software.service.*;
-import suse.software.views.SelectCourseView;
-import suse.software.views.StudentGradeIndexView;
 
-import suse.software.views.TeaCourseView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,11 +30,7 @@ public class LoginController {
     @Autowired
     TeacherService teacherService;
     @Autowired
-    SelectCourseService selectCourseService;
-    @Autowired
     SemesterService semesterService;
-    @Autowired
-    SchedulingService schedulingService;
     @Autowired
     CollegeService collegeService;
 
@@ -61,18 +54,11 @@ public class LoginController {
             Integer type = user.getType();
             parmMap.put("userinfo", user);
             if (type == 0) {
-                List<SelectCourseView> courseTable = selectCourseService.getCourseTable(semesterId, user.getAccount());
-                List<StudentGradeIndexView> gradeList = selectCourseService.getGrade(semesterId, user.getAccount());
-                parmMap.put("courseTable", courseTable);
-                parmMap.put("gradeList", gradeList);
+
                 return "student";
             }
             if (type == 1) {
                 int tno = user.getAccount();
-                List<TeaCourseView> teaCourseViews = schedulingService.getCourseInfoByTno(tno);
-                session.setAttribute("CourseTable",teaCourseViews);
-
-                parmMap.put("courseTable", teaCourseViews);//课表
                 Teacher teacher = teacherService.getTeacherByTno(tno);
                 parmMap.put("teainfo", teacher);
                 int cid = teacher.getCollegeId();
