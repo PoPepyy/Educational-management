@@ -1,5 +1,6 @@
 package suse.software.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import suse.software.domain.Student;
 import suse.software.domain.User;
 import suse.software.service.StudentService;
@@ -25,7 +26,7 @@ public class StudentControllerPage {
         return user.getType() == 2;
     }
     @RequestMapping("/StudentsInfo")
-    public String studentsIofo(HttpServletRequest request) {
+    public String studentsInfo(HttpServletRequest request) {
         if (checkPower(request) == false) {
             return "error";
         }
@@ -113,10 +114,12 @@ public class StudentControllerPage {
         String sno = httpServletRequest.getParameter("sno");
         int sno_int = Integer.parseInt(sno);
         Student student = studentService.getStudentBySno(sno_int);
-        System.out.println(student);
-        System.out.println("test");
         paramMap.put("needUpdateStudent", student);
         return "StudentsAlter";
     }
 
+    @GetMapping("/stualter")
+    public String stuAlter(){
+        return "StudentsAlter";
+    }
 }

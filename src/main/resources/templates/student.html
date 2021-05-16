@@ -12,26 +12,21 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion"
-                       href="#collapseOne" style="text-decoration: none">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="text-decoration: none">
                         个人信息
                     </a>
                 </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <div class="row inline">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-7">
-                            <p style="font-size: 30px;">[[${userinfo.sname}]]</p>
-                        </div>
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-primary" @click="changePass()">信息修改</button>
-                        </div>
-                    </div>
+                    <h3>[[${userinfo.sname}]]</h3>
+                    </br>
                     <p> 学院：[[${userinfo.college}]] </p>
                     <p> 专业：[[${userinfo.major}]] </p>
                     <p> 班级：[[${userinfo.klass}]] </p>
+                    </br>
+                    </br>
+                    <a href="/stualter" role="button" class="btn btn-default"  target="_blank">修改</a>
                 </div>
             </div>
 
