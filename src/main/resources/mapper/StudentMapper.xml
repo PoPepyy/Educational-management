@@ -7,12 +7,19 @@
     <select id="getBySno" parameterType="Integer" resultType="suse.software.domain.Student">
         select * from student where student.sno= #{sno}
     </select>
+
     <select id="getAll" resultType="suse.software.domain.Student">
         select * from student
     </select>
+
     <insert id="insertStudnet" parameterType="suse.software.domain.Student">
         insert into student values (#{sno},#{sname},#{sex},#{major},#{klass},#{comeYear},#{phone},#{grade},#{majorId},#{college},#{collegeId})
     </insert>
+
+    <delete id="deleteStudent" parameterType="Integer">
+        delete from student where student.sno = #{sno}
+    </delete>
+
     <select id="getStudentsByExample" parameterType="suse.software.domain.Student"
             resultType="suse.software.domain.Student">
         select * from student
@@ -31,6 +38,7 @@
             </if>
         </where>
     </select>
+
     <update id="updateStudent" parameterType="suse.software.domain.Student">
         update student
         <set>

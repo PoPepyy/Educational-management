@@ -3,6 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="common/backstageNavigator :: head"></div>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 </head>
 
 <body>
@@ -12,6 +13,9 @@
 <div class="container-fluid" id="SI">
     <div class="row">
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" style="margin-top:48px;">
+
+
+<!--            搜索-->
             <form class="form-inline mt-2 mt-md-0" method="post" th:action="@{/SearchStudents}">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -20,7 +24,6 @@
                     <input class="form-control mr-sm-1" th:name="sno" type="number" v-model="searchStudent.sno"
                            aria-label="Search">
                 </div>
-
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">姓名</span>
@@ -33,16 +36,14 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">专业</span>
                     </div>
-                    <input class="form-control mr-sm-1" th:name="major" type="text" v-model="searchStudent.major"
-                           aria-label="Search">
+                    <input class="form-control mr-sm-1" th:name="major" type="text" v-model="searchStudent.major" aria-label="Search">
                 </div>
 
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">年级</span>
                     </div>
-                    <input class="form-control mr-sm-1" type="text" th:name="grade" v-model="searchStudent.grade"
-                           aria-label="Search">
+                    <input class="form-control mr-sm-1" type="text" th:name="grade" v-model="searchStudent.grade" aria-label="Search">
                 </div>
 
                 <button class="btn btn-outline-primary mr-sm-2" type="submit">
@@ -55,9 +56,8 @@
                 <span data-feather="user-plus"></span>
                 添加学生
             </a>
-            <!--<button @click="upload" class="btn btn-xs btn-primary">Upload</button>-->
             <h2></h2>
-            <table class="table">
+            <table class="table" >
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">学号</th>
@@ -77,7 +77,6 @@
                     <td>{{student.sno}}</td>
                     <td>{{student.sname}}</td>
                     <td>{{student.sex}}</td>
-
                     <td>{{student.major}}</td>
                     <td>{{student.grade}}</td>
                     <td>{{student.klass}}</td>
@@ -86,24 +85,24 @@
                     <td>{{student.phone}}</td>
                     <td>
                         <button class="btn btn-outline-primary btn-sm" v-on:click="change(student.sno)">修改</button>
+                        <button class="btn btn-outline-danger btn-sm" v-on:click="delstu(student.sno)">删除</button>
                     </td>
                 </tr>
                 </tbody>
             </table>
             <!--分页-->
-            <div>
-                <button @click="prePage()" id="btnprepage">上一页</button>
-                <button @click="nextPage()" id="btnnextpage">下一页</button>
-                <input type="text" v-model="jumppage" style="width: 40px">
-                <button @click="leapPage()">跳转</button>
-                <label>当前{{ currentpage+1 }}/{{ pagenum }}</label>
+            <div class="row">
+                    <button @click="prePage()" id="btnprepage">上一页</button>
+                    <button @click="nextPage()" id="btnnextpage">下一页</button>
+                    <input type="text" v-model="jumppage" style="width: 40px">
+                    <button @click="leapPage()">跳转</button>
+                    <label>当前{{ currentpage+1 }}/{{ pagenum }}</label>
             </div>
         </main>
     </div>
 </div>
 
 <script type="text/javascript" th:inline="javascript">
-    // var allStudents =[[${allStudents}]]
     var si = new Vue({
         el: '#SI',
         mounted: function () {
@@ -113,6 +112,29 @@
             change: function (sno) {
                 window.location = "/UpdateStudent?sno=" + sno;
             },
+            delstu: function (sno) {
+                var config = {headers: {'Content-Type': 'multipart/form-data'}};
+                const formData = new FormData();
+                formData.append("sno", sno)
+                this.$http.post('/DeleteStudent',formData,config).then(function (response){
+                    this.result =response.data
+                    this.refreshstu()
+                    alert(response.bodyText)
+                    this.getpage()
+                    location.reload()
+               })
+            },
+
+            refreshstu: function (){
+                var config = {headers: {'Content-Type': 'multipart/form-data'}};
+                const formData = new FormData();
+                _this = this
+                this.$http.get('/StudentsInfo',formData,config).then(function (response){
+                    this.students = response.data.allStudent
+                })
+            },
+
+
             getpage: function () {
                 this.pagenum = Math.ceil(this.students.length / this.pagesize) || 1;
                 for (var i = 0; i < this.pagenum; i++) {
@@ -153,7 +175,7 @@
                 majorId: 0,
             },
             jumppage: null,
-            pagesize: 8,
+            pagesize: 9,
             pagestudents: [],
             totalpage: [],
             pagenum: '',

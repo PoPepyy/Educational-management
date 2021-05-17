@@ -38,19 +38,6 @@
             <form id="SemesterTable" @submit.prevent="submit" th:action="@{/CreateNewSemester}" method="post">
                 <div class="row">
                     <div class="col-3">
-                        <!--<select class="custom-select" v-model='NewSemesterFirst'>-->
-                        <!--<option selected>学年</option>-->
-                        <!--<option value="2017-2018学年">2017-2018学年</option>-->
-                        <!--<option value="2018-2019学年">2018-2019学年</option>-->
-                        <!--<option value="2019-2020学年">2019-2020学年</option>-->
-                        <!--<option value="2020-2021学年">2020-2021学年</option>-->
-                        <!--<option value="2021-2022学年">2021-2022学年</option>-->
-                        <!--<option value="2022-2023学年">2022-2023学年</option>-->
-                        <!--</select>-->
-                        <input type="text" th:name="semester" v-model="semester" placeholder="学期名"
-                               class="form-control mr-sm-2">
-                    </div>
-                    <div class="col-3">
                         <!--<select class="custom-select" v-model='NewSemesterLast'>-->
                         <!--<option selected>学期</option>-->
                         <!--<option value="第1学期">第1学期</option>-->
@@ -60,6 +47,18 @@
                         <input type="text" th:name="semesterid" c-model="semesterid" placeholder="学期id"
                                class="form-control mr-sm-2">
                     </div>
+
+                    <div>
+                        <div class="row">
+                            <h5>&#8195&#8195第&#8195</h5>
+                            <select th:name="semester" v-model="semester" class="col-3">
+                                <option selected="selected"  value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                            <h5>&#8195学期</h5>
+                        </div>
+                    </div>
+
                 </div>
                 <h1></h1>
                 <div class="row">

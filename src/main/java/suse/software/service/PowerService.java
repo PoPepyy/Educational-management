@@ -47,25 +47,6 @@ public class PowerService {
         power = getStatus();
         return power.getSelectCourse() == 1;
     }
-
-    /**
-     * 开放选课权限
-     */
-    public void openSelectCourse() {
-        power = getStatus();
-        power.setSelectCourse(1);
-        powerDao.updatePower(power);
-    }
-
-    /**
-     * 关闭选课权限
-     */
-    public void closeSelectCourse() {
-        power = getStatus();
-        power.setSelectCourse(0);
-        powerDao.updatePower(power);
-    }
-
     /**
      * 得到成绩录入权限
      */
@@ -73,7 +54,6 @@ public class PowerService {
         power = getStatus();
         return power.getScore() == 1;
     }
-
     /**
      * 开放成绩录入权限
      */
@@ -89,32 +69,6 @@ public class PowerService {
     public void closeScore() {
         power = getStatus();
         power.setScore(0);
-        powerDao.updatePower(power);
-    }
-
-    /**
-     * 获取学籍异动选课权限
-     */
-    public Boolean getAbnormal() {
-        power = getStatus();
-        return power.getAbnormal() == 1;
-    }
-
-    /**
-     * 开放学籍异动选课权限
-     */
-    public void openAbnormal() {
-        power = getStatus();
-        power.setAbnormal(1);
-        powerDao.updatePower(power);
-    }
-
-    /**
-     * 关闭学籍异动选课权限
-     */
-    public void closeAbnormal() {
-        power = getStatus();
-        power.setAbnormal(0);
         powerDao.updatePower(power);
     }
 }

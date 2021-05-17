@@ -47,10 +47,7 @@ public class PowerControllerPage {
         return "StudentsFileAdd";
     }
 
-    @RequestMapping("/GoChangePassword")
-    public String goChangePassword(){
-        return "changePassword";
-    }
+
 
     @ResponseBody
     @RequestMapping("/ExcelAfterInsert")
@@ -84,7 +81,6 @@ public class PowerControllerPage {
             return "文件名不能为空！";
         } else {
             if (fileName.endsWith("xls") || fileName.endsWith("xlsx")) {
-//                Boolean isOk = (tmpSemesterId,tmpcno,file);
                 boolean ok = false;
                 try {
                     ok = studentService.excel(file);
@@ -121,7 +117,6 @@ public class PowerControllerPage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // MultipartFile to File
         try {
             multfile.transferTo(file);
         } catch (IOException e) {
@@ -136,7 +131,6 @@ public class PowerControllerPage {
             return "文件名不能为空！";
         } else {
             if (fileName.endsWith("xls") || fileName.endsWith("xlsx")) {
-//                Boolean isOk = (tmpSemesterId,tmpcno,file);
                 boolean ok = false;
                 try {
                     ok = teacherService.excel(file);
@@ -178,6 +172,12 @@ public class PowerControllerPage {
         }
     }
 
+
+    @RequestMapping("/GoChangePassword")
+    public String goChangePassword(){
+        return "changePassword";
+    }
+
     @RequestMapping("/GoHomePage")
     public String homePage(Map<String, Object> parMap, HttpServletRequest request) {
         if (checkPower(request) == false) {
@@ -195,18 +195,7 @@ public class PowerControllerPage {
             return "error";
         }
         request.setAttribute("score", powerService.getScore());
-        request.setAttribute("abnormal", powerService.getAbnormal());
-        request.setAttribute("selectCourse", powerService.getSelectCourse());
         return "PowerManage";
-    }
-
-    @PostMapping("/OpenSelectCourse")
-    public String openSelectCourse(Map<String, Object> parMap, HttpServletRequest request) {
-        if (checkPower(request) == false) {
-            return "error";
-        }
-        powerService.openSelectCourse();
-        return "redirect:/PowerManage";
     }
 
     @PostMapping("/OpenScore")
@@ -215,24 +204,6 @@ public class PowerControllerPage {
             return "error";
         }
         powerService.openScore();
-        return "redirect:/PowerManage";
-    }
-
-    @PostMapping("/OpenAbnormal")
-    public String openAbnormal(Map<String, Object> parMap, HttpServletRequest request) {
-        if (checkPower(request) == false) {
-            return "error";
-        }
-        powerService.openAbnormal();
-        return "redirect:/PowerManage";
-    }
-
-    @PostMapping("/CloseAbnormal")
-    public String closeAbnormal(Map<String, Object> parMap, HttpServletRequest request) {
-        if (checkPower(request) == false) {
-            return "error";
-        }
-        powerService.closeAbnormal();
         return "redirect:/PowerManage";
     }
 
@@ -245,13 +216,4 @@ public class PowerControllerPage {
         return "redirect:/PowerManage";
     }
 
-    @PostMapping("/CloseSelectCourse")
-    public String closeSelectCourse(Map<String, Object> parMap, HttpServletRequest request) {
-        if (checkPower(request) == false) {
-            return "error";
-        }
-        powerService.closeSelectCourse();
-        return "redirect:/PowerManage";
-    }
-//    @RequestMapping("/HomePage")
 }

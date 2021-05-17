@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,11 +37,15 @@ public class TeacherService {
     }
 
     @Transactional
-    public void updateTeachers(List<Teacher> teachers) {
-        for (Teacher teacher : teachers) {
-            teacherDao.updateTeacher(teacher);
-        }
+    public void updateTeacher(Teacher teacher) {
+        teacherDao.updateTeacher(teacher);
     }
+
+    public void updateTeacherById(Integer id, Teacher teacher) {
+        teacher.setTno(id);
+        teacherDao.updateTeacher(teacher);
+    }
+
 
     public void addTeacher(Teacher teacher) {
         teacherDao.insertTeacher(teacher);
@@ -55,10 +60,8 @@ public class TeacherService {
         }
 
     }
-
-    public void updateTeacherById(Integer id, Teacher teacher) {
-        teacher.setTno(id);
-        teacherDao.updateTeacher(teacher);
+    public void deleteTeacher(Integer tno){
+        teacherDao.deleteTeacher(tno);
     }
 
     public List<Teacher> getAllTeacher() {
@@ -83,20 +86,18 @@ public class TeacherService {
         int lastRowNum = sheet.getLastRowNum();
         float tno = 0;
         float coid = 0;
-        System.out.println(sheet.getLastRowNum());
+        DecimalFormat df = new DecimalFormat("0");
         for (int i = 1; i <= lastRowNum; i++) {
             HSSFRow row = sheet.getRow(i);
             teacher = new Teacher();
             teacher.setTname(row.getCell(1).toString());
             teacher.setSex(row.getCell(2).toString());
-            teacher.setCollegeId(Integer.parseInt(row.getCell(5).toString()));
+            teacher.setCollegeId((int)Math.round(row.getCell(5).getNumericCellValue()));
             teacher.setEmail(row.getCell(4).toString());
-            teacher.setPhone(row.getCell(3).toString());
+            teacher.setPhone((int)Math.round(row.getCell(3).getNumericCellValue())+"");
             teacher.setOffice(row.getCell(6).toString());
-            System.out.println();
-            teacher.setTno(Integer.parseInt((row.getCell(0).toString())));
+            teacher.setTno(Integer.parseInt(df.format(row.getCell(0).getNumericCellValue())));
             teacher.setRank(row.getCell(7).toString());
-            System.out.println(teacher);
             teachers.add(teacher);
         }
         addTeachers(teachers);

@@ -15,5 +15,6 @@ public interface StudentDao {
     public List<Student> getAll();
     public void insertStudnet(Student student);
     public void updateStudent(Student student);
+    public void deleteStudent(Integer sno);
     List<Student> getStudentsByExample(Student student);
 }

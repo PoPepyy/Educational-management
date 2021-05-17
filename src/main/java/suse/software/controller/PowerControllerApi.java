@@ -28,16 +28,6 @@ public class PowerControllerApi {
     }
 
     /**
-     * 获取学籍异动权限
-     *
-     * @return Boolean
-     */
-    @GetMapping("/getPowerAbnormal")
-    public ResponseMessage getPowerAbnormal() {
-        return new ResponseMessage(ResponseMessage.SUCCESS, "Abnormal", powerService.getAbnormal());
-    }
-
-    /**
      * 获取成绩录入权限
      *
      * @return Boolean
@@ -47,79 +37,6 @@ public class PowerControllerApi {
         return new ResponseMessage(ResponseMessage.SUCCESS, "Score", powerService.getScore());
     }
 
-    /**
-     * 获取选课权限
-     *
-     * @return Boolean
-     */
-    @GetMapping("/getPowerSelectCourse")
-    public ResponseMessage getPowerSelectCourse() {
-        return new ResponseMessage(ResponseMessage.SUCCESS, "SelectCourse", powerService.getSelectCourse());
-    }
-
-    /**
-     * 打开选课权限
-     *
-     * @return Boolean
-     */
-    @RequestMapping("/openPowerSelectCourse")
-    public ResponseMessage setPowerSelectCourse(HttpServletRequest request, HttpServletResponse response) {
-        User user = (User) request.getSession().getAttribute("user");
-
-        if (user != null && user.getType() == 2) {
-            powerService.openSelectCourse();
-            return new ResponseMessage(ResponseMessage.SUCCESS, "OpenSelectCourse", true);
-        }
-        return new ResponseMessage(ResponseMessage.WRONG, "OpenSelectCourse", false);
-    }
-
-    /**
-     * 关闭选课权限
-     *
-     * @return Boolean
-     */
-    @RequestMapping("/closePowerSelectCourse")
-    public ResponseMessage closePowerSelectCourse(HttpServletRequest request, HttpServletResponse response) {
-        User user = (User) request.getSession().getAttribute("user");
-
-        if (user != null && user.getType() == 2) {
-            powerService.closeSelectCourse();
-            return new ResponseMessage(ResponseMessage.SUCCESS, "CLoseSelectCourse", true);
-        }
-        return new ResponseMessage(ResponseMessage.WRONG, "CLoseSelectCourse", false);
-    }
-
-    /**
-     * 打开学籍异动权限
-     *
-     * @return Boolean
-     */
-    @RequestMapping("/closePowerAbnormal")
-    public ResponseMessage closePowerAbnormal(HttpServletRequest request, HttpServletResponse response) {
-        User user = (User) request.getSession().getAttribute("user");
-
-        if (user != null && user.getType() == 2) {
-            powerService.closeAbnormal();
-            return new ResponseMessage(ResponseMessage.SUCCESS, "CloseAbnormal", true);
-        }
-        return new ResponseMessage(ResponseMessage.WRONG, "CloseAbnormal", false);
-    }
-
-    /**
-     * 关闭学籍异动权限
-     *
-     * @return Boolean
-     */
-    @RequestMapping("/openPowerAbnormal")
-    public ResponseMessage openPowerAbnormal(HttpServletRequest request, HttpServletResponse response) {
-        User user = (User) request.getSession().getAttribute("user");
-
-        if (user != null && user.getType() == 2) {
-            powerService.openAbnormal();
-            return new ResponseMessage(ResponseMessage.SUCCESS, "OpenAbnormal", true);
-        }
-        return new ResponseMessage(ResponseMessage.WRONG, "OpenAbnormal", false);
-    }
 
     /**
      * 打开成绩录入权限

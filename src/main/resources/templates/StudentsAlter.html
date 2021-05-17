@@ -8,23 +8,19 @@
 <body>
 <div th:replace="common/backstageNavigator:: banner"></div>
 <div th:replace="common/backstageNavigator :: navi"></div>
-
 <div class="container-fluid" id="SA">
     <div class="row">
-
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"  style="margin-top:48px;">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">添加学生</h1>
+                <h1 class="h2">学生信息修改</h1>
             </div>
-            <form th:action="@{/DoStudentsAdd}" th:type="suse.software.domain.Student" method="post">
+            <form th:action="@{/UpdateStudent}" th:type="suse.software.domain.Student" method="post">
                 <div class="form-group col-sm-4">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">学号</span>
                         </div>
-                        <!--<h1 th:text="${needUpdateStudent}"></h1>-->
-                        <input class="form-control mr-sm-2" th:name="sno" type="number" v-model="sno" placeholder="学号"
-                        >
+                        <input class="form-control mr-sm-2" th:name="sno" type="number" v-model="sno" placeholder="学号">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -32,8 +28,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">姓名</span>
                         </div>
-                        <input class="form-control mr-sm-2" type="text" th:name="sname" v-model="sname"
-                               placeholder="姓名">
+                        <input class="form-control mr-sm-2" type="text" th:name="sname" v-model="sname" placeholder="姓名">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -41,8 +36,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">性别</span>
                         </div>
-                        <input class="form-control mr-sm-2" type="text"
-                               th:name="sex" v-model="sex" placeholder="性别">
+                        <input class="form-control mr-sm-2" type="text" th:name="sex" v-model="sex" placeholder="性别">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -59,8 +53,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">班级</span>
                         </div>
-                        <input class="form-control mr-sm-2" type="text" th:name="klass" v-model="klass"
-                               placeholder="班级">
+                        <input class="form-control mr-sm-2" type="text" th:name="klass" v-model="klass" placeholder="班级">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -68,8 +61,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">入学年份</span>
                         </div>
-                        <input class="form-control mr-sm-2" type="text" th:name="comeYear" v-model="comeYear"
-                               placeholder="入学年份">
+                        <input class="form-control mr-sm-2" type="text" th:name="comeYear" v-model="comeYear" placeholder="入学年份">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -77,8 +69,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">手机号码</span>
                         </div>
-                        <input class="form-control mr-sm-2" type="text" th:name="phone" v-model="phone"
-                               placeholder="手机号码">
+                        <input class="form-control mr-sm-2" type="text" th:name="phone" v-model="phone" placeholder="手机号码">
                     </div>
                 </div>
 
@@ -87,8 +78,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">学院</span>
                         </div>
-                        <input class="form-control mr-sm-2" type="text" th:name="college" v-model="college"
-                               placeholder="学院">
+                        <input class="form-control mr-sm-2" type="text" th:name="college" v-model="college" placeholder="学院">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -96,8 +86,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">学院号</span>
                         </div>
-                        <input class="form-control mr-sm-2" type="number" th:name="collegeId" v-model="collegeId"
-                               placeholder="学院号">
+                        <input class="form-control mr-sm-2" type="number" th:name="collegeId" v-model="collegeId" placeholder="学院号">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -105,8 +94,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">年级</span>
                         </div>
-                        <input class="form-control mr-sm-2" type="text" th:name="grade" v-model="grade"
-                               placeholder="年级">
+                        <input class="form-control mr-sm-2" type="text" th:name="grade" v-model="grade" placeholder="年级">
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -114,16 +102,18 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">专业号</span>
                         </div>
-                        <input class="form-control mr-sm-2" type="number" th:name="majorId" v-model="majorId"
-                               placeholder="专业号">
+                        <input class="form-control mr-sm-2" type="number" th:name="majorId" v-model="majorId" placeholder="专业号">
                     </div>
                 </div>
+
+
                 <div class="form-group col-sm-4">
                     <button class="btn btn-outline-primary mr-sm-2" type="submit">
                         <span data-feather="user-plus"></span>
                         提交
                     </button>
                 </div>
+
             </form>
         </main>
     </div>
@@ -143,8 +133,6 @@
             college: '[[${needUpdateStudent.college}]]',
             collegeId: [[${needUpdateStudent.collegeId}]],
             grade: '[[${needUpdateStudent.grade}]]',
-
-
             majorId: [[${needUpdateStudent.majorId}]]
         }
     })

@@ -71,10 +71,6 @@
         #{ischosen}
         )
     </insert>
-
-    <delete id="deleteQuestion" parameterType="int">
-      delete from question where questionid = #{questionId}
-    </delete>
     <!--多个参数包装到hashmap中，然后参数名称不要有大写，不要太长-->
     <update id="sureQuestionStudent" parameterType="Map">
         update question set sno=#{sno}, ischosen=true where questionid=#{id}

@@ -1,14 +1,11 @@
 package suse.software.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import suse.software.domain.Student;
 import suse.software.domain.User;
 import suse.software.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -41,10 +38,11 @@ public class StudentControllerPage {
             return "error";
         }
         Object allStudent = httpServletRequest.getSession().getAttribute("allStudent");
-        System.out.println(allStudent);
         httpServletRequest.setAttribute("allStudent", allStudent);
         return "StudentsInfo";
     }
+
+
 
     @RequestMapping("/StudentsAddAction")
     public String studentsAdd(HttpServletRequest httpServletRequest) {
@@ -70,7 +68,6 @@ public class StudentControllerPage {
         if (checkPower(request) == false) {
             return "error";
         }
-        System.out.println(phone);
         Student student = new Student(sno, sname, sex, major, klass, comeYear, phone, college, collegeId, grade, majorId);
         if (studentService.getStudentBySno(sno) == null) {
             studentService.saveStudent(student);
@@ -106,16 +103,46 @@ public class StudentControllerPage {
         return "forward:/StudensPage";
     }
 
-    @RequestMapping("/UpdateStudent")
-    public String updateStudent(Map<String, Object> paramMap,HttpServletRequest httpServletRequest) {
-        if (checkPower(httpServletRequest) == false) {
+
+/*
+    @PostMapping("/updateStudent")
+    public String updateStudent(@RequestParam("sno") Integer sno,
+                                @RequestParam("sex") String sex,
+                                @RequestParam("sname") String sname,
+                                @RequestParam("major") String major,
+                                @RequestParam("klass") String klass,
+                                @RequestParam("comeYear") String comeYear,
+                                @RequestParam("phone") String phone,
+                                @RequestParam("grade") String grade,
+                                @RequestParam("college") String college,
+                                @RequestParam("collegeId") Integer collegeId,
+                                @RequestParam("majorId") Integer majorId,HttpServletRequest request) {
+        if (checkPower(request) == false) {
             return "error";
         }
-        String sno = httpServletRequest.getParameter("sno");
-        int sno_int = Integer.parseInt(sno);
-        Student student = studentService.getStudentBySno(sno_int);
-        paramMap.put("needUpdateStudent", student);
-        return "StudentsAlter";
+        Student student = new Student(sno, sname, sex, major, klass, comeYear, phone, college, collegeId, grade, majorId);
+        if (studentService.getStudentBySno(sno) == null) {
+            studentService.saveStudent(student);
+        } else {
+            studentService.updateStudent(student);
+        }
+        return "forward:/StudentsInfo";
+    }
+*/
+    @ResponseBody
+    @PostMapping("/DeleteStudent")
+    public String deleteStudent(HttpServletRequest httpServletRequest, @RequestParam("sno") String sno) {
+        if (checkPower(httpServletRequest) == false) {
+            return "error";
+        }else{
+            try {
+                int sno_int = Integer.parseInt(sno);
+                studentService.deleteStudent(sno_int);
+                return "删除成功";
+            }catch (Exception e){
+                return "删除失败";
+            }
+        }
     }
 
     @GetMapping("/stualter")

@@ -10,6 +10,11 @@
     <insert id="insertTeacher" parameterType="suse.software.domain.Teacher">
         insert into teacher values (#{tno},#{tname},#{sex},#{phone},#{email},#{collegeId},#{office},#{rank})
     </insert>
+
+    <delete id="deleteTeacher" parameterType="Integer">
+        delete  from teacher where teacher.tno = #{tno}
+    </delete>
+
     <select id="queryByExample" parameterType="suse.software.domain.Teacher" resultType="suse.software.domain.Teacher">
         select * from teacher
         <where>

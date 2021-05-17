@@ -1,5 +1,6 @@
 package suse.software.service;
 
+import org.apache.poi.ss.usermodel.Cell;
 import suse.software.dao.StudentDao;
 import suse.software.domain.Student;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -12,12 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * 学生表
- */
 @Service
 public class StudentService {
     @Autowired
@@ -33,6 +32,8 @@ public class StudentService {
     public Student getStudentBySno(Integer sno) {
         return studentDao.getBySno(sno);
     }
+
+    public void deleteStudent(Integer sno)  { studentDao.deleteStudent(sno); }
 
     public List<Student> getAllStudent() {
         return studentDao.getAll();
@@ -68,28 +69,26 @@ public class StudentService {
         }
         HSSFSheet sheet = hssfWorkbook.getSheetAt(0);
         int lastRowNum = sheet.getLastRowNum();
-        for (int i = 1; i <= lastRowNum; i++) {
+        DecimalFormat df = new DecimalFormat("0");
+        for (int i = 1; i < lastRowNum; i++) {
             HSSFRow row = sheet.getRow(i);
-            System.out.println(row.getCell(10).toString());
-            System.out.println(row.getCell(1).toString());
             student = new Student(
-                    Integer.parseInt(row.getCell(0).toString()),
+                    Integer.parseInt(df.format(row.getCell(0).getNumericCellValue())),
                     row.getCell(1).toString(),
                     row.getCell(2).toString(),
                     row.getCell(3).toString(),
                     row.getCell(4).toString(),
-                    row.getCell(5).toString(),
-                    row.getCell(6).toString(),
+                    (int)Math.round(row.getCell(5).getNumericCellValue())+"",
+                    (int)Math.round(row.getCell(6).getNumericCellValue())+"",
                     row.getCell(9).toString(),
-                    (int)Double.parseDouble(row.getCell(10).toString()),
-                    row.getCell(7).toString(),
-                    Integer.parseInt(row.getCell(8).toString())
+                    (int)Math.round(row.getCell(10).getNumericCellValue()),
+                    ((int)Math.round(row.getCell(7).getNumericCellValue()))+"",
+                    (int)Math.round(row.getCell(8).getNumericCellValue())
             );
             students.add(student);
             System.out.println(student);
         }
         saveStudents(students);
-//        sheet.getRow()
         return true;
     }
 

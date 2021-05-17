@@ -3,6 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="common/backstageNavigator :: head"></div>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 </head>
 
 <body>
@@ -80,9 +81,8 @@
                     <td>{{teacher.rank}}</td>
                     <td>{{teacher.office}}</td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm" v-on:click="change(teacher.tno)" type="button">
-                            修改
-                        </button>
+                        <button class="btn btn-outline-primary btn-sm" v-on:click="change(teacher.tno)" type="button">修改</button>
+                        <button class="btn btn-outline-danger btn-sm" v-on:click="deltea(teacher.tno)" type="button">删除</button>
                     </td>
                 </tr>
                 </tbody>
@@ -106,18 +106,11 @@
 
 
 
-
-
-
-
-
-
 <script type="text/javascript" th:inline="javascript">
     var ti = new Vue({
         el: '#TI',
         mounted:function() {
             this.getpage()
-
         },
         methods: {
             getpage: function() {
@@ -126,6 +119,29 @@
                     this.totalpage[i] = this.teachers.slice(this.pagesize * i, this.pagesize * (1+i));
                 }
                 this.pageteachers = this.totalpage[this.currentpage];
+            },
+            change: function (tno) {
+                window.location = "/UpdateTeacher?tno=" + tno;
+            },
+            deltea: function (tno) {
+                var config = {headers: {'Content-Type': 'multipart/form-data'}};
+                const formData = new FormData();
+                formData.append("tno", tno)
+                this.$http.post('/DeleteTeacher',formData,config).then(function (response){
+                    this.result =response.data
+                    this.refreshtea()
+                    alert(response.bodyText)
+                    this.getpage()
+                    location.reload()
+                })
+            },
+            refreshtea: function (){
+                var config = {headers: {'Content-Type': 'multipart/form-data'}};
+                const formData = new FormData();
+                _this = this
+                this.$http.get('/TeachersInfo',formData,config).then(function (response){
+                    this.teachers = response.data.allTeacher
+                })
             },
             prePage: function() {
                 if(this.currentpage-1 == -1) return;
@@ -142,10 +158,6 @@
                     this.currentpage = this.jumppage-1;
                     this.pageteachers = this.totalpage[this.currentpage];
                 }
-            },
-            change: function (tno) {
-                // alert(tno);
-                window.location = "/UpdateTeacher?tno=" + tno;
             }
         },
         data: {
@@ -156,7 +168,7 @@
                 collegeId: null
             },
             jumppage: null,
-            pagesize: 8,
+            pagesize: 9,
             pageteachers: [],
             totalpage: [],
             pagenum: '',
