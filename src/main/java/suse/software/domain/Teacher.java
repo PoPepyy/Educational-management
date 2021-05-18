@@ -17,14 +17,14 @@ public class Teacher {
     //办公室地址
     private String office;
     //职称：教授，副教授
-    private String rank;
+    private String rankk;
 
     public Teacher() {}
 
     public Teacher(Integer tno, String tname,
                    String sex, String phone,
                    String email, Integer collegeId,
-                   String office, String rank) {
+                   String office, String rankk) {
         this.tno = tno;
         this.tname = tname;
         this.sex = sex;
@@ -32,6 +32,6 @@ public class Teacher {
         this.email = email;
         this.collegeId = collegeId;
         this.office = office;
-        this.rank = rank;
+        this.rankk = rankk;
     }
 }

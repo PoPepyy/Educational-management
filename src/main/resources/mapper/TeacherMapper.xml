@@ -8,7 +8,7 @@
         select * from teacher where teacher.tno=#{tno}
     </select>
     <insert id="insertTeacher" parameterType="suse.software.domain.Teacher">
-        insert into teacher values (#{tno},#{tname},#{sex},#{phone},#{email},#{collegeId},#{office},#{rank})
+        insert into teacher values (#{tno},#{tname},#{sex},#{phone},#{email},#{collegeId},#{office},#{rankk})
     </insert>
 
     <delete id="deleteTeacher" parameterType="Integer">
@@ -39,8 +39,8 @@
             <if test="office != null">
                 and office = #{office}
             </if>
-            <if test="rank != null">
-                and rank = #{rank}
+            <if test="rankk != null">
+                and rankk = #{rankk}
             </if>
         </where>
     </select>
@@ -68,8 +68,8 @@
             <if test="office != null">
                 , office = #{office}
             </if>
-            <if test="rank != null">
-                , rank = #{rank}
+            <if test="rankk != null">
+                , rankk = #{rankk}
             </if>
         </set>
         where tno = #{tno}

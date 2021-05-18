@@ -147,7 +147,7 @@ public class TeacherService {
             teacher.setPhone((int)Math.round(row.getCell(3).getNumericCellValue())+"");
             teacher.setOffice(row.getCell(6).toString());
             teacher.setTno(Integer.parseInt(df.format(row.getCell(0).getNumericCellValue())));
-            teacher.setRank(row.getCell(7).toString());
+            teacher.setRankk(row.getCell(7).toString());
             teachers.add(teacher);
         }
         addTeachers(teachers);

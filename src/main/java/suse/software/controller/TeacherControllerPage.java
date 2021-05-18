@@ -53,11 +53,11 @@ public class TeacherControllerPage {
                                 @RequestParam("email") String email,
                                 @RequestParam("collegeid") Integer collegeid,
                                 @RequestParam("office") String office,
-                                @RequestParam("rank") String rank,HttpServletRequest request) {
+                                @RequestParam("rankk") String rankk,HttpServletRequest request) {
         if (checkPower(request) == false) {
             return "error";
         }
-        Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rank);
+        Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rankk);
         if (teacherService.getTeacherByTno(tno) == null) {
             teacherService.addTeacher(teacher);//db
         } else {
@@ -169,7 +169,7 @@ public class TeacherControllerPage {
         return "TeachersAlter";
     }
 
- /*   @RequestMapping("/DoUpdateTeacher")
+    @RequestMapping("/DoUpdateTeacher")
     public String doUpdateTeacher(  @RequestParam("tno") Integer tno,
                                     @RequestParam("tname") String tname,
                                     @RequestParam("sex") String sex,
@@ -177,14 +177,21 @@ public class TeacherControllerPage {
                                     @RequestParam("email") String email,
                                     @RequestParam("collegeid") Integer collegeid,
                                     @RequestParam("office") String office,
-                                    @RequestParam("rank") String rank,HttpServletRequest request) {
+                                    @RequestParam("rankk") String rankk,HttpServletRequest request) {
         if (checkPower(request) == false) {
             return "error";
         }
         System.out.println("进入了requestmapping");
         System.out.println(tno);
-        Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rank);
+        System.out.println(tname);
+        System.out.println(sex);
+        System.out.println(phone);
+        System.out.println(email);
+        System.out.println(collegeid);
+        System.out.println(office);
+        System.out.println(rankk);
+        Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rankk);
         teacherService.updateTeacherById(tno, teacher);
         return "forward:/TeachersInfo";
-    }*/
+    }
 }
