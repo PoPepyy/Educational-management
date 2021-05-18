@@ -57,7 +57,6 @@ public class PowerControllerPage {
         //2.构建一个文件通过Paths工具类获取一个Path对象
         Path path = Paths.get("D:\\IntelliJ IDEA\\Educational-management\\src\\main\\resources\\static\\excel\\",fileName);
         //判断文件是否存在
-        System.out.println(path);
         if (Files.exists(path)){
             //存在则下载
             //通过response设定他的响应类型
@@ -90,7 +89,7 @@ public class PowerControllerPage {
 
     /**
      * 下载文件
-     *student
+     * student
      * @param response
      */
 

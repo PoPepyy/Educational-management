@@ -169,7 +169,7 @@ public class TeacherControllerPage {
         return "TeachersAlter";
     }
 
-    @RequestMapping("/DoUpdateTeacher")
+ /*   @RequestMapping("/DoUpdateTeacher")
     public String doUpdateTeacher(  @RequestParam("tno") Integer tno,
                                     @RequestParam("tname") String tname,
                                     @RequestParam("sex") String sex,
@@ -186,5 +186,5 @@ public class TeacherControllerPage {
         Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rank);
         teacherService.updateTeacherById(tno, teacher);
         return "forward:/TeachersInfo";
-    }
+    }*/
 }
