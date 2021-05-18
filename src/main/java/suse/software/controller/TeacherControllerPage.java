@@ -58,7 +58,6 @@ public class TeacherControllerPage {
             return "error";
         }
         Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rank);
-        System.out.println(teacher);
         if (teacherService.getTeacherByTno(tno) == null) {
             teacherService.addTeacher(teacher);//db
         } else {
@@ -170,7 +169,7 @@ public class TeacherControllerPage {
         return "TeachersAlter";
     }
 
-  /*  @RequestMapping("/DoUpdateTeacher")
+    @RequestMapping("/DoUpdateTeacher")
     public String doUpdateTeacher(  @RequestParam("tno") Integer tno,
                                     @RequestParam("tname") String tname,
                                     @RequestParam("sex") String sex,
@@ -182,10 +181,10 @@ public class TeacherControllerPage {
         if (checkPower(request) == false) {
             return "error";
         }
+        System.out.println("进入了requestmapping");
+        System.out.println(tno);
         Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rank);
         teacherService.updateTeacherById(tno, teacher);
-
         return "forward:/TeachersInfo";
     }
-*/
 }

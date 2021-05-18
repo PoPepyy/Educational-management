@@ -1,5 +1,6 @@
 package suse.software.controller;
 
+import org.springframework.web.bind.annotation.*;
 import suse.software.domain.Power;
 import suse.software.domain.User;
 import suse.software.service.PowerService;
@@ -8,15 +9,16 @@ import suse.software.service.StudentService;
 import suse.software.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.UUID;
 
@@ -42,9 +44,86 @@ public class PowerControllerPage {
         return user.getType() == 2;
     }
 
+    /**
+     * 下载
+     * teacher
+     * @param response
+     */
+    @RequestMapping(value = "/downloadt",method = RequestMethod.GET)
+    public void downloadt(HttpServletResponse response){
+        //        通过response输出流将文件传递到浏览器
+        //        1、获取文件路径
+        String fileName = "teachers模板.xls";
+        //2.构建一个文件通过Paths工具类获取一个Path对象
+        Path path = Paths.get("D:\\IntelliJ IDEA\\Educational-management\\src\\main\\resources\\static\\excel\\",fileName);
+        //判断文件是否存在
+        System.out.println(path);
+        if (Files.exists(path)){
+            //存在则下载
+            //通过response设定他的响应类型
+            //4.获取文件的后缀名
+            String fileSuffix = fileName.substring(fileName.lastIndexOf(".")+1);
+//            5.设置contentType ,只有指定contentType才能下载
+            response.setContentType("application/"+fileSuffix);
+//            6.添加http头信息
+//            因为fileName的编码格式是UTF-8 但是http头信息只识别 ISO8859-1 的编码格式
+//            因此要对fileName重新编码
+            try {
+                response.addHeader("Content-Disposition","attachment;filename="+new String(fileName.getBytes("UTF-8"),"ISO8859-1"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+//            7.使用Path 和response输出流将文件输出到浏览器
+            try {
+                Files.copy(path,response.getOutputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     @RequestMapping("/ExcelInsert")
     public String excelInsert(HttpServletRequest request) {
         return "StudentsFileAdd";
+    }
+
+    /**
+     * 下载文件
+     *student
+     * @param response
+     */
+
+    @RequestMapping(value = "/download",method = RequestMethod.GET)
+    public void download(HttpServletResponse response){
+        //        通过response输出流将文件传递到浏览器
+        //        1、获取文件路径
+        String fileName = "students模板.xls";
+        //2.构建一个文件通过Paths工具类获取一个Path对象
+        Path path = Paths.get("D:\\IntelliJ IDEA\\Educational-management\\src\\main\\resources\\static\\excel\\",fileName);
+        //判断文件是否存在
+        if (Files.exists(path)){
+            //存在则下载
+            //通过response设定他的响应类型
+            //4.获取文件的后缀名
+            String fileSuffix = fileName.substring(fileName.lastIndexOf(".")+1);
+//            5.设置contentType ,只有指定contentType才能下载
+            response.setContentType("application/"+fileSuffix);
+//            6.添加http头信息
+//            因为fileName的编码格式是UTF-8 但是http头信息只识别 ISO8859-1 的编码格式
+//            因此要对fileName重新编码
+            try {
+                response.addHeader("Content-Disposition","attachment;filename="+new String(fileName.getBytes("UTF-8"),"ISO8859-1"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+//            7.使用Path 和response输出流将文件输出到浏览器
+            try {
+                Files.copy(path,response.getOutputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

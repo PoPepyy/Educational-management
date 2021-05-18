@@ -34,19 +34,22 @@
 <div class="container-fluid" id="app">
     <div class="row">
         <div role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" style="margin-top:48px;">
+            <h2></h2>
             <h2>学生导入</h2>
             <div id="app1">
                 <input type="file" @change="getFile($event)"/>
-                <button @click="upload">上传</button>
+                <button class="btn-primary" @click="upload">上传</button>
+                <a href="/download">下载模板</a>
                 <div>{{ result }}</div>
                 <div v-show="uping==1">正在上传中</div>
             </div>
         </div>
         <div role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <h2></h2>
             <h2>教师导入</h2>
             <div id="app2">
                 <input type="file" @change="getFile2($event)"/>
-                <button @click="uploadt">上传</button>
+                <button class="btn-primary" @click="uploadt">上传</button>
             </div>
             <div>{{ result2 }}</div>
             <div v-show="uping2==1">正在上传中</div>
