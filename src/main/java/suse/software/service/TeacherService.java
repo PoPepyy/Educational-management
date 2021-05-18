@@ -24,22 +24,23 @@ public class TeacherService {
     TeacherDao teacherDao;
     @Autowired
     UserDao userDao;
+
+    /**
+     * 通过tno查询老师
+     * @param tno
+     * @return
+     */
     public Teacher getTeacherByTno(Integer tno) {
         Teacher teacher = teacherDao.getByTno(tno);
         return teacher;
     }
 
-    @Transactional
-    public void addTeachers(List<Teacher> teachers) {
-        for (Teacher teacher : teachers) {
-            teacherDao.insertTeacher(teacher);
-        }
-    }
 
-    @Transactional
+
+/*    @Transactional
     public void updateTeacher(Teacher teacher) {
         teacherDao.updateTeacher(teacher);
-    }
+    }*/
 
     public void updateTeacherById(Integer id, Teacher teacher) {
         teacher.setTno(id);
@@ -58,8 +59,12 @@ public class TeacherService {
             userDao.addUser(user);
             System.out.println(user);
         }
-
     }
+
+    /**
+     * 删除老师
+     * @param tno
+     */
     public void deleteTeacher(Integer tno){
         teacherDao.deleteTeacher(tno);
     }
@@ -69,9 +74,34 @@ public class TeacherService {
         return teachers;
     }
 
+    /**
+     * back查询
+     * @param teacher
+     * @return
+     */
+
     public List<Teacher> getTeacherByExample(Teacher teacher) {
         return teacherDao.queryByExample(teacher);
     }
+
+
+    /**
+     * 批量导入老师
+     * @param teachers
+     */
+
+    @Transactional
+    public void addTeachers(List<Teacher> teachers) {
+        for (Teacher teacher : teachers) {
+            teacherDao.insertTeacher(teacher);
+        }
+    }
+
+    /**
+     * back批量导入
+     * @param file
+     * @return
+     */
 
     public boolean excel(File file) {
         HSSFWorkbook hssfWorkbook = null;
