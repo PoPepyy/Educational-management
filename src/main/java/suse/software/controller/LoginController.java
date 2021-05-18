@@ -111,6 +111,9 @@ public class LoginController {
             Integer type = user.getType();
             parmMap.put("userinfo", user);
             if (type == 0) {
+                int sno = user.getAccount();
+                Student student = studentService.getStudentBySno(sno);
+                parmMap.put("stuinfo", student);
                 return "student";
             }
             if (type == 1) {

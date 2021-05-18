@@ -1,61 +1,165 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
-
 <header th:replace="app/header::static"></header>
-<body>
-<div th:replace="app/header::header"></div>
-<div class="row">
-    <div th:replace="app/header::carousel"></div>
-</div>
-<!-- 主体 -->
-<div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion"
-                   href="#collapseTwo" style="text-decoration: none">
-                    毕业设计
-                </a>
-            </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse">
-            <div class="panel-body">
-                <div class="index_wdyy">
-                    <ul class="list-unstyled mCustomScrollbar _mCS_1 mCS_no_scrollbar">
-                        <li class="col-md-4 col-sm-4">
-                            <a href="/TeaLookThroughQues" target="_blank">
-                                <img src="images/ico_but30.png"/>
-                                <h5>查看题目</h5>
+
+<body>
+
+<div id="TI">
+    <div th:replace="app/header::header"></div>
+    <div class="row">
+        <div th:replace="app/header::carousel"></div>
+    </div>
+    <div v-if="flag">
+        <div class="container-fluid text-center">
+            <br>
+            <br>
+            <br>
+            <br>
+            <h2>第一次登录请修改密码！</h2>
+            <br>
+            <br>
+            <!-- 按钮触发模态框 -->
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">修改密码</button>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                提醒
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            密码安全性较低！如不修改密码则无法进行任何操作！
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <a type="button" class="btn btn-primary" href="/fixpassword" style="text-decoration: none">
+                                前往修改
                             </a>
-                        </li>
-                        <li class="col-md-4 col-sm-4">
-                            <a href="/TeaAddQues" target="_blank">
-                                <img src="images/ico_but42.png"/>
-                                <h5>添加题目</h5>
-                            </a>
-                        </li>
-                        <li class="col-md-4 col-sm-4">
-                            <a href="/TeaAddScore" target="_blank">
-                                <img src="images/ico_but46.png"/>
-                                <h5>指导成绩</h5>
-                            </a>
-                            </a>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a href="/fixpassword" target="_blank" style="text-decoration: none">
-                    密码修改
-                </a>
-            </h4>
+
+    <div v-else>
+        <!-- 主体 -->
+        <div>
+            <!--个人信息-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                           style="text-decoration: none">
+                            个人信息
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <h3>[[${teainfo.tname}]]</h3>
+                        </br>
+                        <p> 性别：[[${teainfo.sex}]] </p>
+                        <p> 工号：[[${userinfo.account}]] </p>
+                        <p> 职衔：[[${teainfo.rank}]] </p>
+                        <p> 电话：[[${teainfo.phone}]] </p>
+                        <p> 邮箱：[[${teainfo.email}]] </p>
+                        <p> 所在学院：[[${colname}]] </p>
+                        <p> 办公地点：[[${teainfo.office}]] </p>
+                        </br>
+                        </br>
+                        <a href="/stualter" role="button" class="btn btn-default" target="_blank">修改</a>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!--毕业设计-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo" style="text-decoration: none">
+                            毕业设计
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="index_wdyy">
+                            <ul class="list-unstyled mCustomScrollbar _mCS_1 mCS_no_scrollbar">
+                                <li class="col-md-4 col-sm-4">
+                                    <a href="/TeaLookThroughQues" target="_blank">
+                                        <img src="images/ico_but30.png"/>
+                                        <h5>查看题目</h5>
+                                    </a>
+                                </li>
+                                <li class="col-md-4 col-sm-4">
+                                    <a href="/TeaAddQues" target="_blank">
+                                        <img src="images/ico_but42.png"/>
+                                        <h5>添加题目</h5>
+                                    </a>
+                                </li>
+                                <li class="col-md-4 col-sm-4">
+                                    <a href="/TeaAddScore" target="_blank">
+                                        <img src="images/ico_but46.png"/>
+                                        <h5>指导成绩</h5>
+                                    </a>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--修改密码-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="/fixpassword" target="_blank" style="text-decoration: none">
+                            密码修改
+                        </a>
+                    </h4>
+                </div>
+            </div>
+
         </div>
     </div>
+
+
 </div>
+
+
+
+
+
+
 </body>
+
+<script>
+    var si = new Vue({
+        el: '#TI',
+        data: {
+            flag: ([[${userinfo.password}]] == [[${userinfo.account}]])
+        }
+    })
+</script>
+
 </html>
+
+
+<div>
+
+
+</div>

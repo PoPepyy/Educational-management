@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
-
 <header th:replace="app/header::static"></header>
+
+
 <body>
 <div id="SI">
     <div th:replace="app/header::header"></div>
@@ -65,10 +66,12 @@
                     <div class="panel-body">
                         <h3>[[${userinfo.sname}]]</h3>
                         </br>
+                        <p> 性别：[[${stuinfo.sex}]] </p>
                         <p> 学院：[[${userinfo.college}]] </p>
                         <p> 专业：[[${userinfo.major}]] </p>
                         <p> 班级：[[${userinfo.klass}]] </p>
-                        <p> 密码：[[${userinfo.password}]] </p>
+                        <p> 学号：[[${userinfo.account}]] </p>
+                        <p> 电话：[[${stuinfo.phone}]] </p>
                         </br>
                         </br>
                         <a href="/stualter" role="button" class="btn btn-default" target="_blank">修改</a>
