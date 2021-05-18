@@ -17,7 +17,7 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h1 class="h2">教师信息修改</h1>
             </div>
-            <form th:action="@{/UpdateTeacher}" method="post" th:type="suse.software.domain.Teacher">
+            <form th:action="@{/DoUpdateTeacher}" method="post" th:type="suse.software.domain.Teacher">
                 <div class="form-group col-sm-4">
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -100,14 +100,6 @@
         el: '#TA'
         ,
         data: {
-            // tno: null,
-            // tname: '',
-            // sex: '',
-            // phone: '',
-            // email: '',
-            // office: '',
-            // collegeId: null,
-            // rank: ''
             tno: [[${needUpdateTeacher.tno}]],
             tname: '[[${needUpdateTeacher.tname}]]',
             sex: '[[${needUpdateTeacher.sex}]]',

@@ -44,6 +44,8 @@
             </if>
         </where>
     </select>
+
+
     <update id="updateTeacher" parameterType="suse.software.domain.Teacher">
         update teacher
         <set>

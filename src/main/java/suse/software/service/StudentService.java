@@ -64,12 +64,25 @@ public class StudentService {
     }
 
     /**
+     * 添加单个学生
+     * @param student
+     */
+    public void addStudent(Student student) {
+        studentDao.insertStudnet(student);
+        UserAddView user = new UserAddView();
+        user.setUserAccount(student.getSno());
+        user.setUserPassword(student.getSno().toString());
+        user.setUserType(0);
+        user.setUserStatus(1);
+        userDao.addUser(user);
+    }
+
+    /**
      * user添加学生
      * @param student
      */
 
-    public void addStudent(Student student) {
-//        teacherDao.insertTeacher(teacher);
+    public void addStudenttouser(Student student) {
         UserAddView user = new UserAddView();
         user.setUserAccount(student.getSno());
         user.setUserPassword(student.getSno().toString());
@@ -88,7 +101,7 @@ public class StudentService {
     public void addStudents(List<Student> students) {
         for (Student student : students) {
             studentDao.insertStudnet(student);
-            addStudent(student);
+            addStudenttouser(student);
         }
     }
 

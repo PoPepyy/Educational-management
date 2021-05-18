@@ -22,6 +22,12 @@ public class StudentControllerPage {
         }
         return user.getType() == 2;
     }
+
+    /**
+     * 跳转
+     * @param request
+     * @return
+     */
     @RequestMapping("/StudentsInfo")
     public String studentsInfo(HttpServletRequest request) {
         if (checkPower(request) == false) {
@@ -32,6 +38,11 @@ public class StudentControllerPage {
         return "redirect:/StudensPage";
     }
 
+    /**
+     * 返回所有学生列表
+     * @param httpServletRequest
+     * @return
+     */
     @RequestMapping("/StudensPage")
     public String studensPage(HttpServletRequest httpServletRequest) {
         if (checkPower(httpServletRequest) == false) {
@@ -42,17 +53,23 @@ public class StudentControllerPage {
         return "StudentsInfo";
     }
 
-
+    /**
+     * 跳转
+     * @param httpServletRequest
+     * @return
+     */
 
     @RequestMapping("/StudentsAddAction")
     public String studentsAdd(HttpServletRequest httpServletRequest) {
-        if (checkPower(httpServletRequest) == false) {
-            return "error";
-        }
+        if (checkPower(httpServletRequest) == false) { return "error"; }
         httpServletRequest.setAttribute("needUpdateStudent", null);
         return "StudentsAdd";
     }
 
+    /**
+     * 添加单个学生
+     * @return
+     */
     @PostMapping("/DoStudentsAdd")
     public String doStudentsAdd(@RequestParam("sno") Integer sno,
                                 @RequestParam("sex") String sex,
@@ -77,7 +94,11 @@ public class StudentControllerPage {
         return "forward:/StudentsInfo";
     }
 
-
+    /**
+     * 查询学生
+     * @param httpServletRequest
+     * @return
+     */
     @PostMapping("/SearchStudents")
     public String searchStudents(HttpServletRequest httpServletRequest) {
         if (checkPower(httpServletRequest) == false) {
@@ -129,6 +150,14 @@ public class StudentControllerPage {
         return "forward:/StudentsInfo";
     }
 */
+
+    /**
+     * 删除学生
+     * @param httpServletRequest
+     * @param sno
+     * @return
+     */
+
     @ResponseBody
     @PostMapping("/DeleteStudent")
     public String deleteStudent(HttpServletRequest httpServletRequest, @RequestParam("sno") String sno) {
@@ -143,10 +172,5 @@ public class StudentControllerPage {
                 return "删除失败";
             }
         }
-    }
-
-    @GetMapping("/stualter")
-    public String stuAlter(){
-        return "StudentsAlter";
     }
 }

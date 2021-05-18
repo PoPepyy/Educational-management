@@ -73,12 +73,28 @@ public class TeacherService {
 
 
     /**
-     * User表添加老师
+     * 添加单个老师
      * @param teacher
      */
 
     public void addTeacher(Teacher teacher) {
-//        teacherDao.insertTeacher(teacher);
+        teacherDao.insertTeacher(teacher);
+        UserAddView user = new UserAddView();
+        user.setUserAccount(teacher.getTno());
+        user.setUserPassword(teacher.getTno().toString());
+        user.setUserType(1);
+        user.setUserStatus(1);
+        userDao.addUser(user);
+    }
+
+
+
+    /**
+     * User表添加老师
+     * @param teacher
+     */
+
+    public void addTeachertouser(Teacher teacher) {
         UserAddView user = new UserAddView();
         user.setUserAccount(teacher.getTno());
         user.setUserPassword(teacher.getTno().toString());
@@ -97,7 +113,7 @@ public class TeacherService {
     public void addTeachers(List<Teacher> teachers) {
         for (Teacher teacher : teachers) {
             teacherDao.insertTeacher(teacher);
-            addTeacher(teacher);
+            addTeachertouser(teacher);
         }
     }
 

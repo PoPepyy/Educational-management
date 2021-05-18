@@ -42,29 +42,31 @@
     </div>
 </div>
 
+
+<!--轮播图-->
 <div class=" p-0 col-md-12 col-sm-12" th:fragment="carousel">
     <div class="row">
         <div class="index_grxx">
             <div class="col-md-12 column">
-                <div class="carousel slide" id="carousel-942744" style="height: 250px;">
+                <div class="carousel slide" id="carousel-942744" style="height: 300px;">
                     <div class="carousel-inner">
                         <div class="item posdiv">
-                            <img alt="" class="img-responsive" style="width: 100%; height: 235px ;"
+                            <img alt="" class="img-responsive" style="width: 100%; height: 280px ;"
                                  src="images/lunbo_hn.jpg"/>
                             <div class="carousel-caption"></div>
-                            <p class="text-center" style="font-size: 1px">汇东校区</p>
+                            <p class="text-center" style="font-size: 15px">汇东校区</p>
                         </div>
                         <div class="item active posdiv">
-                            <img alt="" class="img-responsive" style="width: 100%; height: 235px ;"
+                            <img alt="" class="img-responsive" style="width: 100%; height: 280px ;"
                                  src="images/lunbo_yb.jpg"/>
                             <div class="carousel-caption"></div>
-                            <p class="text-center" style="font-size: 1px">宜宾校区</p>
+                            <p class="text-center" style="font-size: 15px">宜宾校区</p>
                         </div>
                         <div class="item posdiv">
-                            <img alt="" class="img-responsive" style="width: 100%; height: 235px ;"
+                            <img alt="" class="img-responsive" style="width: 100%; height: 280px ;"
                                  src="images/lunbo_yp.jpg"/>
                             <div class="carousel-caption"></div>
-                            <p class="text-center" style="font-size: 1px">营盘校区</p>
+                            <p class="text-center" style="font-size: 15px">营盘校区</p>
                         </div>
                     </div>
                     <a class="left carousel-control" href="#carousel-942744" data-slide="prev">
@@ -77,4 +79,42 @@
     </div>
 </div>
 
+<!--first改密码-->
+<div class="container-fluid text-center" th:fragment="firstfixpass">
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>第一次登录请修改密码！</h2>
+    <br>
+    <br>
+    <!-- 按钮触发模态框 -->
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">修改密码</button>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        提醒
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    密码安全性较低！如不修改密码则无法进行任何操作！
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <a type="button" class="btn btn-primary" href="/fixpassword" style="text-decoration: none">
+                        前往修改
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </html>
