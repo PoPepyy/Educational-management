@@ -19,6 +19,7 @@
 				<form class="form-horizontal m-auto" role="form" action="/login" method="post">
 					<img class="mb-4" src="./images/login_xh.png" alt="" width="80" height="80">
 					<h1 class="h3 mb-3 font-weight-normal">用户登录</h1>
+
 					<div class="alert alert-danger" th:if="${error_msg} != null">
 						<strong>[[ ${error_msg} ]]</strong>
 					</div>
