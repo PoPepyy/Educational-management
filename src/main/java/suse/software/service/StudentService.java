@@ -1,7 +1,7 @@
 package suse.software.service;
 
-import org.apache.poi.ss.usermodel.Cell;
 import suse.software.dao.StudentDao;
+import suse.software.dao.UserDao;
 import suse.software.domain.Student;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -9,6 +9,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import suse.software.views.UserAddView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +22,8 @@ import java.util.List;
 public class StudentService {
     @Autowired
     StudentDao studentDao;
+    @Autowired
+    UserDao userDao;
 
     /**
      * 根据学号获得学生信息
@@ -33,31 +36,67 @@ public class StudentService {
         return studentDao.getBySno(sno);
     }
 
+    /**
+     * 删除学生
+     * @param sno
+     */
+
     public void deleteStudent(Integer sno)  { studentDao.deleteStudent(sno); }
 
     public List<Student> getAllStudent() {
         return studentDao.getAll();
     }
 
+    /**
+     * back 查询
+     * @param student
+     * @return
+     */
+
     public List<Student> getStudentsByExample(Student student) {
         return studentDao.getStudentsByExample(student);
     }
 
-    @Transactional
-    public void saveStudents(List<Student> students) {
-        for (Student student : students) {
-            studentDao.insertStudnet(student);
-        }
-    }
 
-    public void saveStudent(Student student) {
-        studentDao.insertStudnet(student);
-    }
 
     public void updateStudent(Student student) {
         studentDao.updateStudent(student);
     }
 
+    /**
+     * user添加学生
+     * @param student
+     */
+
+    public void addStudent(Student student) {
+//        teacherDao.insertTeacher(teacher);
+        UserAddView user = new UserAddView();
+        user.setUserAccount(student.getSno());
+        user.setUserPassword(student.getSno().toString());
+        user.setUserType(0);
+        user.setUserStatus(1);
+        userDao.addUser(user);
+    }
+
+
+    /**
+     * back遍历导入学生
+     * @param students
+     */
+
+    @Transactional
+    public void addStudents(List<Student> students) {
+        for (Student student : students) {
+            studentDao.insertStudnet(student);
+            addStudent(student);
+        }
+    }
+
+    /**
+     * back批量导入学生
+     * @param file
+     * @return
+     */
     public boolean excel(File file) {
         HSSFWorkbook hssfWorkbook = null;
         Student student = null;
@@ -86,9 +125,8 @@ public class StudentService {
                     (int)Math.round(row.getCell(8).getNumericCellValue())
             );
             students.add(student);
-            System.out.println(student);
         }
-        saveStudents(students);
+        addStudents(students);
         return true;
     }
 

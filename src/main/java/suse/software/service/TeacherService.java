@@ -48,19 +48,6 @@ public class TeacherService {
     }
 
 
-    public void addTeacher(Teacher teacher) {
-        teacherDao.insertTeacher(teacher);
-        if(teacher.getRank().equals("root")){
-            UserAddView user = new UserAddView();
-            user.setUserAccount(teacher.getTno());
-            user.setUserPassword(teacher.getTno().toString());
-            user.setUserType(2);
-            user.setUserStatus(1);
-            userDao.addUser(user);
-            System.out.println(user);
-        }
-    }
-
     /**
      * 删除老师
      * @param tno
@@ -86,7 +73,23 @@ public class TeacherService {
 
 
     /**
-     * 批量导入老师
+     * User表添加老师
+     * @param teacher
+     */
+
+    public void addTeacher(Teacher teacher) {
+//        teacherDao.insertTeacher(teacher);
+        UserAddView user = new UserAddView();
+        user.setUserAccount(teacher.getTno());
+        user.setUserPassword(teacher.getTno().toString());
+        user.setUserType(1);
+        user.setUserStatus(1);
+        userDao.addUser(user);
+    }
+
+
+    /**
+     * back遍历导入老师
      * @param teachers
      */
 
@@ -94,11 +97,12 @@ public class TeacherService {
     public void addTeachers(List<Teacher> teachers) {
         for (Teacher teacher : teachers) {
             teacherDao.insertTeacher(teacher);
+            addTeacher(teacher);
         }
     }
 
     /**
-     * back批量导入
+     * back批量导入老师
      * @param file
      * @return
      */

@@ -105,7 +105,6 @@ public class LoginController {
                     user.setMajorid(student.getMajorId());
                     user.setCollege(student.getCollege());
                     user.setKlass(student.getKlass());
-
                 } else error = true;
             } else if (user.getType() == 1) {
                 // 是一个老师

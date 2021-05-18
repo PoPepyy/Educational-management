@@ -70,7 +70,7 @@ public class StudentControllerPage {
         }
         Student student = new Student(sno, sname, sex, major, klass, comeYear, phone, college, collegeId, grade, majorId);
         if (studentService.getStudentBySno(sno) == null) {
-            studentService.saveStudent(student);
+            studentService.addStudent(student);
         } else {
             studentService.updateStudent(student);
         }

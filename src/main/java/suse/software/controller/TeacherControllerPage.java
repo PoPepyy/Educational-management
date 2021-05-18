@@ -18,7 +18,6 @@ import java.util.Map;
 public class TeacherControllerPage {
     @Autowired
     TeacherService teacherService;
-
     public boolean checkPower(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
@@ -26,26 +25,26 @@ public class TeacherControllerPage {
         }
         return user.getType() == 2;
     }
-    @RequestMapping("/TeachersInfo")
-    public String teacherIofo(HttpServletRequest request) {
-        if (checkPower(request) == false) {
+
+
+    @RequestMapping("/UpdateTeacher")
+    public String updateTeacher(Map<String, Object> paramMap, HttpServletRequest httpServletRequest) {
+        if (checkPower(httpServletRequest) == false) {
             return "error";
         }
-        List<Teacher> teachers = teacherService.getAllTeacher();
-        request.getSession().setAttribute("allTeacher", teachers);
-        return "redirect:/TeacherPage";
+        String tno = httpServletRequest.getParameter("tno");
+        int tno_int = Integer.parseInt(tno);
+        Teacher teacher = teacherService.getTeacherByTno(tno_int);
+        paramMap.put("needUpdateTeacher", teacher);
+        return "TeachersAlter";
     }
 
-    @RequestMapping("/TeacherPage")
-    public String teacherPage(HttpServletRequest request) {
-        if (checkPower(request) == false) {
-            return "error";
-        }
-        List<Teacher> allTeacher = (List<Teacher>) request.getSession().getAttribute("allTeacher");
-        request.setAttribute("allTeacher", allTeacher);
-        System.out.println(allTeacher);
-        return "TeachersInfo";
-    }
+
+    /**
+     * 页面跳转
+     * @param httpServletRequest
+     * @return
+     */
 
     @RequestMapping("/TeachersAddAction")
     public String teachersAdd(HttpServletRequest httpServletRequest) {
@@ -53,6 +52,12 @@ public class TeacherControllerPage {
         return "TeachersAdd";
     }
 
+
+    /**
+     * 增加单个老师
+     * teacher/user表
+     * @return
+     */
     @RequestMapping("/DoTeachersAdd")
     public String doTeachersAdd(@RequestParam("tno") Integer tno,
                                 @RequestParam("tname") String tname,
@@ -68,13 +73,19 @@ public class TeacherControllerPage {
         Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rank);
         System.out.println(teacher);
         if (teacherService.getTeacherByTno(tno) == null) {
-            teacherService.addTeacher(teacher);
+            teacherService.addTeacher(teacher);//db
         } else {
             teacherService.updateTeacherById(tno, teacher);
         }
         return "forward:/TeachersInfo";
     }
 
+
+    /**
+     * 查询老师
+     * @param httpServletRequest
+     * @return
+     */
 
     @RequestMapping("/SearchTeachers")
     public String searchTeachers(HttpServletRequest httpServletRequest) {
@@ -101,7 +112,12 @@ public class TeacherControllerPage {
         return "forward:/TeacherPage";
     }
 
-
+    /**
+     * 删除单个老师
+     * @param httpServletRequest
+     * @param tno
+     * @return
+     */
 
     @ResponseBody
     @PostMapping("/DeleteTeacher")
@@ -119,36 +135,59 @@ public class TeacherControllerPage {
         }
     }
 
-    @RequestMapping("/UpdateTeacher")
-    public String updateTeacher(Map<String, Object> paramMap, HttpServletRequest httpServletRequest) {
-        if (checkPower(httpServletRequest) == false) {
-            return "error";
-        }
-        String tno = httpServletRequest.getParameter("tno");
-        int tno_int = Integer.parseInt(tno);
-        Teacher teacher = teacherService.getTeacherByTno(tno_int);
-        paramMap.put("needUpdateTeacher", teacher);
-        return "TeachersAlter";
-    }
 
-    @RequestMapping("/UpdateTeacher")
-    public String updateTeacher(@RequestParam("tno") Integer tno,
-                                @RequestParam("tname") String tname,
-                                @RequestParam("sex") String sex,
-                                @RequestParam("phone") String phone,
-                                @RequestParam("email") String email,
-                                @RequestParam("collegeid") Integer collegeid,
-                                @RequestParam("office") String office,
-                                @RequestParam("rank") String rank,HttpServletRequest request) {
+    /**
+     * 跳转
+     * @param request
+     * @return
+     */
+
+    @RequestMapping("/TeachersInfo")
+    public String teacherInfo(HttpServletRequest request) {
         if (checkPower(request) == false) {
             return "error";
         }
-        Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rank);
-        System.out.println(teacher);
-        if (teacherService.getTeacherByTno(tno) == null) {
-            teacherService.updateTeacher(teacher);
-        }
-        return "forward:/TeachersInfo";
+        List<Teacher> teachers = teacherService.getAllTeacher();
+        request.getSession().setAttribute("allTeacher", teachers);
+        return "redirect:/TeacherPage";
     }
+
+    /**
+     * back 返回所有老师列表
+     * @param request
+     * @return
+     */
+    @RequestMapping("/TeacherPage")
+    public String teacherPage(HttpServletRequest request) {
+        if (checkPower(request) == false) {
+            return "error";
+        }
+        List<Teacher> allTeacher = (List<Teacher>) request.getSession().getAttribute("allTeacher");
+        request.setAttribute("allTeacher", allTeacher);
+        return "TeachersInfo";
+    }
+
+
+
+
+//    @RequestMapping("/UpdateTeacher")
+//    public String updateTeacher(@RequestParam("tno") Integer tno,
+//                                @RequestParam("tname") String tname,
+//                                @RequestParam("sex") String sex,
+//                                @RequestParam("phone") String phone,
+//                                @RequestParam("email") String email,
+//                                @RequestParam("collegeid") Integer collegeid,
+//                                @RequestParam("office") String office,
+//                                @RequestParam("rank") String rank,HttpServletRequest request) {
+//        if (checkPower(request) == false) {
+//            return "error";
+//        }
+//        Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rank);
+//        System.out.println(teacher);
+//        if (teacherService.getTeacherByTno(tno) == null) {
+//            teacherService.updateTeacher(teacher);
+//        }
+//        return "forward:/TeachersInfo";
+//    }
 
 }
