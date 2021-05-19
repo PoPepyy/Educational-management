@@ -154,7 +154,7 @@ public class QuestionController {
     public String TeaAddQues(HttpServletRequest request,
                              @RequestParam("topic")String topic,
                              @RequestParam("content")String content,
-                             @RequestParam("difficulty")int difficulty,
+                             @RequestParam("difficulty")String difficulty,
                              @RequestParam("majorid")int majorid,
                              Map<String,Object>map){
         HttpSession session = request.getSession();
@@ -162,17 +162,13 @@ public class QuestionController {
         int tno = ((User)user).getAccount();
         Question question = new Question();
         question.setTno(tno);
-
         question.setTopic(topic);
         question.setContent(content);
         question.setDifficulty(difficulty);
         question.setMajorid(majorid);
         boolean isAdded = questionService.addQuestion(question);
-
         session.setAttribute("isAdded",isAdded);
-
         session.setAttribute("hasChangedIsAdded",true);
-
         return "redirect:/TeaAddQues";
     }
 

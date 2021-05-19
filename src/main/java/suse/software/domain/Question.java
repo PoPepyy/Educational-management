@@ -14,14 +14,14 @@ public class Question {
     private int questionid;
     private String topic;
     private String content;
-    private int difficulty;
+    private String difficulty;
     private int tno;
     private int majorid;
     private int sno;
     private boolean ischosen;
 
     public Question(){}
-    public Question(String topic,String content, int difficulty,
+    public Question(String topic,String content, String difficulty,
                     int tno,int majorid) {
         this.topic = topic;
         this.content = content;
@@ -29,7 +29,7 @@ public class Question {
         this.tno = tno;
         this.majorid = majorid;
     }
-    public Question(int questionid,String topic,String content, int difficulty,
+    public Question(int questionid,String topic,String content, String difficulty,
                     int tno,int majorid,int sno,boolean ischosen) {
         this.questionid = questionid;
         this.topic = topic;
