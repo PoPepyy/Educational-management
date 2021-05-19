@@ -108,6 +108,14 @@ public class QuestionController {
 
 
     //Teacher
+
+    /**
+     * 返回教师所有题目
+     * @param request
+     * @param map
+     * @return
+     */
+
     @RequestMapping("/TeaLookThroughQues")
     public String TeaLookThroughQues(HttpServletRequest request,
                                      Map<String,Object> map){
@@ -121,7 +129,12 @@ public class QuestionController {
     }
 
 
-
+    /**
+     * 跳转
+     * isAddJudge 刷新
+     * 删除session
+     * @return
+     */
     @RequestMapping(value = "/TeaAddQues")
     public String TeaAddQues(
             HttpServletRequest request,
@@ -130,9 +143,7 @@ public class QuestionController {
         HttpSession session = request.getSession();
         Object isAddedObject = session.getAttribute("isAdded");
         Object hasChangedObject = session.getAttribute("hasChangedIsAdded");
-
         int isAddedJudge = -1;
-
         if (isAddedObject==null || hasChangedObject==null){
             ;
         }else if((boolean)hasChangedObject==true){
@@ -143,12 +154,14 @@ public class QuestionController {
             }
             session.removeAttribute("hasChangedIsAdded");
         }
-
         map.put("isAdded",isAddedJudge);
         return "TeaAddQues";
     }
 
-
+    /**
+     * 向数据库中加入论文题目
+     * @return
+     */
 
     @RequestMapping(value = "/TeaAddQues",method = RequestMethod.POST)
     public String TeaAddQues(HttpServletRequest request,
