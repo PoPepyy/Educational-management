@@ -57,11 +57,11 @@ public class LoginController {
                 // 学生
                 Student student = studentService.getStudentBySno(user.getAccount());
                 if (student != null) {
-                    user.setMajor(student.getMajor());
+//                    user.setMajor(student.getMajor());
                     user.setSname(student.getSname());
-                    user.setMajorid(student.getMajorId());
+/*                    user.setMajorid(student.getMajorId());
                     user.setCollege(student.getCollege());
-                    user.setKlass(student.getKlass());
+                    user.setKlass(student.getKlass());*/
                 } else{
                     error = true;
                 }

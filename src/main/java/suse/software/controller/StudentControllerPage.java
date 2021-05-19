@@ -2,7 +2,6 @@ package suse.software.controller;
 
 import org.springframework.web.bind.annotation.*;
 import suse.software.domain.Student;
-import suse.software.domain.Teacher;
 import suse.software.domain.User;
 import suse.software.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,16 +120,16 @@ public class StudentControllerPage {
 
     /**
      * 跳转
-     * @param request
+     * @param httpServlerequest
      * @return
      */
     @RequestMapping("/StudentsInfo")
-    public String studentsInfo(HttpServletRequest request) {
-        if (checkPower(request) == false) {
+    public String studentsInfo(HttpServletRequest httpServlerequest) {
+        if (checkPower(httpServlerequest) == false) {
             return "error";
         }
         List<Student> allStudent = studentService.getAllStudent();
-        request.getSession().setAttribute("allStudent", allStudent);
+        httpServlerequest.getSession().setAttribute("allStudent", allStudent);
         return "redirect:/StudensPage";
     }
 
@@ -153,7 +152,7 @@ public class StudentControllerPage {
 
 
     /**
-     * 更新跳转
+     * back更新跳转
      * @param paramMap
      * @param httpServletRequest
      * @return
@@ -170,6 +169,11 @@ public class StudentControllerPage {
         return "StudentsAlter";
     }
 
+
+    /**
+     * 后台改学生信息
+     * @return
+     */
     @RequestMapping("/DoUpdateStudent")
     public String doUpdateStudent(  @RequestParam("sno") Integer sno,
                                     @RequestParam("sex") String sex,
@@ -185,9 +189,47 @@ public class StudentControllerPage {
         if (checkPower(request) == false) {
             return "error";
         }
-        Student student = new Student(sno,sex,sname,major,klass,comeYear,phone,grade,college,collegeId,majorId);
+        Student student = new Student(sno, sname, sex, major, klass, comeYear, phone, college, collegeId, grade, majorId);
         studentService.updateStudentById(sno,student);
         return "forward:/StudentsInfo";
+    }
+
+
+    /**
+     * student更新跳转
+     * @param paramMap
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping("/FrontUpdateStudent")
+    public String frontUpdateStudent(Map<String, Object> paramMap, HttpServletRequest httpServletRequest) {
+        String sno = httpServletRequest.getParameter("sno");
+        int sno_int = Integer.parseInt(sno);
+        Student student = studentService.getStudentBySno(sno_int);
+        paramMap.put("needUpdateStudent", student);
+        return "FrontStudentsAlter";
+    }
+
+
+    /**
+     * student改学生信息
+     * @return
+     */
+    @RequestMapping("/FrontDoUpdateStudent")
+    public String frontDoUpdateStudent(    @RequestParam("sno") Integer sno,
+                                           @RequestParam("sname") String sname,
+                                           @RequestParam("sex") String sex,
+                                           @RequestParam("major") String major,
+                                           @RequestParam("klass") String klass,
+                                           @RequestParam("comeYear") String comeYear,
+                                           @RequestParam("phone") String phone,
+                                           @RequestParam("college") String college,
+                                           @RequestParam("collegeId") Integer collegeId,
+                                           @RequestParam("grade") String grade,
+                                           @RequestParam("majorId") Integer majorId,HttpServletRequest request) {
+        Student student = new Student(sno, sname, sex, major, klass, comeYear, phone, college, collegeId, grade, majorId);
+        studentService.updateStudentById(sno,student);
+        return "forward:/index";
     }
 
 }

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="zh-CN" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <header th:replace="app/header::static"></header>
-
+<head>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
 
 <body>
 <div id="SI">
@@ -31,14 +34,14 @@
                         <h3>[[${userinfo.sname}]]</h3>
                         </br>
                         <p> 性别：[[${stuinfo.sex}]] </p>
-                        <p> 学院：[[${userinfo.college}]] </p>
-                        <p> 专业：[[${userinfo.major}]] </p>
-                        <p> 班级：[[${userinfo.klass}]] </p>
+                        <p> 学院：[[${stuinfo.college}]] </p>
+                        <p> 专业：[[${stuinfo.major}]] </p>
+                        <p> 班级：[[${stuinfo.klass}]] </p>
                         <p> 学号：[[${userinfo.account}]] </p>
                         <p> 电话：[[${stuinfo.phone}]] </p>
                         </br>
                         </br>
-                        <a href="/stualter" role="button" class="btn btn-default" target="_blank">修改</a>
+                        <button role="button" class="btn btn-default" target="_blank" v-on:click="change">修改</button>
                     </div>
                 </div>
             </div>
@@ -103,6 +106,11 @@
         el: '#SI',
         data: {
             flag: ([[${userinfo.password}]] == [[${userinfo.account}]])
+        },
+        methods: {
+            change: function () {
+                window.location = "/FrontUpdateStudent?sno=" + [[${userinfo.account}]];
+            }
         }
     })
 </script>

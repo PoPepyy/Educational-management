@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>信息维护页面</title>
+    <link rel="stylesheet" type="text/css" href="css/selectcourse/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/selectcourse/zftal-ui.css" />
+    <script src="js/selectcourse/vue.min.js"></script>
+    <script src="js/selectcourse/vue-resource.min.js"></script>
+    <link href="css/backstage/bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<body>
+<header class="navbar-inverse top2">
+    <div class="container">
+        <a id="topButton" class="navbar-brand">学生信息修改</a>
+    </div>
+</header>
+
+<div class="container container-func sl_all_bg" id="coursetablearea" style="min-height: 1597px;">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="container-fluid" id="SA">
+                    <div class="row">
+                        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"  style="margin-top:48px;">
+                            <form th:action="@{/FrontDoUpdateStudent}" th:type="suse.software.domain.Student" method="post">
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">学号</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" th:name="sno" type="number" v-model="sno" placeholder="学号" readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">姓名</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" type="text" th:name="sname" v-model="sname" placeholder="姓名" readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">性别</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" type="text" th:name="sex" v-model="sex" placeholder="性别" readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">专业</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" type="text" th:name="major" v-model="major" readonly="readonly"
+                                               placeholder="专业">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">班级</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" type="text" th:name="klass" v-model="klass" placeholder="班级" readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">入学年份</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" type="text" th:name="comeYear" v-model="comeYear" placeholder="入学年份" readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">学院</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" type="text" th:name="college" v-model="college" placeholder="学院" readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">学院号</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" type="number" th:name="collegeId" v-model="collegeId" placeholder="学院号" readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">年级</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" type="text" th:name="grade" v-model="grade" placeholder="年级" readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">专业号</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" type="number" th:name="majorId" v-model="majorId" placeholder="专业号" readonly="readonly">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">手机号码</span>
+                                        </div>
+                                        <input class="form-control mr-sm-2" type="text" th:name="phone" v-model="phone" placeholder="手机号码">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-sm-4">
+                                    <button class="btn btn-outline-primary mr-sm-2" type="submit">
+                                        <span data-feather="user-plus"></span>
+                                        提交
+                                    </button>
+                                </div>
+
+                            </form>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var sa = new Vue({
+        el: '#SA',
+        data: {
+            sno: [[${needUpdateStudent.sno}]],
+            sname: '[[${needUpdateStudent.sname}]]',
+            sex: '[[${needUpdateStudent.sex}]]',
+            major: '[[${needUpdateStudent.major}]]',
+            klass: '[[${needUpdateStudent.klass}]]',
+            comeYear: '[[${needUpdateStudent.comeYear}]]',
+            phone: '[[${needUpdateStudent.phone}]]',
+            college: '[[${needUpdateStudent.college}]]',
+            collegeId: [[${needUpdateStudent.collegeId}]],
+            grade: '[[${needUpdateStudent.grade}]]',
+            majorId: [[${needUpdateStudent.majorId}]]
+        }
+    })
+</script>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+<!-- Graphs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
+</body>
+
+</html>
