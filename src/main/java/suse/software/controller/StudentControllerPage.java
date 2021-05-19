@@ -2,6 +2,7 @@ package suse.software.controller;
 
 import org.springframework.web.bind.annotation.*;
 import suse.software.domain.Student;
+import suse.software.domain.Teacher;
 import suse.software.domain.User;
 import suse.software.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,36 +22,6 @@ public class StudentControllerPage {
             return false;
         }
         return user.getType() == 2;
-    }
-
-    /**
-     * 跳转
-     * @param request
-     * @return
-     */
-    @RequestMapping("/StudentsInfo")
-    public String studentsInfo(HttpServletRequest request) {
-        if (checkPower(request) == false) {
-            return "error";
-        }
-        List<Student> allStudent = studentService.getAllStudent();
-        request.getSession().setAttribute("allStudent", allStudent);
-        return "redirect:/StudensPage";
-    }
-
-    /**
-     * 返回所有学生列表
-     * @param httpServletRequest
-     * @return
-     */
-    @RequestMapping("/StudensPage")
-    public String studensPage(HttpServletRequest httpServletRequest) {
-        if (checkPower(httpServletRequest) == false) {
-            return "error";
-        }
-        Object allStudent = httpServletRequest.getSession().getAttribute("allStudent");
-        httpServletRequest.setAttribute("allStudent", allStudent);
-        return "StudentsInfo";
     }
 
     /**
@@ -125,32 +96,6 @@ public class StudentControllerPage {
     }
 
 
-/*
-    @PostMapping("/updateStudent")
-    public String updateStudent(@RequestParam("sno") Integer sno,
-                                @RequestParam("sex") String sex,
-                                @RequestParam("sname") String sname,
-                                @RequestParam("major") String major,
-                                @RequestParam("klass") String klass,
-                                @RequestParam("comeYear") String comeYear,
-                                @RequestParam("phone") String phone,
-                                @RequestParam("grade") String grade,
-                                @RequestParam("college") String college,
-                                @RequestParam("collegeId") Integer collegeId,
-                                @RequestParam("majorId") Integer majorId,HttpServletRequest request) {
-        if (checkPower(request) == false) {
-            return "error";
-        }
-        Student student = new Student(sno, sname, sex, major, klass, comeYear, phone, college, collegeId, grade, majorId);
-        if (studentService.getStudentBySno(sno) == null) {
-            studentService.saveStudent(student);
-        } else {
-            studentService.updateStudent(student);
-        }
-        return "forward:/StudentsInfo";
-    }
-*/
-
     /**
      * 删除学生
      * @param httpServletRequest
@@ -173,4 +118,76 @@ public class StudentControllerPage {
             }
         }
     }
+
+    /**
+     * 跳转
+     * @param request
+     * @return
+     */
+    @RequestMapping("/StudentsInfo")
+    public String studentsInfo(HttpServletRequest request) {
+        if (checkPower(request) == false) {
+            return "error";
+        }
+        List<Student> allStudent = studentService.getAllStudent();
+        request.getSession().setAttribute("allStudent", allStudent);
+        return "redirect:/StudensPage";
+    }
+
+    /**
+     * 返回所有学生列表
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping("/StudensPage")
+    public String studensPage(HttpServletRequest httpServletRequest) {
+        if (checkPower(httpServletRequest) == false) {
+            return "error";
+        }
+        Object allStudent = httpServletRequest.getSession().getAttribute("allStudent");
+        httpServletRequest.setAttribute("allStudent", allStudent);
+        return "StudentsInfo";
+    }
+
+
+
+
+    /**
+     * 更新跳转
+     * @param paramMap
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping("/UpdateStudent")
+    public String updateStudent(Map<String, Object> paramMap, HttpServletRequest httpServletRequest) {
+        if (checkPower(httpServletRequest) == false) {
+            return "error";
+        }
+        String sno = httpServletRequest.getParameter("sno");
+        int sno_int = Integer.parseInt(sno);
+        Student student = studentService.getStudentBySno(sno_int);
+        paramMap.put("needUpdateStudent", student);
+        return "StudentsAlter";
+    }
+
+    @RequestMapping("/DoUpdateStudent")
+    public String doUpdateStudent(  @RequestParam("sno") Integer sno,
+                                    @RequestParam("sex") String sex,
+                                    @RequestParam("sname") String sname,
+                                    @RequestParam("major") String major,
+                                    @RequestParam("klass") String klass,
+                                    @RequestParam("comeYear") String comeYear,
+                                    @RequestParam("phone") String phone,
+                                    @RequestParam("grade") String grade,
+                                    @RequestParam("college") String college,
+                                    @RequestParam("collegeId") Integer collegeId,
+                                    @RequestParam("majorId") Integer majorId,HttpServletRequest request) {
+        if (checkPower(request) == false) {
+            return "error";
+        }
+        Student student = new Student(sno,sex,sname,major,klass,comeYear,phone,grade,college,collegeId,majorId);
+        studentService.updateStudentById(sno,student);
+        return "forward:/StudentsInfo";
+    }
+
 }

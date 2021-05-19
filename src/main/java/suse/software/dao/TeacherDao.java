@@ -22,6 +22,5 @@ public interface TeacherDao {
 
     public void updateTeacher(Teacher teacher);
 
-    public List<Teacher> getTeacherByTnoAndTname(@Param("tno") Integer tno,@Param("tname") String tname);
 
 }

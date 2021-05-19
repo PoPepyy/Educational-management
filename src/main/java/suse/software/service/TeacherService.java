@@ -36,11 +36,11 @@ public class TeacherService {
     }
 
 
-
-/*    @Transactional
-    public void updateTeacher(Teacher teacher) {
-        teacherDao.updateTeacher(teacher);
-    }*/
+    /**
+     * 通过tno更新老师
+     * @param id
+     * @param teacher
+     */
 
     public void updateTeacherById(Integer id, Teacher teacher) {
         teacher.setTno(id);

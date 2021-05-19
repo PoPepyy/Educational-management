@@ -99,7 +99,7 @@ public class TeacherControllerPage {
     }
 
     /**
-     * 删除单个老师
+     * 删除老师
      * @param httpServletRequest
      * @param tno
      * @return
@@ -181,15 +181,6 @@ public class TeacherControllerPage {
         if (checkPower(request) == false) {
             return "error";
         }
-        System.out.println("进入了requestmapping");
-        System.out.println(tno);
-        System.out.println(tname);
-        System.out.println(sex);
-        System.out.println(phone);
-        System.out.println(email);
-        System.out.println(collegeid);
-        System.out.println(office);
-        System.out.println(rankk);
         Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rankk);
         teacherService.updateTeacherById(tno, teacher);
         return "forward:/TeachersInfo";

@@ -9,6 +9,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import suse.software.domain.Teacher;
 import suse.software.views.UserAddView;
 
 import java.io.File;
@@ -35,6 +36,18 @@ public class StudentService {
     public Student getStudentBySno(Integer sno) {
         return studentDao.getBySno(sno);
     }
+
+
+    /**
+     * 通过sno更新学生
+     * @param id
+     * @param student
+     */
+    public void updateStudentById(Integer id, Student student) {
+        student.setSno(id);
+        studentDao.updateStudent(student);
+    }
+
 
     /**
      * 删除学生
