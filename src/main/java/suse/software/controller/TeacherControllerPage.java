@@ -2,6 +2,7 @@ package suse.software.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import suse.software.domain.Student;
 import suse.software.domain.Teacher;
 import suse.software.domain.User;
 import suse.software.service.TeacherService;
@@ -152,7 +153,7 @@ public class TeacherControllerPage {
     }
 
     /**
-     * 更新跳转
+     * back更新跳转
      * @param paramMap
      * @param httpServletRequest
      * @return
@@ -169,6 +170,11 @@ public class TeacherControllerPage {
         return "TeachersAlter";
     }
 
+    /**
+     * 后台改教师信息
+     * @return
+     */
+
     @RequestMapping("/DoUpdateTeacher")
     public String doUpdateTeacher(  @RequestParam("tno") Integer tno,
                                     @RequestParam("tname") String tname,
@@ -184,5 +190,39 @@ public class TeacherControllerPage {
         Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rankk);
         teacherService.updateTeacherById(tno, teacher);
         return "forward:/TeachersInfo";
+    }
+
+    /**
+     * teacher更新跳转
+     * @param paramMap
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping("/FrontUpdateTeacher")
+    public String frontUpdateStudent(Map<String, Object> paramMap, HttpServletRequest httpServletRequest) {
+        String tno = httpServletRequest.getParameter("tno");
+        int tno_int = Integer.parseInt(tno);
+        Teacher teacher = teacherService.getTeacherByTno(tno_int);
+        paramMap.put("needUpdateTeacher", teacher);
+        return "FrontTeachersAlter";
+    }
+
+
+    /**
+     * student改学生信息
+     * @return
+     */
+    @RequestMapping("/FrontDoUpdateTeacher")
+    public String frontDoUpdateTeacher(    @RequestParam("tno") Integer tno,
+                                           @RequestParam("tname") String tname,
+                                           @RequestParam("sex") String sex,
+                                           @RequestParam("phone") String phone,
+                                           @RequestParam("email") String email,
+                                           @RequestParam("collegeid") Integer collegeid,
+                                           @RequestParam("office") String office,
+                                           @RequestParam("rankk") String rankk,HttpServletRequest request) {
+        Teacher teacher = new Teacher(tno, tname, sex, phone, email, collegeid, office, rankk);
+        teacherService.updateTeacherById(tno, teacher);
+        return "forward:/index";
     }
 }
