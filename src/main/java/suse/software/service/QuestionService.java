@@ -1,14 +1,23 @@
 package suse.software.service;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.springframework.transaction.annotation.Transactional;
 import suse.software.dao.QuestionDao;
 import suse.software.domain.Question;
 import suse.software.domain.QuestionStudentInquiry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -71,17 +80,13 @@ public class QuestionService {
         /*
         用当前的年的最后两位和日和具体时分秒表示论题id
         */
-        String[] strTimes = new SimpleDateFormat("yy-MM-dd-hh-mm-ss")
-                .format(new Date()).split("-");
+        String[] strTimes = new SimpleDateFormat("yy-MM-dd-hh-mm-ss").format(new Date()).split("-");
         String strTime = strTimes[0]+strTimes[2]+strTimes[3]+strTimes[4]+strTimes[5];
         int intTime = Integer.valueOf(strTime);
         question.setQuestionid(intTime);
-
-        //是否选择为假
+        //设置是否选择为假
         question.setIschosen(false);
         //学号设为-1表示没有人选
-
-
         question.setSno(-1);
         questionDao.addQuestion(question);
         return questionDao.getQuestionByQustionId(intTime)!=null;
@@ -161,6 +166,51 @@ public class QuestionService {
     }
 
 
+
+    /**
+     * 遍历导入论题
+     * @param questions
+     *
+     */
+
+    @Transactional
+    public void addQuestions(List<Question> questions) {
+        for (Question question: questions) {
+            addQuestion(question);
+        }
+    }
+
+    /**
+     * 批量导入论题
+     * @param file
+     * @return
+     */
+    public boolean excel(File file) {
+        HSSFWorkbook hssfWorkbook = null;
+        Question question = null;
+        List<Question> questions = new LinkedList<>();
+        try {
+            hssfWorkbook = new HSSFWorkbook(new FileInputStream(file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        HSSFSheet sheet = hssfWorkbook.getSheetAt(0);
+        int lastRowNum = sheet.getLastRowNum();
+        DecimalFormat df = new DecimalFormat("0");
+        for (int i = 1; i < lastRowNum; i++) {
+            HSSFRow row = sheet.getRow(i);
+            question = new Question(
+                    row.getCell(1).toString(),
+                    row.getCell(2).toString(),
+                    row.getCell(3).toString(),
+                    (int)Math.round(row.getCell(4).getNumericCellValue()),
+                    (int)Math.round(row.getCell(5).getNumericCellValue())
+            );
+            questions.add(question);
+        }
+        addQuestions(questions);
+        return true;
+    }
 
 
 }

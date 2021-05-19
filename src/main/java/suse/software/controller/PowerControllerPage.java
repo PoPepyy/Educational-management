@@ -3,10 +3,7 @@ package suse.software.controller;
 import org.springframework.web.bind.annotation.*;
 import suse.software.domain.Power;
 import suse.software.domain.User;
-import suse.software.service.PowerService;
-import suse.software.service.SemesterService;
-import suse.software.service.StudentService;
-import suse.software.service.TeacherService;
+import suse.software.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,9 +29,8 @@ public class PowerControllerPage {
     StudentService studentService;
     @Autowired
     TeacherService teacherService;
-    //传参...
-    private Integer tmpcno;
-    private Integer tmpSemesterId;
+    @Autowired
+    QuestionService questionService;
 
     public boolean checkPower(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
@@ -81,7 +77,11 @@ public class PowerControllerPage {
         }
     }
 
-
+    /**
+     * back跳转
+     * @param request
+     * @return
+     */
     @RequestMapping("/ExcelInsert")
     public String excelInsert(HttpServletRequest request) {
         return "StudentsFileAdd";
@@ -151,9 +151,6 @@ public class PowerControllerPage {
             e.printStackTrace();
         }
 
-        /* 测试数据*/
-        tmpSemesterId = 1;
-        tmpcno = 1;
 
         if (fileName == null && "".equals(fileName)) {
             return "文件名不能为空！";
@@ -200,11 +197,6 @@ public class PowerControllerPage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        /* 测试数据*/
-        tmpSemesterId = 1;
-        tmpcno = 1;
-
         if (fileName == null && "".equals(fileName)) {
             return "文件名不能为空！";
         } else {
@@ -212,6 +204,54 @@ public class PowerControllerPage {
                 boolean ok = false;
                 try {
                     ok = teacherService.excel(file);
+                } catch (Exception e) {
+                    return "导入失败"+e;
+                }
+                //导入结束时，删除临时文件
+                deleteFile(file);
+                if (ok) {
+                    return "导入成功！";
+                } else {
+                    return "导入失败！";
+                }
+            }
+            return "文件格式错误！";
+        }
+
+    }
+
+    /**
+     * 老师导入论题
+     * @param request
+     * @param multfile
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/ExcelInsertQues")
+    public String excelInsertQues(HttpServletRequest request, @RequestParam("file") MultipartFile multfile) {
+        // 获取文件名
+        String fileName = multfile.getOriginalFilename();
+        // 获取文件后缀
+        String prefix = fileName.substring(fileName.lastIndexOf("."));
+        // 用uuid作为文件名，防止生成的临时文件重复
+        File file = null;
+        try {
+            file = File.createTempFile(getUUID(), prefix);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            multfile.transferTo(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (fileName == null && "".equals(fileName)) {
+            return "文件名不能为空！";
+        } else {
+            if (fileName.endsWith("xls") || fileName.endsWith("xlsx")) {
+                boolean ok = false;
+                try {
+                    ok = questionService.excel(file);
                 } catch (Exception e) {
                     return "导入失败"+e;
                 }

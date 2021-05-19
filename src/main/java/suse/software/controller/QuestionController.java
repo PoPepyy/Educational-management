@@ -163,7 +163,7 @@ public class QuestionController {
     }
 
     /**
-     * 向数据库中加入论文题目
+     * 老师向数据库中加入论文题目
      * @return
      */
 
