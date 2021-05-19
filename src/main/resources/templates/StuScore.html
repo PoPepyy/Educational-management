@@ -33,15 +33,9 @@
         </div>
     </div>
 </header>
-<div class="up1">
-    <div class="navbar navbar-default" role="navigation">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="/StuLookThroughQues">选题首页</a></li>
-            <li><a href="/StuChoice">已选课题</a></li>
-            <li><a href="/StuScore">关于成绩</a></li>
-        </ul>
-    </div>
-</div>
+
+<div th:replace="app/header::quesnavi(active='StuScore.html')"></div>
+
 <div class="chengji" id="result">
     <div class="panel panel-default ">
         <div class="alert alert-warning" role="alert">成绩详情</div>

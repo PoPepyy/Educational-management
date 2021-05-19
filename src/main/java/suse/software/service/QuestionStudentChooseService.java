@@ -16,10 +16,8 @@ import suse.software.service.QuestionService;
 public class QuestionStudentChooseService {
     @Autowired
     QuestionStudentDao questionStudentDao;
-
     @Autowired
     QuestionService questionService;
-
     @Autowired
     QuestionStudentChooseService questionStudentChooseService;
 
@@ -30,7 +28,7 @@ public class QuestionStudentChooseService {
      */
     public Boolean chooseQuestion(int questionid,int sno){
         Boolean isChoosen = false;
-        Question question = questionService.getSingleQuestionByQuestionid(questionid);
+        Question question = questionService.getQuestionByQustionId(questionid);
         Question questionSno = questionService.getSingleQuestionBySno(sno);
         if(question==null)//论题不为空
             return isChoosen;

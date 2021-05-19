@@ -118,4 +118,19 @@
         </div>
     </div>
 </div>
+
+
+<!--学生论题导航栏-->
+<div class="up1" th:fragment="quesnavi">
+    <div class="navbar navbar-default" role="navigation">
+        <ul class="nav navbar-nav">
+            <li><a th:class="${active=='StuLookThroughQues.html'?'active':' '}" href="/StuLookThroughQues">选题首页</a></li>
+            <li><a th:class="${active=='StuChoice.html'?'active':' '}" href="/StuChoice">已选课题</a></li>
+            <li><a th:class="${active=='StuScore.html'?'active':' '}" href="/StuScore">关于成绩</a></li>
+        </ul>
+    </div>
+</div>
+
+
+
 </html>

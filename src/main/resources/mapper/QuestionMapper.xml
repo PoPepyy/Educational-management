@@ -16,23 +16,17 @@
 
     </select>
 
-
-    <select id="getPartQuestionsByMajorid" parameterType="int"
-            resultType="QuestionStudentInquiry">
+    <select id="getPartQuestionsByMajorid" parameterType="int" resultType="QuestionStudentInquiry">
         select question.questionid,question.topic,question.difficulty,teacher.tname,question.ischosen from
         question join teacher on question.tno = teacher.tno
         where
             question.majorid = #{majorid}
-        order by
-            question.difficulty
     </select>
-
 
 
     <select id="getSingleQuestionBySno" parameterType="int" resultType="Question">
         select * from  question where sno = #{sno}
     </select>
-
 
 
     <select id="getQuestionsByMajorid" parameterType="int"

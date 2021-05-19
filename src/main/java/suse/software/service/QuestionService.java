@@ -3,11 +3,9 @@ package suse.software.service;
 import suse.software.dao.QuestionDao;
 import suse.software.domain.Question;
 import suse.software.domain.QuestionStudentInquiry;
-import suse.software.utils.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,12 +40,11 @@ public class QuestionService {
 
 
     /**
-
      * 功能：根据专业 获取论题的部分内容
      * 服务对象：学生
      * @param majorid 专业id
      * @return  论题部分信息列表
-     * String topic;int difficulty;String tname;boolean ischosen;
+     * id; topic; difficulty; tname; ischosen;
      */
     public List<QuestionStudentInquiry> getPartQuestionByMajorid(int majorid){
         return questionDao.getPartQuestionsByMajorid(majorid);
@@ -59,12 +56,12 @@ public class QuestionService {
      * @param questionid 论题id
      * @return  一个论题的全部信息
      */
-    public Question getSingleQuestionByQuestionid(int questionid){
+    public Question getQuestionByQustionId(int questionid){
         return questionDao.getQuestionByQustionId(questionid);
     }
 
     /**
-     * 功能：添加论题
+     * 功能：添加论题 (true)
      * 服务对象：老师
      * @param question Question类
      * @return 添加成功则返回true，否则返回false
@@ -132,7 +129,7 @@ public class QuestionService {
     }
 
     /**
-     * 功能：根据老师工号查询论题表的全部信息
+     * 功能：根据老师工号查询论题表的对应工号的全部信息 (true)
      * 服务对象：老师
      * @param tno 老师工号
      * @return 论题列表
@@ -165,98 +162,5 @@ public class QuestionService {
 
 
 
-
-
-
-    //以下函数仅为测试功能的函数
-    private ResponseMessage setMessage(List<Question> questions){
-        ResponseMessage message = ResponseMessage.getMessage(
-                questions!=null && !questions.isEmpty(),
-                ResponseMessage.SUCCESS, "Inquire Success !",
-                ResponseMessage.EmptyDate,"No Information Found !"
-        );
-        message.setData(questions);
-        return message;
-    }
-
-
-    private ResponseMessage setMessagePart(List<QuestionStudentInquiry> questions){
-        ResponseMessage message = ResponseMessage.getMessage(
-                questions!=null && !questions.isEmpty(),
-                ResponseMessage.SUCCESS, "Inquire Success !",
-                ResponseMessage.EmptyDate,"No Information Found !"
-        );
-        message.setData(questions);
-        return message;
-    }
-
-
-    private ResponseMessage setMessageSingle(Question question){
-        ResponseMessage message = ResponseMessage.getMessage(
-                question!=null,
-                ResponseMessage.SUCCESS, "Inquire Success !",
-                ResponseMessage.EmptyDate,"No Information Found !"
-        );
-        message.setData(question);
-        return message;
-    }
-
-
-    public ResponseMessage messageGetQuestionByMajorid(int majorid){
-        List<Question> questions = this.getQuestionByMajorid(majorid);
-        return this.setMessage(questions);
-    }
-
-
-    public ResponseMessage messageGetPartQuestionByMajorid(int majorid){
-        List<QuestionStudentInquiry> questions = this.getPartQuestionByMajorid(majorid);
-        return this.setMessagePart(questions);
-    }
-
-
-    public ResponseMessage messageGetQuestionByTno(int tno){
-        List<Question> questions = this.getQuestionByTno(tno);
-        return setMessage(questions);
-    }
-
-
-    public ResponseMessage messageGetQuestionByQuestionid(int questionid){
-        Question question = this.getSingleQuestionByQuestionid(questionid);
-        return setMessageSingle(question);
-    }
-
-
-    public ResponseMessage messageAddQuestion(Question question){
-        Boolean  isAdded = this.addQuestion(question);
-        ResponseMessage message = ResponseMessage.getMessage(isAdded,
-                ResponseMessage.SUCCESS, "Add Success！",
-                ResponseMessage.EmptyDate,"Add Fail !"
-        );
-        return message;
-    }
-
-
-    public ResponseMessage messageDeleteQuestion(int questionid){
-        Boolean isDeleted = this.deleteQuestionByQuestionid(questionid);
-        ResponseMessage message = ResponseMessage.getMessage(isDeleted,
-                ResponseMessage.SUCCESS, "Delete Success!",
-                ResponseMessage.EmptyDate,"Delete Fail!"
-        );
-        return message;
-    }
-
-    public ResponseMessage messageSureQuestionStudent(int questionid,int sno){
-        Boolean isSured = this.sureQuestionStudent(questionid,sno);
-        ResponseMessage message = ResponseMessage.getMessage(isSured,
-                ResponseMessage.SUCCESS, "Sure Success!",
-                ResponseMessage.EmptyDate,"Sure Fail!"
-        );
-        return message;
-    }
-
-    public ResponseMessage messageGetSingleQuestionBySno(int sno){
-        Question question = this.getSingleQuestionBySno(sno);
-        return setMessageSingle(question);
-    }
 
 }

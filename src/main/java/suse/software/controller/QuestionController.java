@@ -24,54 +24,58 @@ import java.util.Map;
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
-
     @Autowired
     private StudentService studentService;
-
     @Autowired
     private TeacherService teacherService;
-
-
     @Autowired
     private QuestionStudentChooseService questionStudentChooseService;
 
 
     //Student
+
+    /**
+     * 跳转 所有该学院的论题
+     * @param request
+     * @param map
+     * @return
+     */
     @RequestMapping("/StuLookThroughQues")
-    public String StuLookThroughQues(HttpServletRequest request,
-                                     Map<String,Object> map){
-        //需要返回的列表数据有 题目 难度 出题老师姓名 是否选中
+    public String StuLookThroughQues(HttpServletRequest request, Map<String,Object> map){
+        //需要返回的列表数据有 id 题目 类型 出题老师姓名 是否选中
         HttpSession session =  request.getSession();
         Object userInfo = session.getAttribute("user");
         User user = (User) userInfo;
         int sno = user.getAccount();
         Student student = studentService.getStudentBySno(sno);
+
         int studentMajor = student.getMajorId();
         List<QuestionStudentInquiry> questionStudentInquiry = questionService.getPartQuestionByMajorid(studentMajor);
         map.put("quesInfos",questionStudentInquiry);
-//        System.out.println(questionStudentInquiry.get(0));//debug
         return "StuLookThroughQues";
     }
 
-
-
+    /**
+     * 详情--
+     * @param request
+     * @param map
+     * @param questionid
+     * @return
+     */
     @RequestMapping(value = "/StuQuesDetails")
-    public String StuQuesDetails(HttpServletRequest request,
-                                 Map<String,Object> map,
-                                 @RequestParam("questionid") int questionid
-    ){
+    public String StuQuesDetails(HttpServletRequest request, Map<String,Object> map, @RequestParam("questionid") int questionid){
+        System.out.println("进入了requestmapping！");
         HttpSession session =  request.getSession();
         Object userInfo = session.getAttribute("user");
         User user = (User) userInfo;
         int sno = user.getAccount();
-        Question question = questionService.getSingleQuestionByQuestionid(questionid);
+        Question question = questionService.getQuestionByQustionId(questionid);
         int tno = question.getTno();
         Teacher teacher = teacherService.getTeacherByTno(tno);
-        QuestionStudentChoose questionStudentChoose = questionStudentChooseService.getChoiceByQidSno(questionid,sno);
+//        QuestionStudentChoose questionStudentChoose = questionStudentChooseService.getChoiceByQidSno(questionid,sno);
         int isChosen=-1;
         Object hasChangedObject = session.getAttribute("hasChanged");
         Object isChosenObject = session.getAttribute("isChosen");
-
         if (hasChangedObject==null || isChosenObject==null){
             isChosen = -1;
         }else if(((boolean)hasChangedObject)==true){
@@ -181,7 +185,7 @@ public class QuestionController {
         question.setMajorid(majorid);
         boolean isAdded = questionService.addQuestion(question);
         session.setAttribute("isAdded",isAdded);
-        session.setAttribute("hasChangedIsAdded",true);
+        session.setAttribute("hasChanged",true);
         return "redirect:/TeaAddQues";
     }
 
@@ -191,7 +195,7 @@ public class QuestionController {
     public String TeaQuesDetails(HttpServletRequest request,
                                  @RequestParam("questionid")int questionid,
                                  Map<String,Object>map){
-        Question question = questionService.getSingleQuestionByQuestionid(questionid);
+        Question question = questionService.getQuestionByQustionId(questionid);
         map.put("question",question);
         List<QuestionStudentChoose> questionStudentChooses = questionStudentChooseService.getChoiceByQid(questionid);
         List<Student> students = new ArrayList<>();

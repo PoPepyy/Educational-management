@@ -48,40 +48,12 @@ public class QuestionStudentChooseController {
         List<QuestionStudentChoose> questionStudentChooses = questionStudentChooseService.getChoiceBySno(sno);
         List<Question> questions = new ArrayList<>();
         for(int i=0;i<questionStudentChooses.size();i++){
-            questions.add(questionService.getSingleQuestionByQuestionid(questionStudentChooses.get(i).getQuestionid()));
+            questions.add(questionService.getQuestionByQustionId(questionStudentChooses.get(i).getQuestionid()));
         }
         map.put("quesInfos",questions);
         return "StuChoice";
     }
 
 
-
-//以下皆为测试API
-//    @GetMapping("cQ")
-//    public void chooseQuestion(){
-//        questionStudentChooseService.chooseQuestion(1906033518,11);
-//    }
-//
-//    @GetMapping("getQSCByQidSno")
-//    public void getChoiceByQidSno(){
-//        QuestionStudentChoose questionStudentChoose = questionStudentChooseService.getChoiceByQidSno(1907102645,11);
-//        System.out.println(questionStudentChoose);
-//    }
-//
-//    @GetMapping("getQSCBySno")
-//    public void getChoiceBySno(){
-//        List<QuestionStudentChoose> questionStudentChooses = questionStudentChooseService.getChoiceBySno(10);
-//        for(int i=0;i<questionStudentChooses.size();i++){
-//            System.out.println(questionStudentChooses.get(i));
-//        }
-//    }
-//
-//    @GetMapping("getQSCByTno")
-//    public void getChoiceByTno(){
-//        List<QuestionStudentChoose> questionStudentChooses = questionStudentChooseService.getChoiceByTno(1);
-//        for(int i=0;i<questionStudentChooses.size();i++){
-//            System.out.println(questionStudentChooses.get(i));
-//        }
-//    }
 
 }

@@ -76,7 +76,7 @@
                         <td th:text="${teaInfo.phone}"></td>
                         <td th:text="${teaInfo.email}"></td>
                         <td th:text="${teaInfo.office}"></td>
-                        <td th:text="${teaInfo.rank}"></td>
+                        <td th:text="${teaInfo.rankk}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -106,7 +106,7 @@
         <div class="panel-body">
             <ul class="list-group">
                 <li class="list-group-item" th:text="'论题ID:'+${quesInfo.questionid}"></li>
-                <li class="list-group-item" th:text="'难度:'+ ${quesInfo.difficulty}"></li>
+                <li class="list-group-item" th:text="'类型:'+ ${quesInfo.difficulty}"></li>
                 <!--<li class="list-group-item" th:if="${isChosen==true}">是否已选择</li>-->
                 <div th:switch="${quesInfo.ischosen}">
                     <li class="list-group-item" th:case="false">论题未被选中</li>

@@ -9,8 +9,6 @@ public class GradeManagementView {
     private Integer sno;
     private Integer tno;
 
-    //planning表
-    private Integer credit;
 
     //semester表
     private String start;

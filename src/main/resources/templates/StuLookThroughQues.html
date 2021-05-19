@@ -22,35 +22,22 @@
     </style>
 </head>
 <body>
-<!--<div class="top">-->
-    <!--<h2 class="text-black-50 text-center">浏览选题页面</h2>-->
-<!--</div>-->
+
+
 <header class="navbar-inverse top2">
     <div class="container" id="navbar_container">
         <div class="container">
             <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span class="sr-only">学生选题</span>
-                </button>
-                <A class="navbar-brand" id="topbutton" href="">学生选题</A>
+                <a class="navbar-brand" id="topbutton" >学生选题</a>
             </div>
         </div>
     </div>
 </header>
-<div class="up1">
-    <div class="navbar navbar-default" role="navigation">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="/StuLookThroughQues">选题首页</a></li>
-            <li><a href="/StuChoice">已选课题</a></li>
-            <li><a href="/StuScore">关于成绩</a></li>
-        </ul>
-    </div>
-</div>
+
+<div th:replace="app/header::quesnavi(active='StuLookThroughQues.html')"></div>
+
 <div class="down">
-    <div class="panel panel-default" >      <!--row   pre-scrollable-->
-        <!--<div class="panel-heading alert alert-info text-center" role="alert">-->
-            <!--<div >您已经选择但未被老师确认的选题</div>-->
-        <!--</div>-->
+    <div class="panel panel-default" >
         <div class="alert alert-info text-center" role="alert">
         </div>
         <div class="panel-body ">
@@ -59,8 +46,8 @@
                     <thead>
                     <tr>
                         <th>题目ID</th>
-                        <th>标题</th>
-                        <th>难度</th>
+                        <th>题目</th>
+                        <th>题目类型</th>
                         <th>老师姓名</th>
                         <th>是否选中</th>
                         <th>详情</th>
