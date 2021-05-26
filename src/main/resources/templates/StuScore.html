@@ -45,23 +45,19 @@
                         <thead>
                         <tr>
 
-                            <th>初期表现10%</th>
-                            <th>中期考核20%</th>
+                            <th>论文成绩30%</th>
                             <th>答辩30%</th>
-                            <th>论文30%</th>
-                            <th>额外加分10%</th>
+                            <th>教师评分40%</th>
                             <th>总成绩</th>
 
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td th:text="${quesScore.earlyperformance}">表格单元格</td>
-                            <td th:text="${quesScore.midexam}">表格单元格</td>
-                            <td th:text="${quesScore.thesisanswer}">表格单元格</td>
                             <td th:text="${quesScore.paper}">表格单元格</td>
-                            <td th:text="${quesScore.extracredit}">表格单元格</td>
-                            <td th:text="${quesScore.earlyperformance+quesScore.midexam+quesScore.thesisanswer+quesScore.paper+quesScore.extracredit}"></td>
+                            <td th:text="${quesScore.thesisanswer}">表格单元格</td>
+                            <td th:text="${quesScore.teacheranswer}">表格单元格</td>
+                            <td th:text="${total}"></td>
                         </tr>
                         </tbody>
                     </table>

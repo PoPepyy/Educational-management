@@ -48,7 +48,6 @@ public class QuestionController {
         User user = (User) userInfo;
         int sno = user.getAccount();
         Student student = studentService.getStudentBySno(sno);
-
         int studentMajor = student.getMajorId();
         List<QuestionStudentInquiry> questionStudentInquiry = questionService.getPartQuestionByMajorid(studentMajor);
         map.put("quesInfos",questionStudentInquiry);
@@ -64,7 +63,6 @@ public class QuestionController {
      */
     @RequestMapping(value = "/StuQuesDetails")
     public String StuQuesDetails(HttpServletRequest request, Map<String,Object> map, @RequestParam("questionid") int questionid){
-        System.out.println("进入了requestmapping！");
         HttpSession session =  request.getSession();
         Object userInfo = session.getAttribute("user");
         User user = (User) userInfo;
@@ -205,12 +203,9 @@ public class QuestionController {
         }//添加学生详细信息
         map.put("choices",questionStudentChooses);
         map.put("students",students);
-
         //判断有无选择成功
         HttpSession session = request.getSession();
-
         session.setAttribute("snoSured",question.getSno());
-
         Object snoSured = session.getAttribute("snoSured");
         int snoSuredInt;
         if(snoSured!=null){

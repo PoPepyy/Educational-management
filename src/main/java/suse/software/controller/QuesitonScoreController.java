@@ -40,12 +40,11 @@ public class QuesitonScoreController {
         if(questionScore==null)
             total = -1;
         else{
-            total =  questionScore.getEarlyperformance()*0.1+questionScore.getMidexam()*0.2+questionScore.getThesisanswer()*0.3+questionScore.getPaper()*0.3+questionScore.getExtracredit()*0.1;
+            total =  questionScore.getPaper()*0.3+questionScore.getThesisanswer()*0.3+questionScore.getTeacheranswer()*0.4;
         }
 
         map.put("total",total);
         map.put("quesScore",questionScore);
-
         return "StuScore";
     }
 
@@ -57,6 +56,7 @@ public class QuesitonScoreController {
         Object user = session.getAttribute("user");
         int tno = ((User)user).getAccount();
         List<Question> questions = questionService.getQuestionByTno(tno);
+        //questionid sno
         List<QuestionStudentChoose> questionStudentChooses = new ArrayList<>();
         for(int i=0;i<questions.size();i++){
             if (questions.get(i).getSno()!=-1){
@@ -64,7 +64,6 @@ public class QuesitonScoreController {
             }
         }
         map.put("choices",questionStudentChooses);
-
         //判断是否打分成功
         int isJudged = -1;
         Object judgeObject = session.getAttribute("judge");
@@ -91,11 +90,9 @@ public class QuesitonScoreController {
     public String TeaAddScore(HttpServletRequest request,
                              @RequestParam("sno")int sno,
                              @RequestParam("questionid")int questionid,
-                             @RequestParam("earlyperformance")int earlyperformance,
-                             @RequestParam("midexam")int midexam,
-                             @RequestParam("thesisanswer")int thesisanswer,
                              @RequestParam("paper")int paper,
-                             @RequestParam("extracredit")int extracredit){
+                             @RequestParam("thesisanswer")int thesisanswer,
+                             @RequestParam("teacheranswer")int teacheranswer){
        HttpSession session = request.getSession();
         //判断有无打过分
         QuestionScore questionScoreCheck = questionScoreService.getQuestionScoreBySno(sno);
@@ -104,15 +101,12 @@ public class QuesitonScoreController {
            session.setAttribute("hasChangedScore",true);
            return "redirect:/TeaAddScore";
        }
-
        QuestionScore questionScore = new QuestionScore();
        questionScore.setSno(sno);
        questionScore.setQuestionid(questionid);
-       questionScore.setEarlyperformance(earlyperformance);
-       questionScore.setMidexam(midexam);
-       questionScore.setThesisanswer(thesisanswer);
        questionScore.setPaper(paper);
-       questionScore.setExtracredit(extracredit);
+       questionScore.setThesisanswer(thesisanswer);
+       questionScore.setTeacheranswer(teacheranswer);
        questionScoreService.addQuestionScore(questionScore);
        session.setAttribute("hasChangedScore",true);
        session.setAttribute("judge",true);//表示打分成功
@@ -166,19 +160,15 @@ public class QuesitonScoreController {
                               @RequestParam("sno")int sno,
                               @RequestParam("questionid")int questionid,
                               Map<String,Object> map,
-                              @RequestParam("earlyperformance")int earlyperformance,
-                              @RequestParam("midexam")int midexam,
-                              @RequestParam("thesisanswer")int thesisanswer,
                               @RequestParam("paper")int paper,
-                              @RequestParam("extracredit")int extracredit){
+                              @RequestParam("thesisanswer")int thesisanswer,
+                              @RequestParam("teacheranswer")int teacheranswer){
         QuestionScore questionScore = new QuestionScore();
         questionScore.setSno(sno);
         questionScore.setQuestionid(questionid);
-        questionScore.setEarlyperformance(earlyperformance);
-        questionScore.setMidexam(midexam);
-        questionScore.setThesisanswer(thesisanswer);
         questionScore.setPaper(paper);
-        questionScore.setExtracredit(extracredit);
+        questionScore.setThesisanswer(thesisanswer);
+        questionScore.setTeacheranswer(teacheranswer);
         boolean isChanged = questionScoreService.changeQuestionScore(questionScore);
         HttpSession session = request.getSession();
         session.setAttribute("gradeIsChanged",isChanged);
@@ -186,23 +176,6 @@ public class QuesitonScoreController {
         return "redirect:ManageLookThroughGrade";//"redirect:/ManageScore"+"?sno="+sno;
     }
 
-
-    //一下皆为测试接口
-//    @GetMapping("addQC")
-//    public void addQuestionScore(){
-//        QuestionScore q = new QuestionScore(3333,2,3,4,5,6,7);
-//        questionScoreService.addQuestionScore(q);
-//    }
-//
-//    @GetMapping("getQSBS")
-//    public void getQuestionScoreBySno(){
-//        System.out.println(questionScoreService.getQuestionScoreBySno(3333));
-//    }
-//
-//    @GetMapping("getQSBT")
-//    public void getQuestionScoreByTno(){
-//        System.out.println(questionScoreService.getQuestionScoreByTno(1));
-//    }
 
 }
 

@@ -8,23 +8,19 @@ import org.apache.ibatis.type.Alias;
 public class QuestionScore {
     private int sno;
     private int questionid;
-    private int earlyperformance;
-    private int midexam;
-    private int thesisanswer;
-    private int paper;
-    private int extracredit;
+    private int paper;//40%
+    private int thesisanswer;//30%
+    private int teacheranswer;//40%
 
     public QuestionScore(){}
 
-    public QuestionScore(int sno,int questionid,int earlyperformance,
-                         int midexam,int thesisanswer,int paper,int extracredit){
+    public QuestionScore(int sno,int questionid,int paper,
+                         int thesisanswer,int teacheranswer){
         this.sno = sno;
         this.questionid = questionid;
-        this.earlyperformance = earlyperformance;
-        this.midexam = midexam;
-        this.thesisanswer = thesisanswer;
         this.paper = paper;
-        this.extracredit = extracredit;
+        this.thesisanswer = thesisanswer;
+        this.teacheranswer = teacheranswer;
     }
 
     public void setSno(int sno) {
@@ -35,23 +31,15 @@ public class QuestionScore {
         this.questionid = questionid;
     }
 
-    public void setEarlyperformance(int earlyperformance) {
-        this.earlyperformance = earlyperformance;
-    }
-
-    public void setMidexam(int midexam) {
-        this.midexam = midexam;
+    public void setPaper(int paper) {
+        this.paper = paper;
     }
 
     public void setThesisanswer(int thesisanswer) {
         this.thesisanswer = thesisanswer;
     }
 
-    public void setPaper(int paper) {
-        this.paper = paper;
-    }
-
-    public void setExtracredit(int extracredit) {
-        this.extracredit = extracredit;
+    public void setTeacheranswer(int teacheranswer) {
+        this.teacheranswer = teacheranswer;
     }
 }

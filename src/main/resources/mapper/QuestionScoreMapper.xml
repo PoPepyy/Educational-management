@@ -7,11 +7,9 @@
 
     <update id="changeQuestionScore" parameterType="QuestionScore">
         update question_score set
-        earlyperformance = ${earlyperformance},
-        midexam = ${midexam},
-        thesisanswer = ${thesisanswer},
         paper = ${paper},
-        extracredit = ${extracredit}
+        thesisanswer = ${thesisanswer},
+        teacheranser = ${teacheranswer}
         where sno = ${sno}
     </update>
 
@@ -24,19 +22,15 @@
         insert into question_score(
           sno,
           questionid,
-          earlyperformance,
-          midexam,
-          thesisanswer,
           paper,
-          extracredit
+          thesisanswer,
+          teacheranswer
         )values (
         #{sno},
         #{questionid},
-        #{earlyperformance},
-        #{midexam},
-        #{thesisanswer},
         #{paper},
-        #{extracredit}
+        #{thesisanswer},
+        #{teacheranswer}
         )
     </insert>
 

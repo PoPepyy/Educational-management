@@ -33,20 +33,11 @@
 <body th:onload="'javascript:f('+${isChosen}+');'">
 
 
-
-
-
-<!--<div class="top">-->
-    <!--<h2 class="text-black-50 text-center">题目详情页面</h2>-->
-<!--</div>-->
 <header class="navbar-inverse top2">
     <div class="container" id="navbar_container">
         <div class="container">
             <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span class="sr-only">论题详情</span>
-                </button>
-                <A class="navbar-brand" id="topbutton" href="">论题详情</A>
+                <a class="navbar-brand" id="topbutton" href="">题目详情</a>
             </div>
         </div>
     </div>
@@ -92,10 +83,10 @@
             <!--<button class="btn btn-primary" data-toggle="modal" data-target="#mymodal-data" type="button" value="选择">选择</button>-->
                 <div th:switch="${quesInfo.ischosen}">
                     <a th:case="true">
-                        <button class="btn btn-primary btn-sm btn-block" type="button"  disabled="disabled" >选择此论题</button>
+                        <button class="btn btn-primary btn-sm btn-block" type="button"  disabled="disabled" >选择此题目</button>
                     </a>
                     <a th:case="false" th:href="@{'/StuChooseQues?questionid='+${quesInfo.questionid}}">
-                        <button class="btn btn-primary btn-sm btn-block"  type="button" >选择此论题</button>
+                        <button class="btn btn-primary btn-sm btn-block"  type="button" >选择此题目</button>
                         <!--<div th:if="${isChosen}==true">-->
 
                         <!--</div>-->
@@ -109,8 +100,8 @@
                 <li class="list-group-item" th:text="'类型:'+ ${quesInfo.difficulty}"></li>
                 <!--<li class="list-group-item" th:if="${isChosen==true}">是否已选择</li>-->
                 <div th:switch="${quesInfo.ischosen}">
-                    <li class="list-group-item" th:case="false">论题未被选中</li>
-                    <li class="list-group-item" th:case="true">论题已被选中，你无法选择</li>
+                    <li class="list-group-item" th:case="false">题目未被选中</li>
+                    <li class="list-group-item" th:case="true">题目已被选中，你无法选择</li>
                 </div>
                 <li class="list-group-item" th:text="${quesInfo.topic}"></li>
             </ul>
@@ -133,7 +124,7 @@
                 <h4 class="modal-title text-center">提示信息!!</h4>
             </div>
             <div class="modal-body">
-                <p>您确定选择此论题？</p>
+                <p>您确定选择此题目？</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">NO</button>

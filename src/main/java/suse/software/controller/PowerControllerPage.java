@@ -251,13 +251,14 @@ public class PowerControllerPage {
             if (fileName.endsWith("xls") || fileName.endsWith("xlsx")) {
                 boolean ok = false;
                 try {
-                    ok = questionService.excel(file);
+                    ok = questionService.excelques(file);
                 } catch (Exception e) {
                     return "导入失败"+e;
                 }
                 //导入结束时，删除临时文件
                 deleteFile(file);
                 if (ok) {
+                    System.out.println("进入requestmapping");
                     return "导入成功！";
                 } else {
                     return "导入失败！";

@@ -13,16 +13,12 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * database-table question operation
- */
 @Service
 public class QuestionService {
     @Autowired
@@ -78,10 +74,10 @@ public class QuestionService {
      */
     public Boolean addQuestion(Question question){
         /*
-        用当前的年的最后两位和日和具体时分秒表示论题id
+        用当前的日和具体时分秒表示论题id
         */
-        String[] strTimes = new SimpleDateFormat("yy-MM-dd-hh-mm-ss").format(new Date()).split("-");
-        String strTime = strTimes[0]+strTimes[2]+strTimes[3]+strTimes[4]+strTimes[5];
+        String[] strTimes = new SimpleDateFormat("yy-MM-dd-hh-mm-ss-SSS").format(new Date()).split("-");
+        String strTime = strTimes[3]+strTimes[4]+strTimes[5]+strTimes[6];
         int intTime = Integer.valueOf(strTime);
         question.setQuestionid(intTime);
         //设置是否选择为假
@@ -178,6 +174,7 @@ public class QuestionService {
         for (Question question: questions) {
             addQuestion(question);
         }
+        System.out.println("批量导入论题");
     }
 
     /**
@@ -185,7 +182,7 @@ public class QuestionService {
      * @param file
      * @return
      */
-    public boolean excel(File file) {
+    public boolean excelques(File file) {
         HSSFWorkbook hssfWorkbook = null;
         Question question = null;
         List<Question> questions = new LinkedList<>();
@@ -196,15 +193,18 @@ public class QuestionService {
         }
         HSSFSheet sheet = hssfWorkbook.getSheetAt(0);
         int lastRowNum = sheet.getLastRowNum();
-        DecimalFormat df = new DecimalFormat("0");
-        for (int i = 1; i < lastRowNum; i++) {
+        System.out.println("数据量：");
+        System.out.println(lastRowNum);
+        for (int i = 1; i <= lastRowNum; i++) {
+            System.out.println("进入了for循环");
             HSSFRow row = sheet.getRow(i);
+            System.out.println(row);
             question = new Question(
+                    row.getCell(0).toString(),
                     row.getCell(1).toString(),
                     row.getCell(2).toString(),
-                    row.getCell(3).toString(),
-                    (int)Math.round(row.getCell(4).getNumericCellValue()),
-                    (int)Math.round(row.getCell(5).getNumericCellValue())
+                    (int)Math.round(row.getCell(3).getNumericCellValue()),
+                    (int)Math.round(row.getCell(4).getNumericCellValue())
             );
             questions.add(question);
         }
