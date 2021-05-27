@@ -295,16 +295,10 @@ public class PowerControllerPage {
         return "changePassword";
     }
 
-    @RequestMapping("/GoHomePage")
-    public String homePage(Map<String, Object> parMap, HttpServletRequest request) {
-        if (checkPower(request) == false) {
-            return "error";
-        }
-        Power status = powerService.getStatus();
-        parMap.put("power", status);
-        return "HomePage";
-    }
-
+    /**
+     * 成绩录入权限返回前端
+     * @return
+     */
     @RequestMapping("/PowerManage")
     public String powerControll(Map<String, Object> parMap, HttpServletRequest request) {
         if (checkPower(request) == false) {

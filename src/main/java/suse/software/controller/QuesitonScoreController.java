@@ -49,42 +49,6 @@ public class QuesitonScoreController {
 
 
 
-    @RequestMapping(value =  "/TeaAddScore")
-    public String TeaAddScore(HttpServletRequest request,Map<String,Object>map){
-        HttpSession session = request.getSession();
-        Object user = session.getAttribute("user");
-        int tno = ((User)user).getAccount();
-        List<Question> questions = questionService.getQuestionByTno(tno);
-        //questionid sno
-        List<QuestionStudentChoose> questionStudentChooses = new ArrayList<>();
-        for(int i=0;i<questions.size();i++){
-            if (questions.get(i).getSno()!=-1){
-                questionStudentChooses.add(new QuestionStudentChoose(questions.get(i).getQuestionid(),questions.get(i).getSno() ) );
-            }
-        }
-        map.put("choices",questionStudentChooses);
-        //判断是否打分成功
-        int isJudged = -1;
-        Object judgeObject = session.getAttribute("judge");
-        Object hasChangedScoreObject = session.getAttribute("hasChangedScore");
-
-        if (hasChangedScoreObject == null || judgeObject==null){
-            isJudged = -1;
-        }else if((boolean)hasChangedScoreObject==true){
-            if((boolean)judgeObject==true){
-                isJudged = 1;//打分成功
-            }else {
-                isJudged = 0;//已经打过分
-            }
-            session.removeAttribute("hasChangedScore");
-        }
-
-        map.put("judge",isJudged);
-        return "TeaAddScore";
-    }
-
-
-
     @RequestMapping(value = "/TeaAddScore",method = RequestMethod.POST)
     public String TeaAddScore(HttpServletRequest request,
                              @RequestParam("sno")int sno,
@@ -112,6 +76,37 @@ public class QuesitonScoreController {
        return "redirect:/TeaAddScore";
     }
 
+    @RequestMapping(value =  "/TeaAddScore")
+    public String TeaAddScore(HttpServletRequest request,Map<String,Object>map){
+        HttpSession session = request.getSession();
+        Object user = session.getAttribute("user");
+        int tno = ((User)user).getAccount();
+        List<Question> questions = questionService.getQuestionByTno(tno);
+        //questionid sno
+        List<QuestionStudentChoose> questionStudentChooses = new ArrayList<>();
+        for(int i=0;i<questions.size();i++){
+            if (questions.get(i).getSno()!=-1){
+                questionStudentChooses.add(new QuestionStudentChoose(questions.get(i).getQuestionid(),questions.get(i).getSno() ) );
+            }
+        }
+        map.put("choices",questionStudentChooses);
+        //判断是否打分成功
+        int isJudged = -1;
+        Object judgeObject = session.getAttribute("judge");
+        Object hasChangedScoreObject = session.getAttribute("hasChangedScore");
+        if (hasChangedScoreObject == null || judgeObject==null){
+            isJudged = -1;
+        }else if((boolean)hasChangedScoreObject==true){
+            if((boolean)judgeObject==true){
+                isJudged = 1;//打分成功
+            }else {
+                isJudged = 0;//已经打过分
+            }
+            session.removeAttribute("hasChangedScore");
+        }
+        map.put("judge",isJudged);
+        return "TeaAddScore";
+    }
 
 
 

@@ -17,17 +17,6 @@ public class PowerService {
     PowerDao powerDao;
     Power power;
 
-    /**
-     * 初始化权限
-     */
-    public void initPower() {
-        power = new Power();
-        power.setAbnormal(0);
-        power.setSelectCourse(0);
-        power.setScore(0);
-        powerDao.deletePower();
-        powerDao.insertPower(power);
-    }
 
     /**
      * 得到权限表当前状态
@@ -35,18 +24,9 @@ public class PowerService {
      * @return
      */
     public Power getStatus() {
-        return powerDao.getPower().get(0);
+        return powerDao.getPower("score");
     }
 
-    /**
-     * 得到当前选课权限
-     *
-     * @return selectCourse值
-     */
-    public Boolean getSelectCourse() {
-        power = getStatus();
-        return power.getSelectCourse() == 1;
-    }
     /**
      * 得到成绩录入权限
      */

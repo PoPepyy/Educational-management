@@ -4,20 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="suse.software.dao.PowerDao">
     <select id="getPower" resultType="suse.software.domain.Power">
-        select * from power
+        select * from power where power.powername = #{ powername }
     </select>
-    <delete id="deletePower">
-        delete  from power
-    </delete>
     <update id="updatePower" parameterType="suse.software.domain.Power">
         update power
         <set>
-            power.selectCourse = #{ selectCourse },
-            power.score = #{score},
-            power.abnormal = #{abnormal}
+            power.powername = #{ powername },
+            power.score = #{score}
         </set>
     </update>
-    <insert id="insertPower" parameterType="suse.software.domain.Power">
-        insert into power values (#{selectCourse},#{score},#{abnormal})
-    </insert>
 </mapper>
