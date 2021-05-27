@@ -28,8 +28,7 @@ public class QuesitonScoreController {
     @Autowired
     StudentService studentService;
     @RequestMapping(value = "/StuScore")
-    public String StuScore(HttpServletRequest request,
-                           Map<String,Object> map){
+    public String StuScore(HttpServletRequest request,Map<String,Object> map){
         HttpSession session = request.getSession();
         Object user = session.getAttribute("user");
         int sno = ((User)user).getAccount();

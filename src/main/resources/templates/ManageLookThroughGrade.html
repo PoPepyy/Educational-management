@@ -22,12 +22,10 @@
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">学生学号</th>
-                    <th scope="col">论题ID</th>
-                    <th scope="col">初期表现(10%)</th>
-                    <th scope="col">中期考核(20%)</th>
+                    <th scope="col">毕业设计题目ID</th>
                     <th scope="col">答辩(30%)</th>
                     <th scope="col">论文(30%)</th>
-                    <th scope="col">额外加分(10%)</th>
+                    <th scope="col">教师评分(40%)</th>
                     <th scope="col">操作</th>
                 </tr>
                 </thead>
@@ -35,11 +33,9 @@
                 <tr th:each="scoreInfo:${scoreInfos}">
                     <td th:text="${scoreInfo.sno}"></td>
                     <td th:text="${scoreInfo.questionid}"></td>
-                    <td th:text="${scoreInfo.earlyperformance}"></td>
-                    <td th:text="${scoreInfo.midexam}"></td>
-                    <td th:text="${scoreInfo.thesisanswer}"></td>
                     <td th:text="${scoreInfo.paper}"></td>
-                    <td th:text="${scoreInfo.extracredit}"></td>
+                    <td th:text="${scoreInfo.thesisanswer}"></td>
+                    <td th:text="${scoreInfo.teacheranswer}"></td>
                     <td>
                         <a th:href="@{'/ManageScore?sno='+${scoreInfo.sno}}" target="_self">修改</a>
                     </td>
@@ -57,4 +53,11 @@
     </div>
 </div>
 </body>
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+<!-- Graphs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 </html>

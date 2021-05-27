@@ -24,8 +24,6 @@ public class PowerControllerPage {
     @Autowired
     PowerService powerService;
     @Autowired
-    SemesterService semesterService;
-    @Autowired
     StudentService studentService;
     @Autowired
     TeacherService teacherService;
@@ -304,7 +302,6 @@ public class PowerControllerPage {
         }
         Power status = powerService.getStatus();
         parMap.put("power", status);
-        request.setAttribute("currentSemesterInfo", semesterService.getCurrentSemesterInfo());
         return "HomePage";
     }
 

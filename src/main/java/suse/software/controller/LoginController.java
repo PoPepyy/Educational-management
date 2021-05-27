@@ -30,8 +30,6 @@ public class LoginController {
     @Autowired
     TeacherService teacherService;
     @Autowired
-    SemesterService semesterService;
-    @Autowired
     CollegeService collegeService;
 
     /**
